@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
+import 'widgets/tableofcontent.dart';
 
 void main() => runApp(new MyApp());
 
@@ -43,30 +44,38 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
+class WidgetBuilder {
+  static Widget getTocRow(int index, String text) {
+    return TableOfContentsRow(index: index, text: text);
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   List<Chapter> chapters = Chapter.chapters();
-  Widget _body = new Center(
-    child: new Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[],
-    ),
+
+  Widget _body = Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    mainAxisSize: MainAxisSize.max,
+    children: <Widget>[
+      TableOfContents(chapters: [
+        WidgetBuilder.getTocRow(1, 'Introduction'),
+        WidgetBuilder.getTocRow(2, 'Game components'),
+        WidgetBuilder.getTocRow(3, 'Kekler')
+      ])
+    ],
   );
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-      _counter++;
-    });
+  BottomNavigationBar getNavBar() {
+    return BottomNavigationBar(items: [
+      BottomNavigationBarItem(
+          icon: Icon(Icons.book), title: const Text('Rules')),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.keyboard), title: const Text('Wikipedia'))
+    ], onTap: _onBottomNavigationBarTapped);
   }
 
   void _onBottomNavigationBarTapped(int index) {
-    print("Index was ${index}");
+    print("Index was $index");
   }
 
   @override
@@ -84,17 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: _body,
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-            icon: Icon(Icons.book), title: const Text('Rules')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.keyboard), title: const Text('Wikipedia'))
-      ], onTap: _onBottomNavigationBarTapped),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar:
+          getNavBar(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
