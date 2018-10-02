@@ -9,10 +9,19 @@ class TableOfContentsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Text(
-      "$index. $text",
-      textAlign: TextAlign.left,
-      style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+    return Row(
+      children: [
+        GestureDetector(
+          child: Text(
+            "$index. $text",
+            textAlign: TextAlign.left,
+            style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+          ),
+          onTap: () {
+            print("on tap $text");
+          },
+        )
+      ],
     );
   }
 }
@@ -26,11 +35,12 @@ class TableOfContents extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
+        padding: EdgeInsets.all(40.0),
         child: Stack(children: <Widget>[
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: chapters,
-      )
-    ]));
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: chapters,
+          )
+        ]));
   }
 }
