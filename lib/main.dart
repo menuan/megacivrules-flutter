@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mega_civ_rules/models/chapter.dart';
 
 void main() => runApp(new MyApp());
 
@@ -44,6 +45,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  List<Chapter> chapters = Chapter.chapters();
   Widget _body = new Center(
     child: new Column(
       mainAxisAlignment: MainAxisAlignment.center,
