@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Mega Civilizaton Rules',
       theme: new ThemeData(
         // This is the theme of your application.
         //
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new MyHomePage(title: 'Mega Civilization Rules'),
     );
   }
 }
@@ -44,6 +44,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  Widget _body = new Center(
+    child: new Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[],
+    ),
+  );
 
   void _incrementCounter() {
     setState(() {
@@ -55,6 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
       _counter++;
     });
+  }
+
+  void _onBottomNavigationBarTapped(int index) {
+    print("Index was ${index}");
   }
 
   @override
@@ -71,35 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title),
       ),
-      body: new Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: new Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug paint" (press "p" in the console where you ran
-          // "flutter run", or select "Toggle Debug Paint" from the Flutter tool
-          // window in IntelliJ) to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              'You have pushed the button this many times:',
-            ),
-            new Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
+      body: _body,
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.book), title: const Text('Rules')),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.keyboard), title: const Text('Wikipedia'))
+      ], onTap: _onBottomNavigationBarTapped),
       floatingActionButton: new FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
