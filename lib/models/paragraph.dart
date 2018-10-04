@@ -1,5 +1,11 @@
 class Paragraph {
   String title;
-  List<String> text;
-  Paragraph(this.title, this.text);
+  List<ParagraphItem> items;
+  Paragraph(this.title, this.items);
+}
+
+class ParagraphItem {
+  String text;
+  List<String> images;
+  ParagraphItem(this.text, this.images);
 }

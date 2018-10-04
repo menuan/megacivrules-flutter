@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
 import 'package:mega_civ_rules/widgets/tableofcontent.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new MegaCivRules());
 
-class MyApp extends StatelessWidget {
+class MegaCivRules extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -21,55 +21,20 @@ class MyApp extends StatelessWidget {
           // counter didn't reset back to zero; the application is not restarted.
           primarySwatch: Colors.amber,
           backgroundColor: Colors.orangeAccent),
-      home: new MyHomePage(title: 'Mega Civilization Rules'),
+      home: new MegaCivPage(title: 'Mega Civilization Rules'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MegaCivPage extends StatefulWidget {
+  MegaCivPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-/*
-class WidgetBuilder {
-  static Widget getTocRow(
-      int index, Chapter chapter, OnTapTocRow onTap, bool expanded) {
-    return TableOfContentsRow(
-        index: index, chapter: chapter, onTap: onTap, expanded: expanded);
-  }
-}*/
-
-class ExpandableList extends StatelessWidget {
-  ExpandableList({this.chapters});
-
-  List<Chapter> chapters;
-
-  @override
-  Widget build(BuildContext context) {
-    return new ListView.builder(
-      itemBuilder: (context, i) => ExpansionTile(
-            title: new Text(chapters[i].title,
-                style: new TextStyle(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.start),
-            children: chapters[i]
-                .paragraphs
-                .map((val) => new ExpansionTile(
-                      title: new Text(val.title, textAlign: TextAlign.center),
-                      children: val.text.map((p) {
-                        return new Text(p);
-                      }).toList(),
-                    ))
-                .toList(),
-          ),
-      itemCount: 5,
-    );
-  }
+  _MegaCivPageState createState() => new _MegaCivPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MegaCivPageState extends State<MegaCivPage> {
   List<Chapter> chapters = Chapter.chapters();
   int selectedIndex = -1;
 
@@ -89,13 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onBottomNavigationBarTapped(int index) {
     print("Index was $index");
-  }
-
-  void _onTap(int index) {
-    print("on tap $index");
-    setState(() {
-      this.selectedIndex = index + 1;
-    });
   }
 
   @override

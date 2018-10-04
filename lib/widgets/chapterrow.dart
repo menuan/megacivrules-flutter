@@ -12,6 +12,7 @@ class ChapterRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var paragraphIndex = 1;
     return ExpansionTile(
       title: new Text("$index: ${chapter.title}",
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
@@ -19,6 +20,8 @@ class ChapterRow extends StatelessWidget {
       children: chapter.paragraphs
           .map((val) => ParagraphRow(
                 paragraph: val,
+                parentIndex: index,
+                paragraphIndex: paragraphIndex++,
               ))
           .toList(),
     );
