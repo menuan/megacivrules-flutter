@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
-import 'package:mega_civ_rules/widgets/paragraphrow.dart';
+import 'package:mega_civ_rules/widgets/tableofcontent/paragraphrow.dart';
 
 typedef void OnTapTocRow(int index);
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
-import 'package:mega_civ_rules/widgets/chapterrow.dart';
-
-typedef void OnTapTocRow(int index);
+import 'package:mega_civ_rules/widgets/tableofcontent/chapterrow.dart';
 
 class TableOfContents extends StatelessWidget {
   TableOfContents({this.chapters});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
-import 'package:mega_civ_rules/widgets/tableofcontent.dart';
+import 'package:mega_civ_rules/widgets/tableofcontent/tableofcontent.dart';
+import 'package:mega_civ_rules/widgets/wikipedia/wikipedia.dart';
 
 void main() => runApp(new MegaCivRules());
 
@@ -36,7 +37,7 @@ class MegaCivPage extends StatefulWidget {
 
 class _MegaCivPageState extends State<MegaCivPage> {
   List<Chapter> chapters = Chapter.chapters();
-  int selectedIndex = -1;
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -44,29 +45,40 @@ class _MegaCivPageState extends State<MegaCivPage> {
   }
 
   BottomNavigationBar getNavBar() {
-    return BottomNavigationBar(items: [
-      BottomNavigationBarItem(
-          icon: Icon(Icons.book), title: const Text('Rules')),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.keyboard), title: const Text('Wikipedia'))
-    ], onTap: _onBottomNavigationBarTapped);
+    return BottomNavigationBar(
+        currentIndex: this.selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.book), title: const Text('Rules')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.keyboard), title: const Text('Wikipedia'))
+        ],
+        onTap: _onBottomNavigationBarTapped);
   }
 
   void _onBottomNavigationBarTapped(int index) {
-    print("Index was $index");
+    setState(() {
+      selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget body;
+    if (this.selectedIndex == 0) {
+      body = new TableOfContents(
+        chapters: Chapter.chapters(),
+      );
+    } else {
+      body = new Wikipedia();
+    }
     return new Scaffold(
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title),
       ),
-      body: new TableOfContents(
-        chapters: Chapter.chapters(),
-      ),
+      body: body,
       bottomNavigationBar:
           getNavBar(), // This trailing comma makes auto-formatting nicer for build methods.
     );
