@@ -1,5 +1,5 @@
 class Paragraph {
   String title;
-  List<String> paragraphs;
-  Paragraph(this.title, this.paragraphs);
+  List<String> text;
+  Paragraph(this.title, this.text);
 }

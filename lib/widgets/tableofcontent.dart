@@ -1,52 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mega_civ_rules/models/chapter.dart';
+import 'package:mega_civ_rules/widgets/chapterrow.dart';
 
 typedef void OnTapTocRow(int index);
-
-class TableOfContentsRow extends StatelessWidget {
-  TableOfContentsRow({this.index, this.text, this.onTap});
-
-  final int index;
-  final String text;
-  final OnTapTocRow onTap;
-
-  _onTap() {
-    onTap(index);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Row(mainAxisSize: MainAxisSize.max, children: [
-      Flexible(
-          child: GestureDetector(
-        child: Text(
-          "$index. $text",
-          overflow: TextOverflow.clip,
-          textAlign: TextAlign.left,
-          style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
-        ),
-        onTap: _onTap,
-      ))
-    ]);
-  }
-}
 
 class TableOfContents extends StatelessWidget {
   TableOfContents({this.chapters});
 
-  final List<Widget> chapters;
+  final List<Chapter> chapters;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-        padding: EdgeInsets.all(40.0),
-        child: Stack(children: <Widget>[
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: chapters,
-          )
-        ], overflow: Overflow.clip));
+    return new ListView.builder(
+      itemBuilder: (context, i) =>
+          new ChapterRow(chapter: chapters[i], index: i + 1),
+      itemCount: chapters.length,
+    );
   }
 }

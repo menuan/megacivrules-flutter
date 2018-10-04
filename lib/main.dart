@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
-import 'widgets/tableofcontent.dart';
+import 'package:mega_civ_rules/widgets/tableofcontent.dart';
 
 void main() => runApp(new MyApp());
 
@@ -33,15 +33,45 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
-
+/*
 class WidgetBuilder {
-  static Widget getTocRow(int index, String text, OnTapTocRow onTap) {
-    return TableOfContentsRow(index: index, text: text, onTap: onTap);
+  static Widget getTocRow(
+      int index, Chapter chapter, OnTapTocRow onTap, bool expanded) {
+    return TableOfContentsRow(
+        index: index, chapter: chapter, onTap: onTap, expanded: expanded);
+  }
+}*/
+
+class ExpandableList extends StatelessWidget {
+  ExpandableList({this.chapters});
+
+  List<Chapter> chapters;
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListView.builder(
+      itemBuilder: (context, i) => ExpansionTile(
+            title: new Text(chapters[i].title,
+                style: new TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.start),
+            children: chapters[i]
+                .paragraphs
+                .map((val) => new ExpansionTile(
+                      title: new Text(val.title, textAlign: TextAlign.center),
+                      children: val.text.map((p) {
+                        return new Text(p);
+                      }).toList(),
+                    ))
+                .toList(),
+          ),
+      itemCount: 5,
+    );
   }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Chapter> chapters = Chapter.chapters();
+  int selectedIndex = -1;
 
   @override
   void initState() {
@@ -63,27 +93,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onTap(int index) {
     print("on tap $index");
+    setState(() {
+      this.selectedIndex = index + 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
     return new Scaffold(
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          TableOfContents(
-              chapters: chapters
-                  .map((item) =>
-                      WidgetBuilder.getTocRow(index++, item.title, _onTap))
-                  .toList())
-        ],
+      body: new TableOfContents(
+        chapters: Chapter.chapters(),
       ),
       bottomNavigationBar:
           getNavBar(), // This trailing comma makes auto-formatting nicer for build methods.
