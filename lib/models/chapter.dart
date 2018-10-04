@@ -137,18 +137,26 @@ class Chapter {
           Marcel Remijn, Tony Lemmers, Rico Radeke, Nathan
           Barhorst, Bill Kohler and all the play-testers and the
           contributors of the Civproject forum.
-          ''', [])
+          ''', ["1/development.png"])
         ])
       ]),
       new Chapter('Game components', [
         Paragraph('Game components', [
           ParagraphItem('''
-        TODO
-        ''', [])
+             ''', [
+            "2/map.png",
+            "2/tokens.png",
+            "2/credit_tokens.png",
+            "2/barbarians.png",
+            "2/ast.png"
+          ])
         ])
       ]),
       new Chapter('General rules and definitions', [
-        Paragraph('The playing pieces', []),
+        Paragraph('The playing pieces', [
+          ParagraphItem('''
+          ''', ["3/playing_pieces.png"])
+        ]),
         Paragraph('Barbarians and Pirates', [
           ParagraphItem('''
           As the game evolves, eventually barbarian tokens and
@@ -202,8 +210,7 @@ class Chapter {
         ]),
         Paragraph('Map-board definitions', [
           ParagraphItem('''
-          TODO:
-          ''', [])
+          ''', ["3/map_board_definitions.png"])
         ]),
         Paragraph('Civilization Advances', [
           ParagraphItem('''
