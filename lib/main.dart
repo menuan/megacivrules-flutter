@@ -60,7 +60,9 @@ class _MegaCivPageState extends State<MegaCivPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.book), title: const Text('Rules')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.keyboard), title: const Text('Wikipedia'))
+              icon: Icon(Icons.keyboard), title: const Text('Wikipedia')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.insert_chart), title: const Text('Progress'))
         ],
         onTap: _onBottomNavigationBarTapped);
   }

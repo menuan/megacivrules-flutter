@@ -5,6 +5,6 @@ class Wikipedia extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Text("Wikipedia");
+    return Text("Implement me");
   }
 }
