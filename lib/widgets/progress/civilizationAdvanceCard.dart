@@ -4,9 +4,11 @@ import 'package:mega_civ_rules/models/civilizationadvance.dart';
 typedef void OnTapCivilizationAdvanceCard(CivilizationAdvance advance);
 
 class CivilizationAdvanceCard extends StatelessWidget {
-  CivilizationAdvanceCard({this.advance, this.onTap, this.buttonText});
+  CivilizationAdvanceCard(
+      {this.advance, this.advances, this.onTap, this.buttonText});
 
   final CivilizationAdvance advance;
+  final List<CivilizationAdvance> advances;
   final OnTapCivilizationAdvanceCard onTap;
   final String buttonText;
 
@@ -20,9 +22,12 @@ class CivilizationAdvanceCard extends StatelessWidget {
     }).toList();
   }
 
+  String getReducedCost() {
+    return "0";
+  }
+
   @override
   Widget build(BuildContext context) {
-    AnimationController _controller;
     Card card = Card(
         child: new Column(
       mainAxisSize: MainAxisSize.min,
@@ -38,6 +43,15 @@ class CivilizationAdvanceCard extends StatelessWidget {
               padding: EdgeInsets.only(left: 10.0, top: 10.0),
               child: Text(
                   "Cost: ${advance.cost.toString()} \nVictory points: ${advance.victoryPoints.toString()}")),
+          subtitle: null,
+        ),
+        ListTile(
+          title: Container(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text(
+                "Reduced cost: ${getReducedCost()}",
+                style: TextStyle(fontSize: 15.0, color: Colors.green[400]),
+              )),
           subtitle: Container(
             padding: EdgeInsets.only(left: 10.0, top: 10.0),
             child: Text(advance.attributes.join('\n\n')),
@@ -47,7 +61,9 @@ class CivilizationAdvanceCard extends StatelessWidget {
           // make buttons use the appropriate styles for cards
           child: new ButtonBar(
             children: <Widget>[
-              new FlatButton(
+              new RaisedButton(
+                color: Colors.amber,
+                textColor: Colors.white,
                 child: Text(this.buttonText),
                 onPressed: () {
                   this.onTap(advance);
