@@ -4,11 +4,16 @@ import 'package:mega_civ_rules/models/paragraph.dart';
 typedef void OnTapTocRow(int index);
 
 class ParagraphRow extends StatelessWidget {
-  ParagraphRow({this.paragraph, this.parentIndex, this.paragraphIndex});
+  ParagraphRow(
+      {this.paragraph,
+      this.parentIndex,
+      this.paragraphIndex,
+      this.searchString});
 
   final Paragraph paragraph;
   final int parentIndex;
   final int paragraphIndex;
+  String searchString;
 
   Widget getTextWidget(String text) {
     var textWidget = new Text(
@@ -36,7 +41,6 @@ class ParagraphRow extends StatelessWidget {
     EdgeInsets textPadding = EdgeInsets.only(left: 20.0, top: 10.0);
     puncuated.forEach((p) {
       List<Widget> c = List<Widget>();
-
       // Add title
       c.add(Row(children: [
         Container(

@@ -1,14 +1,14 @@
 import 'package:mega_civ_rules/models/paragraph.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'chapter.g.dart';
 
-class Chapter {
+@JsonSerializable()
+class Chapter extends Object with _$ChapterSerializerMixin {
   String title;
   List<Paragraph> paragraphs;
 
   Chapter(this.title, this.paragraphs);
 
-  Chapter.fromJSON(Map<String, dynamic> json) : title = json['title'] {
-    this.paragraphs = List.from((json["paragraphs"] as List)).map((itemJson) {
-      return Paragraph.fromJSON(itemJson);
-    }).toList();
-  }
+  factory Chapter.fromJson(Map<String, dynamic> json) =>
+      _$ChapterFromJson(json);
 }

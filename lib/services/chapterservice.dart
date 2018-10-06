@@ -8,7 +8,7 @@ class ChapterService {
     return Utils.loadJSONAsset("chapters.json").then((val) {
       var chapters = List<Chapter>();
       List<dynamic> chaptersJson = json.decode(val);
-      chaptersJson.forEach((d) => chapters.add(Chapter.fromJSON(d)));
+      chaptersJson.forEach((d) => chapters.add(Chapter.fromJson(d)));
       return chapters;
     });
   }

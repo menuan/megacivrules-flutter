@@ -1,65 +1,47 @@
-class Paragraph {
+import 'package:json_annotation/json_annotation.dart';
+part 'paragraph.g.dart';
+
+@JsonSerializable()
+class Paragraph extends Object with _$ParagraphSerializerMixin {
   String title;
   List<ParagraphItem> items;
   Paragraph(this.title, this.items);
 
-  Paragraph.fromJSON(Map<String, dynamic> json) : title = json['title'] {
-    this.items = List.from((json["items"] as List))
-        .map((itemJson) => ParagraphItem.fromJSON(itemJson))
-        .toList();
-  }
+  factory Paragraph.fromJson(Map<String, dynamic> json) =>
+      _$ParagraphFromJson(json);
 }
 
-class ParagraphItem {
+@JsonSerializable()
+class ParagraphItem extends Object with _$ParagraphItemSerializerMixin {
   String text;
   List<PunctuatedList> punctuatedTextList;
   List<String> images;
   ParagraphItem(this.text, this.images, this.punctuatedTextList);
 
-  ParagraphItem.fromJSON(Map<String, dynamic> json) : text = json['text'] {
-    if (json["images"] == null) {
-      this.images = [];
-    } else {
-      this.images = List.from((json["images"] as List))
-          .map((src) => src as String)
-          .toList();
-    }
-    if (json["punctuatedTextList"] != null) {
-      this.punctuatedTextList = List.from((json["punctuatedTextList"] as List))
-          .map((p) => PunctuatedList.fromJSON(p))
-          .toList();
-    }
-  }
+  factory ParagraphItem.fromJson(Map<String, dynamic> json) =>
+      _$ParagraphItemFromJson(json);
 }
 
-class PunctuatedList {
+@JsonSerializable()
+class PunctuatedList extends Object with _$PunctuatedListSerializerMixin {
   String title;
   String text;
   List<PunctuatedListItem> items;
   PunctuatedList({this.title, this.text, this.items});
 
-  PunctuatedList.fromJSON(Map<String, dynamic> json)
-      : title = json["title"],
-        text = json["text"] {
-    if (json["items"] != null) {
-      this.items = List.from((json["items"] as List))
-          .map((p) => PunctuatedListItem.fromJSON(p))
-          .toList();
-    } else {
-      this.items = [];
-    }
-  }
+  factory PunctuatedList.fromJson(Map<String, dynamic> json) =>
+      _$PunctuatedListFromJson(json);
 }
 
-class PunctuatedListItem {
+@JsonSerializable()
+class PunctuatedListItem extends Object
+    with _$PunctuatedListItemSerializerMixin {
   String text;
   String title;
   String leading;
 
   PunctuatedListItem({this.text, this.title, this.leading});
 
-  PunctuatedListItem.fromJSON(Map<String, dynamic> json)
-      : text = json['text'],
-        title = json['title'],
-        leading = json['leading'];
+  factory PunctuatedListItem.fromJson(Map<String, dynamic> json) =>
+      _$PunctuatedListItemFromJson(json);
 }

@@ -4,6 +4,7 @@ import 'package:mega_civ_rules/widgets/tableofcontent/tableofcontent.dart';
 import 'package:mega_civ_rules/widgets/wikipedia/wikipedia.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mega_civ_rules/services/chapterservice.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -27,14 +28,13 @@ class MegaCivRules extends StatelessWidget {
           // counter didn't reset back to zero; the application is not restarted.
           primarySwatch: Colors.amber,
           backgroundColor: Colors.orangeAccent),
-      home: new MegaCivPage(title: 'Mega Civilization Rules'),
+      home: new MegaCivPage(),
     );
   }
 }
 
 class MegaCivPage extends StatefulWidget {
-  MegaCivPage({Key key, this.title}) : super(key: key);
-  final String title;
+  MegaCivPage({Key key}) : super(key: key);
 
   @override
   _MegaCivPageState createState() => new _MegaCivPageState();
@@ -43,14 +43,41 @@ class MegaCivPage extends StatefulWidget {
 class _MegaCivPageState extends State<MegaCivPage> {
   List<Chapter> chapters = [];
   int selectedIndex = 0;
+  SearchBar searchBar;
+  String searchString = "";
+
   @override
   void initState() {
     super.initState();
+    searchBar = new SearchBar(
+        inBar: false,
+        buildDefaultAppBar: buildAppBar,
+        setState: setState,
+        clearOnSubmit: false,
+        onSubmitted: onSubmitted,
+        onChanged: onChange,
+        onClosed: () {
+          setState(() => searchString = "");
+        });
     ChapterService.get().then((chapters) {
       this.setState(() {
         this.chapters = chapters;
       });
     });
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return new AppBar(
+        title: new Text('Mega Civilization Rules'),
+        actions: [searchBar.getSearchAction(context)]);
+  }
+
+  void onChange(String value) {
+    setState(() => searchString = value);
+  }
+
+  void onSubmitted(String value) {
+    setState(() => searchString = value);
   }
 
   BottomNavigationBar getNavBar() {
@@ -78,6 +105,7 @@ class _MegaCivPageState extends State<MegaCivPage> {
       case 0:
         return new TableOfContents(
           chapters: this.chapters,
+          searchString: this.searchString,
         );
       case 1:
         return new Wikipedia();
@@ -91,11 +119,7 @@ class _MegaCivPageState extends State<MegaCivPage> {
     Widget body = getBody();
 
     return new Scaffold(
-      appBar: new AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: new Text(widget.title),
-      ),
+      appBar: searchBar.build(context),
       body: body,
       bottomNavigationBar:
           getNavBar(), // This trailing comma makes auto-formatting nicer for build methods.
