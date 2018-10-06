@@ -23,18 +23,10 @@ class ProgressHeader extends StatelessWidget {
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const ListTile(
+          ListTile(
               leading: const Icon(Icons.album),
-              title: const Text('Current progreess'),
-              subtitle: null),
-          Container(
-              width: double.infinity,
-              padding: EdgeInsets.only(left: 20.0, bottom: 20.0),
-              child: Text(
-                "Victory points: ${getVictoryPoints()}",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20.0),
-              ))
+              title: Text("Victory points: ${getVictoryPoints()}"),
+              subtitle: null)
         ],
       ),
     );
