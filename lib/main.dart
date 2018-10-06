@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
 import 'package:mega_civ_rules/widgets/tableofcontent/tableofcontent.dart';
 import 'package:mega_civ_rules/widgets/wikipedia/wikipedia.dart';
+import 'package:flutter/rendering.dart';
+import 'package:mega_civ_rules/services/chapterservice.dart';
 
-void main() => runApp(new MegaCivRules());
+void main() {
+  debugPaintSizeEnabled = false;
+  runApp(new MegaCivRules());
+}
 
 class MegaCivRules extends StatelessWidget {
   // This widget is the root of your application.
@@ -36,12 +41,16 @@ class MegaCivPage extends StatefulWidget {
 }
 
 class _MegaCivPageState extends State<MegaCivPage> {
-  List<Chapter> chapters = Chapter.chapters();
+  List<Chapter> chapters = [];
   int selectedIndex = 0;
-
   @override
   void initState() {
     super.initState();
+    ChapterService.get().then((chapters) {
+      this.setState(() {
+        this.chapters = chapters;
+      });
+    });
   }
 
   BottomNavigationBar getNavBar() {
@@ -62,16 +71,23 @@ class _MegaCivPageState extends State<MegaCivPage> {
     });
   }
 
+  Widget getBody() {
+    switch (this.selectedIndex) {
+      case 0:
+        return new TableOfContents(
+          chapters: this.chapters,
+        );
+      case 1:
+        return new Wikipedia();
+      default:
+        return Text("Not implemented");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget body;
-    if (this.selectedIndex == 0) {
-      body = new TableOfContents(
-        chapters: Chapter.chapters(),
-      );
-    } else {
-      body = new Wikipedia();
-    }
+    Widget body = getBody();
+
     return new Scaffold(
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by

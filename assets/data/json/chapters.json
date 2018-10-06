@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Introduction",
+    "paragraphs": [
+      {
+        "title": "Introduction",
+        "items": [
+          {
+            "text": "Mega Civilization is a game of skill for 5 to 18 players covering the historical development of ancient civilizations from just after the last Ice Age to the dawn of the new era at the end of the Iron Age - a time span of almost 8,000 years. Each player leads his own civilization as it tries to expand its culture over a map-board that stretches from the Mediterranean Sea to India.",
+            "images": []
+          },
+          {
+            "text": "Although battles and territorial strategy are important, Mega Civilization is not a wargame as you might expect when looking at the map-board. Instead, the objective of play is to gain a level of overall advancement involving cultural, economic, scientific, political, civic and religious factors. The player who most effectively balances these various goals will achieve the best scores and win the game.",
+            "image": []
+          },
+          {
+            "text": "The objective of Mega Civilization is to acquire the highest number of Victory Points by building cities and developing Civilization Advances. This will be done over various phases and turns, some of which will be performed simultaneously by the players. After each turn, a check is made for each player to move forward on the Archaeological Succession Table (A.S.T.). Each step on this timeline represents a certain period of time in history reaching from the Stone Age. Advancement there will provide ever more Victory Points. The winner will not necessarily be the first player to reach the end of the A.S.T. or the player with the highest number of cities or Civilization Advances, although these are the key factors in determining the winner.",
+            "images": []
+          },
+          {
+            "text": "Each civilization begins with a single population token and every turn each player increases his population by adding tokens to each area he occupies. These tokens can be moved over the map-board by land, or by sea using ships. As each area has a population limit, a good strategic overview will give players advantage in occupying more and more areas. If players manage to move sufficient tokens into areas they can build a city there. These cities generate trade cards which will eventually lead to knowledge and wealth.",
+            "images": []
+          },
+          {
+            "text": "During trade sessions, players receive not only the commodities they need to complete sets; they might also receive calamities which will remove population or cities. Specific Civilization Advances will protect the players from natural or civic calamities. The development of these Civilization Advances is symbolized by turning in sets of trading goods, as the wealthier civilizations will acquire more Civilization Advances",
+            "images": []
+          },
+          {
+            "text": "As civilizations develop, it will be harder for their rulers to find the right balance between future population growth, maintaining enough support for their cities and increasing their treasury. If they cannot manage their token population, their cities might eventually revolt during the Tax Collection-phase. The civilizations with the strongest economy traditionally score the highest.",
+            "images": []
+          }
+        ]
+      },
+      {
+        "title": "Length of a game",
+        "items": [
+          {
+            "text": "A game of Mega Civilization can take 10-12 hours to complete. Players can also choose to play the beginner-scenario ‘The First Game’, which will take only 1-2 hours. Another scenario, ‘The Short Game’, provides the same excitement as the full game, although the game starts in a later age. This way games can be played in ‘just’ 6-8 hours",
+            "images": []
+          }
+        ]
+      },
+      {
+        "title": "Development",
+        "items": [
+          {
+            "text": "Somewhere around 1999 John Rodriguez, living in Texas, USA, picked up the idea to create a bigger map and some extra cards for his favorite game: Civilization by Francis Tresham. Much historical research ensued with larger and larger maps, new civilizations and new advances. A few years later, he shared his map and cards on the internet, creating the forum Civproject where anyone with ideas could contribute to his project.",
+            "images": []
+          },
+          {
+            "text": "At the same time Flo de Haan, living in the Netherlands, Europe, had similar ideas creating extensions to his favorite game Civilization and started searching the internet for resources. He came across the forum and after a while John and Flo decided to work together to take this shared idea to a higher level. They worked on the design, artwork and simplicity to this enormous game which now accomodates up to 18 players. At first it was just an extension to the original game, but now they started working on the game from scratch. No single detail was safe. Rules would change radically, new ideas were launched and sometimes failed and years went by testing, testing, changing, testing, adding, removing,  testing, changing and testing again. For years, each with their own group of players on either side of the ocean,  John and Flo kept discussing their findings and fully redesigned the first idea to the game it is today. As each game takes a full day and requires a group of people to play, the effort to perform the most comprehensive testing was a real challenge.",
+            "images": []
+          },
+          {
+            "text": "Here it is, Mega Civilization: a game for 5-18 players. Created by devoted Civilization-fans who put their heart into this wonderful game. We would like to thank: Gerart de Haan,  Jon Severinsson, Martin Brodén, Jeffrey Brent McBeth,  Judith van der Molen, Miquel Schumacher, Michael Bruinsma, Jacob Boersma, Jochem van Dijk, Mirjam Molenkamp, David van Nederveen Meerkerk, Johannes van der Horst, Bob Feis, Ronald Engeringh, Mike Droog,  Marcel Remijn, Tony Lemmers, Rico Radeke, Nathan Barhorst, Bill Kohler and all the play-testers and the contributors of the Civproject forum.",
+            "images": ["1/development.png"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Game components",
+    "paragraphs": [
+      {
+        "title": "Game components",
+        "items": [
+          {
+            "text": "",
+            "images": [
+              "2/map.png",
+              "2/tokens.png",
+              "2/credit_tokens.png",
+              "2/barbarians.png",
+              "2/ast.png"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
