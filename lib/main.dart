@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/chapter.dart';
 import 'package:mega_civ_rules/widgets/tableofcontent/tableofcontent.dart';
 import 'package:mega_civ_rules/widgets/wikipedia/wikipedia.dart';
+import 'package:mega_civ_rules/widgets/progress/progress.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mega_civ_rules/services/chapterservice.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
@@ -109,6 +110,8 @@ class _MegaCivPageState extends State<MegaCivPage> {
         );
       case 1:
         return new Wikipedia();
+      case 2:
+        return new Progress();
       default:
         return Text("Not implemented");
     }

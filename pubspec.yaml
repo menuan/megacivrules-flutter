@@ -46,6 +46,7 @@ flutter:
     - assets/img/chapters/2/
     - assets/img/chapters/3/
     - assets/data/json/chapters.json
+    - assets/data/json/civilizationadvances.json
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
