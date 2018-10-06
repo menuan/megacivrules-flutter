@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 import 'package:mega_civ_rules/widgets/progress/civilizationAdvanceCard.dart';
+import 'package:mega_civ_rules/widgets/progress/progressHeader.dart';
 
 class Progress extends StatefulWidget {
   Progress({Key key}) : super(key: key);
@@ -20,6 +21,7 @@ class _ProgressState extends State<Progress> {
     CivilizationAdvanceService.get().then((advances) {
       this.setState(() {
         this.advances = advances;
+        sort();
       });
     });
   }
@@ -28,6 +30,7 @@ class _ProgressState extends State<Progress> {
     this.setState(() {
       advances.remove(advance);
       acquired.add(advance);
+      sort();
     });
   }
 
@@ -35,7 +38,20 @@ class _ProgressState extends State<Progress> {
     this.setState(() {
       acquired.remove(advance);
       advances.add(advance);
+      sort();
     });
+  }
+
+  int advancesSort(CivilizationAdvance a, CivilizationAdvance b) {
+    int sort = a.cost - b.cost;
+    if (sort < 0) return -1;
+    if (sort > 0) return 1;
+    return sort;
+  }
+
+  void sort() {
+    advances.sort(advancesSort);
+    acquired.sort(advancesSort);
   }
 
   @override
@@ -52,15 +68,15 @@ class _ProgressState extends State<Progress> {
           buttonText: "Remove"),
       itemCount: acquired.length,
     );
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(10.0),
-      child: Row(
-        children: [
-          new Expanded(child: advancesList),
-          new Expanded(child: acquiredList)
-        ],
-      ),
-    );
+
+    List<Widget> cardLists = [
+      new Expanded(child: advancesList),
+      new Expanded(child: acquiredList)
+    ];
+    return Column(children: [
+      ProgressHeader(advances: acquired),
+      Expanded(
+          child: Column(children: [Expanded(child: Row(children: cardLists))]))
+    ]);
   }
 }

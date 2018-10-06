@@ -12,11 +12,12 @@ class CivilizationAdvanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    AnimationController _controller;
+    Card card = Card(
         child: new Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        ListTile(leading: const Icon(Icons.album), title: Text(advance.name)),
+        ListTile(leading: null, title: Text(advance.name)),
         ListTile(
           title: Container(
               padding: EdgeInsets.only(left: 10.0, top: 10.0),
@@ -42,5 +43,6 @@ class CivilizationAdvanceCard extends StatelessWidget {
         ),
       ],
     ));
+    return card;
   }
 }
