@@ -31,24 +31,6 @@ class CivilizationAdvanceCard extends StatelessWidget {
     return advance.calculateReducedCost(this.advances);
   }
 
-  Widget getFooterButton() {
-    return new ButtonTheme.bar(
-      // make buttons use the appropriate styles for cards
-      child: new ButtonBar(
-        children: <Widget>[
-          new RaisedButton(
-            color: Colors.amber,
-            textColor: Colors.white,
-            child: Text(this.buttonText),
-            onPressed: () {
-              this.onTap(advance);
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget getDiscount() {
     return ListTile(
       title: Container(
@@ -78,7 +60,16 @@ class CivilizationAdvanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
-      ListTile(leading: null, title: Text(advance.name)),
+      ListTile(
+          trailing: new RaisedButton(
+            color: Colors.amber,
+            textColor: Colors.white,
+            child: Text(this.buttonText),
+            onPressed: () {
+              this.onTap(advance);
+            },
+          ),
+          title: Text(advance.name)),
       Container(
           width: double.infinity,
           height: 30.0,
@@ -112,7 +103,6 @@ class CivilizationAdvanceCard extends StatelessWidget {
     if (advance.reduceCosts != null && advance.reduceCosts.length > 0) {
       children.add(getDiscount());
     }
-    children.add(getFooterButton());
 
     Card card = Card(
         child: new Column(
