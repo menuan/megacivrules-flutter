@@ -88,9 +88,11 @@ class ParagraphRow extends StatelessWidget {
       }
 
       // Add images
-      for (var src in item.images) {
-        var image = getImageWidget(src);
-        children.add(image);
+      if (item.images != null) {
+        for (var src in item.images) {
+          var image = getImageWidget(src);
+          children.add(image);
+        }
       }
 
       // Add list
