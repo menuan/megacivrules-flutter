@@ -58,18 +58,20 @@ class _ProgressState extends State<Progress> {
   Widget build(BuildContext context) {
     var advancesList = new ListView.builder(
       itemBuilder: (context, i) => new CivilizationAdvanceCard(
-          advances: this.advances,
+          advances: this.acquired,
           advance: advances[i],
           onTap: onTapAdvanceAdd,
-          buttonText: "Add"),
+          buttonText: "Add",
+          shouldRenderReducedCost: true),
       itemCount: advances.length,
     );
     var acquiredList = new ListView.builder(
       itemBuilder: (context, i) => new CivilizationAdvanceCard(
-          advances: this.advances,
+          advances: null,
           advance: acquired[i],
           onTap: onTapAdvanceRemove,
-          buttonText: "Remove"),
+          buttonText: "Remove",
+          shouldRenderReducedCost: false),
       itemCount: acquired.length,
     );
 

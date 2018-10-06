@@ -16,7 +16,13 @@ CivilizationAdvance _$CivilizationAdvanceFromJson(Map<String, dynamic> json) {
       cost: json['cost'] as int,
       attributes:
           (json['attributes'] as List)?.map((e) => e as String)?.toList(),
-      name: json['name'] as String);
+      name: json['name'] as String)
+    ..reduceCosts = (json['reduceCosts'] as List)
+        ?.map((e) => e == null
+            ? null
+            : new CivilizationAdvanceReducedCost.fromJson(
+                e as Map<String, dynamic>))
+        ?.toList();
 }
 
 abstract class _$CivilizationAdvanceSerializerMixin {
@@ -25,11 +31,26 @@ abstract class _$CivilizationAdvanceSerializerMixin {
   int get cost;
   List<String> get attributes;
   String get name;
+  List<CivilizationAdvanceReducedCost> get reduceCosts;
   Map<String, dynamic> toJson() => <String, dynamic>{
         'groups': groups?.map((e) => e?.toString()?.split('.')?.last)?.toList(),
         'victoryPoints': victoryPoints,
         'cost': cost,
         'attributes': attributes,
-        'name': name
+        'name': name,
+        'reduceCosts': reduceCosts
       };
+}
+
+CivilizationAdvanceReducedCost _$CivilizationAdvanceReducedCostFromJson(
+    Map<String, dynamic> json) {
+  return new CivilizationAdvanceReducedCost(
+      reduced: json['reduced'] as int, id: json['id'] as String);
+}
+
+abstract class _$CivilizationAdvanceReducedCostSerializerMixin {
+  int get reduced;
+  String get id;
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{'reduced': reduced, 'id': id};
 }

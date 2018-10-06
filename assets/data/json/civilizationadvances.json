@@ -4,7 +4,17 @@
     "victoryPoints": 1,
     "cost": 60,
     "attributes": ["Acquire 10 additional points of credit tokens in any combination of colors"],
-    "name": "Written record"
+    "name": "Written record",
+    "reduceCosts": [
+      {
+        "id": "Advanced Military",
+        "reduced": 10
+      },
+      {
+        "id": "Agriculture",
+        "reduced": 20
+      }
+    ]
   },
   {
     "groups": ["science", "civic"],
@@ -15,7 +25,8 @@
       "You are allowed to cause conflict in areas containing units belonging to players holding Cultural Ascendancy.",
       "CIVIL DISORDER: Reduce 1 additional city."
     ],
-    "name": "Advanced Military"
+    "name": "Advanced Military",
+    "reduceCosts": []
   },
   {
     "groups": ["science", "crafts"],
@@ -25,6 +36,12 @@
       "The population limit of ‘0’, ‘1’ and ‘2’ areas on the board is increased by 1 for you as long as these areas do not contain any other player’s units or barbarian tokens.",
       "FAMINE: If you are the primary victim, take 5 additional damage."
     ],
-    "name": "Agriculture"
+    "name": "Agriculture",
+    "reduceCosts": [
+      {
+        "id": "Advanced Military",
+        "reduced": 20
+      }
+    ]
   }
 ]
