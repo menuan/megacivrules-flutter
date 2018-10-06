@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'civilizationadvance.g.dart';
 
-enum CivilizationAdvanceGroup { science, arts, crafts, civic }
+enum CivilizationAdvanceGroup { science, arts, crafts, civic, religion }
 
 @JsonSerializable()
 class CivilizationAdvance extends Object

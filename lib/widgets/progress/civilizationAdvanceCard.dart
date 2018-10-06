@@ -10,6 +10,16 @@ class CivilizationAdvanceCard extends StatelessWidget {
   final OnTapCivilizationAdvanceCard onTap;
   final String buttonText;
 
+  List<Widget> getGroupImages() {
+    return advance.groups.map((g) {
+      String fileSrc = g.toString().replaceAll("CivilizationAdvanceGroup.", "");
+      return Image(
+          alignment: Alignment.topLeft,
+          width: 30.0,
+          image: AssetImage("assets/img/advancegroups/$fileSrc.png"));
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     AnimationController _controller;
@@ -18,6 +28,11 @@ class CivilizationAdvanceCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(leading: null, title: Text(advance.name)),
+        Container(
+            width: double.infinity,
+            height: 30.0,
+            padding: EdgeInsets.only(left: 20.0),
+            child: Row(children: getGroupImages())),
         ListTile(
           title: Container(
               padding: EdgeInsets.only(left: 10.0, top: 10.0),

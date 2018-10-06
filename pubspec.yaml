@@ -45,6 +45,7 @@ flutter:
     - assets/img/chapters/1/
     - assets/img/chapters/2/
     - assets/img/chapters/3/
+    - assets/img/advancegroups/
     - assets/data/json/chapters.json
     - assets/data/json/civilizationadvances.json
   #  - images/a_dot_ham.jpeg
