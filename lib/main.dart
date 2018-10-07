@@ -38,8 +38,8 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   void loadSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      darkThemeEnabled = prefs.getBool('theme_dark');
-      sliderColor = prefs.getInt('theme_color');
+      darkThemeEnabled = prefs.getBool('theme_dark') ?? false;
+      sliderColor = prefs.getInt('theme_color') ?? 0;
       themeColor = ThemeService.getColor(sliderColor);
     });
   }
