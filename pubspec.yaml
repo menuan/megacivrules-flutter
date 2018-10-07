@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  shared_preferences: ^0.4.3
   json_annotation: ^0.2.3
   flutter_search_bar:
   # The following adds the Cupertino Icons font to your application.

@@ -37,7 +37,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
           padding: EdgeInsets.only(left: 10.0),
           child: Text(
             "Discounts:",
-            style: TextStyle(fontSize: 15.0, color: Colors.black),
+            style: TextStyle(fontSize: 15.0, color: Colors.white),
           )),
       subtitle: Container(
           padding: EdgeInsets.only(left: 10.0, top: 10.0),
@@ -62,7 +62,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
     List<Widget> children = [
       ListTile(
           trailing: new RaisedButton(
-            color: Colors.amber,
+//            color: Colors.purple,
             textColor: Colors.white,
             child: Text(this.buttonText),
             onPressed: () {
