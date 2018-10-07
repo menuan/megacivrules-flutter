@@ -14,44 +14,40 @@ import 'package:mega_civ_rules/services/themeservice.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
-  runApp(new MegaCivRules());
+  runApp(MegaCivRules());
 }
 
 class MegaCivRules extends StatefulWidget {
   MegaCivRules({Key key}) : super(key: key);
 
-//  @override
-//  Widget build(BuildContext context) {
-//    return new MaterialApp(
-//      title: 'Mega Civilizaton Rules',
-//      theme:
-//      home: new MegaCivPage(),
-//    );
-//  }
-
   @override
   _MegaCivRulesState createState() => new _MegaCivRulesState();
 }
 
-//class MegaCivPage extends StatefulWidget {
-//  MegaCivPage({Key key}) : super(key: key);
-//
-//  @override
-//  _MegaCivPageState createState() => new _MegaCivPageState();
-//}
-
 class _MegaCivRulesState extends State<MegaCivRules> {
   bool darkThemeEnabled = false;
   int sliderColor = 0;
+
+  MaterialColor themeColor = Colors.lightGreen;
 
   List<Chapter> chapters = [];
   int selectedIndex = 0;
   SearchBar searchBar;
   String searchString = "";
 
+  void loadSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      darkThemeEnabled = prefs.getBool('theme_dark');
+      sliderColor = prefs.getInt('theme_color');
+      themeColor = ThemeService.getColor(sliderColor);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    loadSharedPreferences();
     searchBar = new SearchBar(
         inBar: false,
         buildDefaultAppBar: buildAppBar,
@@ -80,10 +76,10 @@ class _MegaCivRulesState extends State<MegaCivRules> {
         // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
 //           counter didn't reset back to zero; the application is not restarted.
         brightness: darkThemeEnabled ? Brightness.dark : Brightness.light,
-        primarySwatch: ThemeService.getColor(sliderColor),
-        primaryColor: ThemeService.getColor(sliderColor)[700],
-        accentColor: ThemeService.getColor(sliderColor)[800],
-        backgroundColor: ThemeService.getColor(sliderColor)[100]);
+        primarySwatch: themeColor,
+        primaryColor: themeColor[700],
+        accentColor: themeColor[800],
+        backgroundColor: themeColor[100]);
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -103,11 +99,11 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   Widget getNavBar() {
     return Theme(
         data: Theme.of(context).copyWith(
-            canvasColor: ThemeService.getColor(sliderColor),
-            primaryColor: ThemeService.getColor(sliderColor)[700],
-            textTheme: Theme.of(context).textTheme.copyWith(
-                caption:
-                    TextStyle(color: ThemeService.getColor(sliderColor)[700]))),
+            canvasColor: themeColor,
+            primaryColor: themeColor[700],
+            textTheme: Theme.of(context)
+                .textTheme
+                .copyWith(caption: TextStyle(color: themeColor[700]))),
         child: BottomNavigationBar(
             currentIndex: this.selectedIndex,
             type: BottomNavigationBarType.fixed,
@@ -131,16 +127,24 @@ class _MegaCivRulesState extends State<MegaCivRules> {
     });
   }
 
-  void _onSwitchValueChange(bool newValue) {
+  void _onSwitchValueChange(bool newValue) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('Toggling dark theme: $newValue');
     setState(() {
       darkThemeEnabled = newValue;
     });
+    prefs.setBool('theme_dark', newValue);
   }
 
-  void _onColorSliderValueChange(double newValue) {
+  void _onColorSliderValueChange(double newValue) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int rounded = newValue.round();
+    print('Setting color to index $rounded and saving to storage');
     setState(() {
-      sliderColor = newValue.round();
+      sliderColor = rounded;
+      themeColor = ThemeService.getColor(sliderColor);
     });
+    prefs.setInt('theme_color', rounded);
   }
 
   Widget getBody() {
