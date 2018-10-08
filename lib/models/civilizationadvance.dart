@@ -12,9 +12,15 @@ class CivilizationAdvance extends Object
   List<String> attributes;
   String name;
   List<CivilizationAdvanceReducedCost> reduceCosts;
+  String id;
   // TODO: Additional credits, if present, specified as attributes
   CivilizationAdvance(
-      {this.groups, this.victoryPoints, this.cost, this.attributes, this.name});
+      {this.groups,
+      this.victoryPoints,
+      this.cost,
+      this.attributes,
+      this.name,
+      this.id});
 
   factory CivilizationAdvance.fromJson(Map<String, dynamic> json) =>
       _$CivilizationAdvanceFromJson(json);
@@ -24,7 +30,7 @@ class CivilizationAdvance extends Object
       int reducedSum = 0;
       acquired.forEach((a) {
         a.reduceCosts.forEach((reduced) {
-          if (reduced.id == this.name) {
+          if (reduced.id == this.id) {
             reducedSum += reduced.reduced;
           }
         });

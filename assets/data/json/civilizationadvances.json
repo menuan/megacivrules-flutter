@@ -1,24 +1,27 @@
 [
   {
     "groups": ["science", "civic"],
+    "id": "written_record",
     "victoryPoints": 1,
     "cost": 60,
     "attributes": ["Acquire 10 additional points of credit tokens in any combination of colors"],
     "name": "Written record",
     "reduceCosts": [
+
       {
-        "id": "Advanced Military",
-        "reduced": 10
+        "id": "advance_military",
+        "reduced": 20
       },
       {
-        "id": "Agriculture",
-        "reduced": 20
+        "id": "agriculture",
+        "reduced": 10
       }
     ]
   },
   {
     "groups": ["science", "civic"],
     "victoryPoints": 6,
+    "id": "advance_military",
     "cost": 240,
     "attributes": [
       "In conflicts, you may choose to remove tokens from areas adjacent by land. After each round of token removal a new check for token majority must be made. You may decide to wait for other token conflicts to be resolved first.",
@@ -31,6 +34,7 @@
   {
     "groups": ["science", "crafts"],
     "victoryPoints": 3,
+    "id": "agriculture",
     "cost": 120,
     "attributes": [
       "The population limit of ‘0’, ‘1’ and ‘2’ areas on the board is increased by 1 for you as long as these areas do not contain any other player’s units or barbarian tokens.",
@@ -39,7 +43,7 @@
     "name": "Agriculture",
     "reduceCosts": [
       {
-        "id": "Advanced Military",
+        "id": "advance_military",
         "reduced": 20
       }
     ]

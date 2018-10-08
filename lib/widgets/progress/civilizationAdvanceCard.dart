@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/civilizationadvance.dart';
 
-typedef void OnTapCivilizationAdvanceCard(CivilizationAdvance advance);
+typedef void OnTapCivilizationAdvanceCard(
+    CivilizationAdvance advance, bool add);
 
 class CivilizationAdvanceCard extends StatelessWidget {
   CivilizationAdvanceCard(
-      {this.advance,
-      this.advances,
-      this.onTap,
-      this.buttonText,
-      this.shouldRenderReducedCost});
+      {this.advance, this.acquired, this.onTap, this.shouldRenderReducedCost});
 
   final CivilizationAdvance advance;
-  final List<CivilizationAdvance> advances;
+  final List<String> acquired;
   final OnTapCivilizationAdvanceCard onTap;
-  final String buttonText;
   final bool shouldRenderReducedCost;
 
   List<Widget> getGroupImages() {
@@ -27,34 +23,46 @@ class CivilizationAdvanceCard extends StatelessWidget {
     }).toList();
   }
 
+  bool isAcquired() {
+    return this.acquired.contains(advance.id);
+  }
+
+  String getButtonText() {
+    if (this.acquired.contains(advance.id)) {
+      return "Remove";
+    } else {
+      return "Add";
+    }
+  }
+
   int getReducedCost() {
-    return advance.calculateReducedCost(this.advances);
+    return 0; //advance.calculateReducedCost(this.advances);
   }
 
   Widget getDiscount() {
-    return ListTile(
-      title: Container(
-          padding: EdgeInsets.only(left: 10.0),
-          child: Text(
-            "Discounts:",
-            style: TextStyle(fontSize: 15.0, color: Colors.white),
-          )),
-      subtitle: Container(
-          padding: EdgeInsets.only(left: 10.0, top: 10.0),
-          child: Row(
-              children: advance.reduceCosts.map((r) {
-            String title = "${r.id}: ${r.reduced}";
-            return Container(
-                padding: EdgeInsets.only(left: 5.0),
-                child: Chip(
-                  backgroundColor: Colors.green,
-                  label: new Text(
-                    '$title',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ));
-          }).toList())),
-    );
+    var chips = Row(
+        children: advance.reduceCosts.map((r) {
+      String title = "${r.id}: ${r.reduced}";
+      return Container(
+          //padding: EdgeInsets.only(left: 5.0),
+          child: Chip(
+        backgroundColor: Colors.green,
+        label: new Text(
+          '$title',
+          overflow: TextOverflow.fade,
+          style: TextStyle(color: Colors.white),
+        ),
+      ));
+    }).toList());
+    var title = ListTile(
+        title: Container(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text(
+              "Discounts:",
+              style: TextStyle(fontSize: 15.0, color: Colors.white),
+            )),
+        subtitle: null);
+    return Column(children: [chips]);
   }
 
   @override
@@ -64,9 +72,9 @@ class CivilizationAdvanceCard extends StatelessWidget {
           trailing: new RaisedButton(
 //            color: Colors.purple,
             textColor: Colors.white,
-            child: Text(this.buttonText),
+            child: Text(getButtonText()),
             onPressed: () {
-              this.onTap(advance);
+              this.onTap(advance, !isAcquired());
             },
           ),
           title: Text(advance.name)),

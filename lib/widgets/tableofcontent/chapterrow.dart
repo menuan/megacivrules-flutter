@@ -17,7 +17,7 @@ class ChapterRow extends StatelessWidget {
 
     return ExpansionTile(
       title: new Text("$index: ${chapter.title}",
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           textAlign: TextAlign.start),
       children: chapter.paragraphs
           .map((val) => ParagraphRow(

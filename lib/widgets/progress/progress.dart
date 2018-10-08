@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:mega_civ_rules/models/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 import 'package:mega_civ_rules/widgets/progress/civilizationAdvanceCard.dart';
@@ -13,11 +14,17 @@ class Progress extends StatefulWidget {
 
 class _ProgressState extends State<Progress> {
   List<CivilizationAdvance> advances = [];
-  List<CivilizationAdvance> acquired = [];
+  List<String> acquired = [];
 
   @override
   void initState() {
     super.initState();
+    CivilizationAdvanceService.getAcquired().then((acquired) {
+      this.setState(() {
+        print(acquired);
+        this.acquired = acquired;
+      });
+    });
     CivilizationAdvanceService.get().then((advances) {
       this.setState(() {
         this.advances = advances;
@@ -26,19 +33,14 @@ class _ProgressState extends State<Progress> {
     });
   }
 
-  void onTapAdvanceAdd(CivilizationAdvance advance) {
+  void onTapAdvance(CivilizationAdvance advance, bool add) {
     this.setState(() {
-      advances.remove(advance);
-      acquired.add(advance);
-      sort();
-    });
-  }
-
-  void onTapAdvanceRemove(CivilizationAdvance advance) {
-    this.setState(() {
-      acquired.remove(advance);
-      advances.add(advance);
-      sort();
+      if (add) {
+        this.acquired.add(advance.id);
+      } else {
+        this.acquired.remove(advance.id);
+      }
+      CivilizationAdvanceService.setAcquired(this.acquired);
     });
   }
 
@@ -51,36 +53,25 @@ class _ProgressState extends State<Progress> {
 
   void sort() {
     advances.sort(advancesSort);
-    acquired.sort(advancesSort);
   }
 
   @override
   Widget build(BuildContext context) {
     var advancesList = new ListView.builder(
       itemBuilder: (context, i) => new CivilizationAdvanceCard(
-          advances: this.acquired,
+          acquired: this.acquired,
           advance: advances[i],
-          onTap: onTapAdvanceAdd,
-          buttonText: "Add",
+          onTap: onTapAdvance,
           shouldRenderReducedCost: true),
       itemCount: advances.length,
     );
-    var acquiredList = new ListView.builder(
-      itemBuilder: (context, i) => new CivilizationAdvanceCard(
-          advances: null,
-          advance: acquired[i],
-          onTap: onTapAdvanceRemove,
-          buttonText: "Remove",
-          shouldRenderReducedCost: false),
-      itemCount: acquired.length,
-    );
 
-    List<Widget> cardLists = [
-      new Expanded(child: advancesList),
-      new Expanded(child: acquiredList)
-    ];
+    List<Widget> cardLists = [new Expanded(child: advancesList)];
     return Column(children: [
-      ProgressHeader(advances: acquired),
+      ProgressHeader(
+          advances: this.advances.where((advance) {
+        return this.acquired.contains(advance.id);
+      }).toList()),
       Expanded(
           child: Column(children: [Expanded(child: Row(children: cardLists))]))
     ]);

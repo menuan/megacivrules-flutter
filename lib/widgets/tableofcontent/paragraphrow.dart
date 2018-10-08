@@ -21,7 +21,7 @@ class ParagraphRow extends StatelessWidget {
       textAlign: TextAlign.left,
       softWrap: true,
       overflow: TextOverflow.clip,
-      style: TextStyle(fontSize: 20.0),
+      style: TextStyle(fontSize: 15.0),
     );
     var container = Container(
       child: textWidget,
@@ -104,9 +104,9 @@ class ParagraphRow extends StatelessWidget {
 
     return new ExpansionTile(
       title: new Padding(
-        padding: new EdgeInsets.only(left: 25.0),
+        padding: new EdgeInsets.only(left: 5.0),
         child: new Text("$parentIndex:$paragraphIndex: ${paragraph.title}",
-            textAlign: TextAlign.start),
+            textAlign: TextAlign.start, style: TextStyle(fontSize: 15.0)),
       ),
       children: children,
     );
