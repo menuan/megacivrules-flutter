@@ -164,7 +164,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   @override
   Widget build(BuildContext context) {
     Widget body = getBody();
-
     return MaterialApp(
         theme: getThemeData(),
         home: Scaffold(

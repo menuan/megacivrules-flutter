@@ -55,6 +55,22 @@ class _ProgressState extends State<Progress> {
     advances.sort(advancesSort);
   }
 
+  void showModal(BuildContext context) {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext modalContext) {
+          return Container(
+              child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Text(
+                      'This is the modal bottom sheet. Tap anywhere to dismiss.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Theme.of(modalContext).accentColor,
+                          fontSize: 24.0))));
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     var advancesList = new ListView.builder(

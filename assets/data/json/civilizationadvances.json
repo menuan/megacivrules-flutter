@@ -7,7 +7,6 @@
     "attributes": ["Acquire 10 additional points of credit tokens in any combination of colors"],
     "name": "Written record",
     "reduceCosts": [
-
       {
         "id": "advance_military",
         "reduced": 20

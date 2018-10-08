@@ -22,32 +22,14 @@ class ProgressHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Card(
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-              leading: null,
+              leading: Icon(Icons.stars),
               title: Text("Victory points: ${getVictoryPoints()}"),
               subtitle: null),
-          Row(children: [
-            Checkbox(
-              value: this.filter,
-              onChanged: onChangeFilter,
-              tristate: false,
-            ),
-            Checkbox(
-              value: this.filter,
-              onChanged: onChangeFilter,
-              tristate: false,
-            ),
-            Checkbox(
-              value: this.filter,
-              onChanged: onChangeFilter,
-              tristate: false,
-            )
-          ])
         ],
       ),
     );

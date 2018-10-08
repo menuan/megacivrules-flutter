@@ -60,65 +60,80 @@ class CivilizationAdvanceCard extends StatelessWidget {
 
   void onTapShowCard() {}
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> children = [
-      ListTile(
-          trailing: Container(
-              padding: EdgeInsets.only(top: 40.0),
-              child: Column(children: [
-                new RaisedButton(
-//            color: Colors.purple,
-                  textColor: Colors.white,
-                  child: Text(getButtonText()),
-                  onPressed: () {
-                    this.onTap(advance, !isAcquired());
-                  },
-                ),
-                new RaisedButton(
-//            color: Colors.purple,
-                  textColor: Colors.white,
-                  child: Text("Show card"),
-                  onPressed: () {
-                    this.onTapShowCard();
-                  },
-                )
-              ])),
-          title: Text(advance.name)),
-      /*Container(
-          width: double.infinity,
-          height: 30.0,
-          padding: EdgeInsets.only(left: 20.0),
-          child: Row(children: getGroupImages())),*/
+  void showModal(BuildContext context) {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext modalContext) {
+          return Container(
+              child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Text('TODO: Show card image...',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Theme.of(modalContext).accentColor,
+                          fontSize: 24.0))));
+        });
+  }
+
+  Widget getFooter(BuildContext context) {
+    return new ButtonTheme.bar(
+      // make buttons use the appropriate styles for cards
+      child: new ButtonBar(
+        children: <Widget>[
+          new RaisedButton(
+            child: const Text('Card'),
+            onPressed: () {
+              this.showModal(context);
+            },
+          ),
+          new RaisedButton(
+            child: Text(getButtonText()),
+            onPressed: () {
+              this.onTap(advance, !isAcquired());
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getHeader() {
+    return ListTile(
+        trailing: Text(
+            "Cost: ${advance.cost.toString()} \nVictory points: ${advance.victoryPoints.toString()}"),
+        title: Text(advance.name));
+  }
+
+  List<Widget> getContent(BuildContext context) {
+    int reducedCost = getReducedCost();
+    List<Widget> content = [
       ListTile(
         title: Container(
-            padding: EdgeInsets.only(left: 10.0, top: 0.0),
-            child: Text(
-                "Cost: ${advance.cost.toString()} \nVictory points: ${advance.victoryPoints.toString()}")),
-        subtitle: null,
+            padding: EdgeInsets.only(left: 10.0),
+            child: shouldRenderReducedCost && reducedCost != advance.cost
+                ? Text(
+                    "Reduced cost: $reducedCost",
+                    style: TextStyle(fontSize: 15.0, color: Colors.green[400]),
+                  )
+                : null),
+        subtitle: Container(
+          padding: EdgeInsets.only(left: 10.0, top: 10.0),
+          child: Text(advance.attributes.join('\n\n')),
+        ),
       )
     ];
-
-    int reducedCost = getReducedCost();
-    children.add(ListTile(
-      title: Container(
-          padding: EdgeInsets.only(left: 10.0),
-          child: shouldRenderReducedCost && reducedCost != advance.cost
-              ? Text(
-                  "Reduced cost: $reducedCost",
-                  style: TextStyle(fontSize: 15.0, color: Colors.green[400]),
-                )
-              : null),
-      subtitle: Container(
-        padding: EdgeInsets.only(left: 10.0, top: 10.0),
-        child: Text(advance.attributes.join('\n\n')),
-      ),
-    ));
-
     if (advance.reduceCosts != null && advance.reduceCosts.length > 0) {
-      children.add(getDiscount(context));
+      content.add(getDiscount(context));
     }
+    return content;
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> children = [];
+    children.add(getHeader());
+    children.addAll(getContent(context));
+    children.add(getFooter(context));
     Card card = Card(
         color: isAcquired()
             ? Theme.of(context).primaryColor
