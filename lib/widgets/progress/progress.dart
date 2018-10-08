@@ -78,6 +78,8 @@ class _ProgressState extends State<Progress> {
           acquired: this.acquired,
           advance: advances[i],
           onTap: onTapAdvance,
+          allAdvances: Map.fromIterable(advances,
+              key: (item) => item.id, value: (item) => item),
           shouldRenderReducedCost: true),
       itemCount: advances.length,
     );

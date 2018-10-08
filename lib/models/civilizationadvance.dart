@@ -25,9 +25,21 @@ class CivilizationAdvance extends Object
   factory CivilizationAdvance.fromJson(Map<String, dynamic> json) =>
       _$CivilizationAdvanceFromJson(json);
 
-  int calculateReducedCost(List<String> acquiredIds) {
-    if (acquiredIds != null && acquiredIds.length > 0) {
+  int calculateReducedCost(
+      List<String> acquiredIds, Map<String, CivilizationAdvance> allAdvances) {
+    if (acquiredIds.length > 0) {
       int reducedSum = 0;
+      acquiredIds.forEach((id) {
+        var advance = allAdvances[id];
+        if (advance != null) {
+          var reduced = advance.reduceCosts.firstWhere((r) {
+            return r.id == this.id;
+          }, orElse: () => null);
+          if (reduced != null) {
+            reducedSum += reduced.reduced;
+          }
+        }
+      });
       return (cost - reducedSum);
     }
     return cost;

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/civilizationadvance.dart';
-import 'package:mega_civ_rules/services/themeservice.dart';
 
 typedef void OnTapCivilizationAdvanceCard(
     CivilizationAdvance advance, bool add);
 
 class CivilizationAdvanceCard extends StatelessWidget {
   CivilizationAdvanceCard(
-      {this.advance, this.acquired, this.onTap, this.shouldRenderReducedCost});
+      {this.advance,
+      this.allAdvances,
+      this.acquired,
+      this.onTap,
+      this.shouldRenderReducedCost});
 
   final CivilizationAdvance advance;
+  final Map<String, CivilizationAdvance> allAdvances;
   final List<String> acquired;
   final OnTapCivilizationAdvanceCard onTap;
   final bool shouldRenderReducedCost;
@@ -37,13 +41,13 @@ class CivilizationAdvanceCard extends StatelessWidget {
   }
 
   int getReducedCost() {
-    return advance.calculateReducedCost(this.acquired);
+    return advance.calculateReducedCost(acquired, this.allAdvances);
   }
 
   Widget getDiscount(BuildContext context) {
     var chips = Row(
         children: advance.reduceCosts.map((r) {
-      String title = "${r.id}: ${r.reduced}";
+      String title = "${allAdvances[r.id].name}: ${r.reduced}";
       return Container(
           padding: EdgeInsets.only(left: 5.0),
           child: Chip(
@@ -57,8 +61,6 @@ class CivilizationAdvanceCard extends StatelessWidget {
     }).toList());
     return Column(children: [chips]);
   }
-
-  void onTapShowCard() {}
 
   void showModal(BuildContext context) {
     showModalBottomSheet<void>(
@@ -105,7 +107,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
   }
 
   List<Widget> getContent(BuildContext context) {
-    int reducedCost = getReducedCost();
+    int reducedCost = !isAcquired() ? getReducedCost() : advance.cost;
     List<Widget> content = [
       ListTile(
         title: Container(
