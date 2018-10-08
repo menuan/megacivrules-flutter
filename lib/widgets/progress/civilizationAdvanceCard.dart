@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mega_civ_rules/models/civilizationadvance.dart';
+import 'package:mega_civ_rules/services/themeservice.dart';
 
 typedef void OnTapCivilizationAdvanceCard(
     CivilizationAdvance advance, bool add);
@@ -28,7 +29,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
   }
 
   String getButtonText() {
-    if (this.acquired.contains(advance.id)) {
+    if (isAcquired()) {
       return "Remove";
     } else {
       return "Add";
@@ -36,56 +37,62 @@ class CivilizationAdvanceCard extends StatelessWidget {
   }
 
   int getReducedCost() {
-    return 0; //advance.calculateReducedCost(this.advances);
+    return advance.calculateReducedCost(this.acquired);
   }
 
-  Widget getDiscount() {
+  Widget getDiscount(BuildContext context) {
     var chips = Row(
         children: advance.reduceCosts.map((r) {
       String title = "${r.id}: ${r.reduced}";
       return Container(
-          //padding: EdgeInsets.only(left: 5.0),
+          padding: EdgeInsets.only(left: 5.0),
           child: Chip(
-        backgroundColor: Colors.green,
-        label: new Text(
-          '$title',
-          overflow: TextOverflow.fade,
-          style: TextStyle(color: Colors.white),
-        ),
-      ));
+            backgroundColor: Theme.of(context).chipTheme.secondarySelectedColor,
+            label: new Text(
+              '$title',
+              overflow: TextOverflow.fade,
+              style: TextStyle(color: Colors.white),
+            ),
+          ));
     }).toList());
-    var title = ListTile(
-        title: Container(
-            padding: EdgeInsets.only(left: 10.0),
-            child: Text(
-              "Discounts:",
-              style: TextStyle(fontSize: 15.0, color: Colors.white),
-            )),
-        subtitle: null);
     return Column(children: [chips]);
   }
+
+  void onTapShowCard() {}
 
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
       ListTile(
-          trailing: new RaisedButton(
+          trailing: Container(
+              padding: EdgeInsets.only(top: 40.0),
+              child: Column(children: [
+                new RaisedButton(
 //            color: Colors.purple,
-            textColor: Colors.white,
-            child: Text(getButtonText()),
-            onPressed: () {
-              this.onTap(advance, !isAcquired());
-            },
-          ),
+                  textColor: Colors.white,
+                  child: Text(getButtonText()),
+                  onPressed: () {
+                    this.onTap(advance, !isAcquired());
+                  },
+                ),
+                new RaisedButton(
+//            color: Colors.purple,
+                  textColor: Colors.white,
+                  child: Text("Show card"),
+                  onPressed: () {
+                    this.onTapShowCard();
+                  },
+                )
+              ])),
           title: Text(advance.name)),
-      Container(
+      /*Container(
           width: double.infinity,
           height: 30.0,
           padding: EdgeInsets.only(left: 20.0),
-          child: Row(children: getGroupImages())),
+          child: Row(children: getGroupImages())),*/
       ListTile(
         title: Container(
-            padding: EdgeInsets.only(left: 10.0, top: 10.0),
+            padding: EdgeInsets.only(left: 10.0, top: 0.0),
             child: Text(
                 "Cost: ${advance.cost.toString()} \nVictory points: ${advance.victoryPoints.toString()}")),
         subtitle: null,
@@ -109,14 +116,17 @@ class CivilizationAdvanceCard extends StatelessWidget {
     ));
 
     if (advance.reduceCosts != null && advance.reduceCosts.length > 0) {
-      children.add(getDiscount());
+      children.add(getDiscount(context));
     }
 
     Card card = Card(
+        color: isAcquired()
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).cardColor,
         child: new Column(
-      mainAxisSize: MainAxisSize.min,
-      children: children,
-    ));
+          mainAxisSize: MainAxisSize.min,
+          children: children,
+        ));
     return card;
   }
 }
