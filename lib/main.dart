@@ -53,8 +53,8 @@ class _MegaCivRulesState extends State<MegaCivRules> {
         buildDefaultAppBar: buildAppBar,
         setState: setState,
         clearOnSubmit: false,
-        onSubmitted: onSubmitted,
-        onChanged: onChange,
+        onSubmitted: onChangeSearchBar,
+        onChanged: onChangeSearchBar,
         onClosed: () {
           setState(() => searchString = "");
         });
@@ -88,11 +88,7 @@ class _MegaCivRulesState extends State<MegaCivRules> {
         actions: [searchBar.getSearchAction(context)]);
   }
 
-  void onChange(String value) {
-    setState(() => searchString = value);
-  }
-
-  void onSubmitted(String value) {
+  void onChangeSearchBar(String value) {
     setState(() => searchString = value);
   }
 
