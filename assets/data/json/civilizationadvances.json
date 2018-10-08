@@ -15,6 +15,16 @@
         "id": "agriculture",
         "reduced": 10
       }
+    ],
+    "colorCredits": [
+      {
+        "group": "science",
+        "value": 10
+      },
+      {
+        "group": "crafts",
+        "value": 20
+      }
     ]
   },
   {
@@ -28,7 +38,8 @@
       "CIVIL DISORDER: Reduce 1 additional city."
     ],
     "name": "Advanced Military",
-    "reduceCosts": []
+    "reduceCosts": [],
+    "colorCredits": []
   },
   {
     "groups": ["science", "crafts"],
@@ -40,6 +51,7 @@
       "FAMINE: If you are the primary victim, take 5 additional damage."
     ],
     "name": "Agriculture",
+    "colorCredits": [],
     "reduceCosts": [
       {
         "id": "advance_military",

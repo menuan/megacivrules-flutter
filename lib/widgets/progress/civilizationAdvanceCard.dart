@@ -20,7 +20,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
 
   List<Widget> getGroupImages() {
     return advance.groups.map((g) {
-      String fileSrc = g.toString().replaceAll("CivilizationAdvanceGroup.", "");
+      String fileSrc = g.toString().split('.')?.last;
       return Image(
           alignment: Alignment.topLeft,
           width: 30.0,
@@ -124,6 +124,15 @@ class CivilizationAdvanceCard extends StatelessWidget {
         ),
       )
     ];
+    if (advance.colorCredits.length > 0) {
+      content.add(ListTile(
+          title: null,
+          subtitle: Container(
+              child: Text(advance.colorCredits
+                  .map((c) =>
+                      "${c.group.toString().split('.')?.last}: ${c.value}")
+                  .join(", ")))));
+    }
     if (advance.reduceCosts != null && advance.reduceCosts.length > 0) {
       content.add(getDiscount(context));
     }

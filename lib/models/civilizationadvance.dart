@@ -13,6 +13,8 @@ class CivilizationAdvance extends Object
   String name;
   List<CivilizationAdvanceReducedCost> reduceCosts;
   String id;
+  List<ColorCredit> colorCredits;
+
   // TODO: Additional credits, if present, specified as attributes
   CivilizationAdvance(
       {this.groups,
@@ -38,6 +40,11 @@ class CivilizationAdvance extends Object
           if (reduced != null) {
             reducedSum += reduced.reduced;
           }
+          advance.colorCredits.forEach((colorCredit) {
+            if (this.groups.contains(colorCredit.group)) {
+              reducedSum += colorCredit.value;
+            }
+          });
         }
       });
       return (cost - reducedSum);
@@ -55,4 +62,15 @@ class CivilizationAdvanceReducedCost extends Object
 
   factory CivilizationAdvanceReducedCost.fromJson(Map<String, dynamic> json) =>
       _$CivilizationAdvanceReducedCostFromJson(json);
+}
+
+@JsonSerializable()
+class ColorCredit extends Object with _$ColorCreditSerializerMixin {
+  ColorCredit();
+
+  CivilizationAdvanceGroup group;
+  int value;
+
+  factory ColorCredit.fromJson(Map<String, dynamic> json) =>
+      _$ColorCreditFromJson(json);
 }

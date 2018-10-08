@@ -23,6 +23,11 @@ CivilizationAdvance _$CivilizationAdvanceFromJson(Map<String, dynamic> json) {
             ? null
             : new CivilizationAdvanceReducedCost.fromJson(
                 e as Map<String, dynamic>))
+        ?.toList()
+    ..colorCredits = (json['colorCredits'] as List)
+        ?.map((e) => e == null
+            ? null
+            : new ColorCredit.fromJson(e as Map<String, dynamic>))
         ?.toList();
 }
 
@@ -34,6 +39,7 @@ abstract class _$CivilizationAdvanceSerializerMixin {
   String get name;
   List<CivilizationAdvanceReducedCost> get reduceCosts;
   String get id;
+  List<ColorCredit> get colorCredits;
   Map<String, dynamic> toJson() => <String, dynamic>{
         'groups': groups?.map((e) => e?.toString()?.split('.')?.last)?.toList(),
         'victoryPoints': victoryPoints,
@@ -41,7 +47,8 @@ abstract class _$CivilizationAdvanceSerializerMixin {
         'attributes': attributes,
         'name': name,
         'reduceCosts': reduceCosts,
-        'id': id
+        'id': id,
+        'colorCredits': colorCredits
       };
 }
 
@@ -56,4 +63,20 @@ abstract class _$CivilizationAdvanceReducedCostSerializerMixin {
   String get id;
   Map<String, dynamic> toJson() =>
       <String, dynamic>{'reduced': reduced, 'id': id};
+}
+
+ColorCredit _$ColorCreditFromJson(Map<String, dynamic> json) {
+  return new ColorCredit()
+    ..group = $enumDecodeNullable('CivilizationAdvanceGroup',
+        CivilizationAdvanceGroup.values, json['group'] as String)
+    ..value = json['value'] as int;
+}
+
+abstract class _$ColorCreditSerializerMixin {
+  CivilizationAdvanceGroup get group;
+  int get value;
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'group': group?.toString()?.split('.')?.last,
+        'value': value
+      };
 }
