@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 import 'dart:convert';
 
-class ImageCache {
-  static ImageCache instance = ImageCache();
+class ImageMemoization {
+  static ImageMemoization instance = ImageMemoization();
 
   Map<String, Uint8List> _images = Map();
 
