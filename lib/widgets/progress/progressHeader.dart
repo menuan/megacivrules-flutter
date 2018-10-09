@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
+import 'package:mega_civ_rules/widgets/progress/progress.dart';
+
+typedef void OnChangeProgressMode(ProgressDisplayMode mode);
 
 class ProgressHeader extends StatelessWidget {
-  ProgressHeader({this.advances});
+  ProgressHeader({this.advances, this.onChangeMode, this.mode});
   final List<CivilizationAdvance> advances;
-  bool filter = false;
+  final OnChangeProgressMode onChangeMode;
+  final ProgressDisplayMode mode;
+
   String getVictoryPoints() {
     if (advances.length > 0) {
       return advances
@@ -16,10 +21,6 @@ class ProgressHeader extends StatelessWidget {
     return "0";
   }
 
-  void onChangeFilter(bool val) {
-    this.filter = val;
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Card(
@@ -28,6 +29,18 @@ class ProgressHeader extends StatelessWidget {
         children: <Widget>[
           ListTile(
               leading: Icon(Icons.stars),
+              trailing: Column(
+                children: <Widget>[
+                  GestureDetector(
+                      onTap: () => this.onChangeMode(
+                          this.mode == ProgressDisplayMode.DetailedCard
+                              ? ProgressDisplayMode.Card
+                              : ProgressDisplayMode.DetailedCard),
+                      child: Icon(mode == ProgressDisplayMode.DetailedCard
+                          ? Icons.grid_on
+                          : Icons.list))
+                ],
+              ),
               title: Text("Victory points: ${getVictoryPoints()}"),
               subtitle: null),
         ],

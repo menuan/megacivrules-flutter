@@ -134,7 +134,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
 
   void _onSwitchValueChange(bool newValue) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print('Toggling dark theme: $newValue');
     setState(() {
       darkThemeEnabled = newValue;
     });
@@ -144,7 +143,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   void _onColorSliderValueChange(double newValue) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int rounded = newValue.round();
-    print('Setting color to index $rounded and saving to storage');
     setState(() {
       sliderColor = rounded;
       themeColor = ThemeService.getColor(sliderColor);

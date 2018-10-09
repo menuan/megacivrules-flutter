@@ -4,15 +4,21 @@ import 'dart:async' show Future;
 
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/utils.dart';
+import 'package:mega_civ_rules/services/imageMemoization.dart';
 
 class CivilizationAdvanceService {
   static String acquiredKey = "acquired";
 
   static Future<List<CivilizationAdvance>> get() {
+    ImageMemoization imgCache = ImageMemoization.instance;
     return Utils.loadJSONAsset("civilizationadvances.json").then((val) {
       var advances = List<CivilizationAdvance>();
       List<dynamic> advanceJson = json.decode(val);
-      advanceJson.forEach((a) => advances.add(CivilizationAdvance.fromJson(a)));
+      advanceJson.forEach((a) {
+        var decoded = CivilizationAdvance.fromJson(a);
+        advances.add(decoded);
+        imgCache.setImage(decoded.name, decoded.image);
+      });
       return advances;
     });
   }

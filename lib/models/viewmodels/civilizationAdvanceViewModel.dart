@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+import 'dart:convert';
+
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 
 class CivilizationAdvanceViewModel {
@@ -39,7 +42,6 @@ class CivilizationAdvanceViewModel {
     if (advance.reduceCosts != null &&
         advance.reduceCosts.length > 0 &&
         allAdvances != null) {
-      print(advance.reduceCosts);
       return advance.reduceCosts.map((r) {
         CivilizationAdvance other = allAdvances[r.id];
         if (other != null) {
@@ -85,7 +87,7 @@ class CivilizationAdvanceViewModel {
         .join(", ");
   }
 
-  String getImage() {
-    return "imgsrc";
+  Uint8List getBase64ImageData() {
+    return Base64Decoder().convert(advance.image);
   }
 }

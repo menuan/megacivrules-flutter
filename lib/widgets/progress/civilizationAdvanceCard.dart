@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 
-typedef void OnTapCivilizationAdvanceCard(
+typedef void OnTapCivilizationAdvanceCardAddRemove(
     CivilizationAdvance advance, bool add);
+typedef void OnTapCivilizationAdvanceCardShowCard(CivilizationAdvance advance);
 
 class CivilizationAdvanceCard extends StatelessWidget {
-  CivilizationAdvanceCard({this.onTap, this.viewModel});
+  CivilizationAdvanceCard(
+      {this.onTapAddRemove, this.viewModel, this.onTapShowCard});
 
-  final OnTapCivilizationAdvanceCard onTap;
+  final OnTapCivilizationAdvanceCardAddRemove onTapAddRemove;
   final CivilizationAdvanceViewModel viewModel;
+  final OnTapCivilizationAdvanceCardShowCard onTapShowCard;
 
   String getButtonText() {
     if (viewModel.isAcquired()) {
@@ -36,22 +40,6 @@ class CivilizationAdvanceCard extends StatelessWidget {
     return Column(children: [chips]);
   }
 
-  void showModal(BuildContext context) {
-    showModalBottomSheet<void>(
-        context: context,
-        builder: (BuildContext modalContext) {
-          return Container(
-              child: Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: Text(
-                      'TODO: Show card image... ${viewModel.getImage()}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Theme.of(modalContext).accentColor,
-                          fontSize: 24.0))));
-        });
-  }
-
   Widget getFooter(BuildContext context) {
     return new ButtonTheme.bar(
       // make buttons use the appropriate styles for cards
@@ -60,13 +48,14 @@ class CivilizationAdvanceCard extends StatelessWidget {
           new RaisedButton(
             child: const Text('Card'),
             onPressed: () {
-              this.showModal(context);
+              this.onTapShowCard(viewModel.getAdvance());
             },
           ),
           new RaisedButton(
             child: Text(getButtonText()),
             onPressed: () {
-              this.onTap(viewModel.getAdvance(), !viewModel.isAcquired());
+              this.onTapAddRemove(
+                  viewModel.getAdvance(), !viewModel.isAcquired());
             },
           ),
         ],
