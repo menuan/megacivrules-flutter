@@ -14,6 +14,7 @@ class CivilizationAdvance extends Object
   List<CivilizationAdvanceReducedCost> reduceCosts;
   String id;
   List<ColorCredit> colorCredits;
+  String image;
 
   // TODO: Additional credits, if present, specified as attributes
   CivilizationAdvance(
@@ -22,7 +23,8 @@ class CivilizationAdvance extends Object
       this.cost,
       this.attributes,
       this.name,
-      this.id});
+      this.id,
+      this.image});
 
   factory CivilizationAdvance.fromJson(Map<String, dynamic> json) =>
       _$CivilizationAdvanceFromJson(json);
