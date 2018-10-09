@@ -1,53 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:mega_civ_rules/models/civilizationadvance.dart';
+import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
+import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 
 typedef void OnTapCivilizationAdvanceCard(
     CivilizationAdvance advance, bool add);
 
 class CivilizationAdvanceCard extends StatelessWidget {
-  CivilizationAdvanceCard(
-      {this.advance,
-      this.allAdvances,
-      this.acquired,
-      this.onTap,
-      this.shouldRenderReducedCost});
+  CivilizationAdvanceCard({this.onTap, this.viewModel});
 
-  final CivilizationAdvance advance;
-  final Map<String, CivilizationAdvance> allAdvances;
-  final List<String> acquired;
   final OnTapCivilizationAdvanceCard onTap;
-  final bool shouldRenderReducedCost;
-
-  List<Widget> getGroupImages() {
-    return advance.groups.map((g) {
-      String fileSrc = g.toString().split('.')?.last;
-      return Image(
-          alignment: Alignment.topLeft,
-          width: 30.0,
-          image: AssetImage("assets/img/advancegroups/$fileSrc.png"));
-    }).toList();
-  }
-
-  bool isAcquired() {
-    return this.acquired.contains(advance.id);
-  }
+  final CivilizationAdvanceViewModel viewModel;
 
   String getButtonText() {
-    if (isAcquired()) {
+    if (viewModel.isAcquired()) {
       return "Remove";
     } else {
       return "Add";
     }
   }
 
-  int getReducedCost() {
-    return advance.calculateReducedCost(acquired, this.allAdvances);
-  }
-
   Widget getDiscount(BuildContext context) {
     var chips = Row(
-        children: advance.reduceCosts.map((r) {
-      String title = "${allAdvances[r.id].name}: ${r.reduced}";
+        children: viewModel.getReducedCostStrings().map((title) {
       return Container(
           padding: EdgeInsets.only(left: 5.0),
           child: Chip(
@@ -69,7 +43,8 @@ class CivilizationAdvanceCard extends StatelessWidget {
           return Container(
               child: Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: Text('TODO: Show card image...',
+                  child: Text(
+                      'TODO: Show card image... ${viewModel.getImage()}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Theme.of(modalContext).accentColor,
@@ -91,7 +66,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
           new RaisedButton(
             child: Text(getButtonText()),
             onPressed: () {
-              this.onTap(advance, !isAcquired());
+              this.onTap(viewModel.getAdvance(), !viewModel.isAcquired());
             },
           ),
         ],
@@ -102,17 +77,19 @@ class CivilizationAdvanceCard extends StatelessWidget {
   Widget getHeader() {
     return ListTile(
         trailing: Text(
-            "Cost: ${advance.cost.toString()} \nVictory points: ${advance.victoryPoints.toString()}"),
-        title: Text(advance.name));
+            "Cost: ${viewModel.getAdvanceCost()} \nVictory points: ${viewModel.getAdvanceVictoryPoints()}"),
+        title: Text(viewModel.getAdvanceName()));
   }
 
   List<Widget> getContent(BuildContext context) {
-    int reducedCost = !isAcquired() ? getReducedCost() : advance.cost;
+    int reducedCost = !viewModel.isAcquired()
+        ? viewModel.calculateReducedCost()
+        : viewModel.getAdvanceCost();
     List<Widget> content = [
       ListTile(
         title: Container(
             padding: EdgeInsets.only(left: 10.0),
-            child: shouldRenderReducedCost && reducedCost != advance.cost
+            child: reducedCost != viewModel.getAdvanceCost()
                 ? Text(
                     "Reduced cost: $reducedCost",
                     style: TextStyle(fontSize: 15.0, color: Colors.green[400]),
@@ -120,20 +97,16 @@ class CivilizationAdvanceCard extends StatelessWidget {
                 : null),
         subtitle: Container(
           padding: EdgeInsets.only(left: 10.0, top: 10.0),
-          child: Text(advance.attributes.join('\n\n')),
+          child: Text(viewModel.getAdvanceAttributes()),
         ),
       )
     ];
-    if (advance.colorCredits.length > 0) {
+    if (viewModel.hasColorCredits()) {
       content.add(ListTile(
           title: null,
-          subtitle: Container(
-              child: Text(advance.colorCredits
-                  .map((c) =>
-                      "${c.group.toString().split('.')?.last}: ${c.value}")
-                  .join(", ")))));
+          subtitle: Container(child: Text(viewModel.getColorCreditString()))));
     }
-    if (advance.reduceCosts != null && advance.reduceCosts.length > 0) {
+    if (viewModel.hasReduceCosts()) {
       content.add(getDiscount(context));
     }
     return content;
@@ -146,7 +119,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
     children.addAll(getContent(context));
     children.add(getFooter(context));
     Card card = Card(
-        color: isAcquired()
+        color: viewModel.isAcquired()
             ? Theme.of(context).primaryColor
             : Theme.of(context).cardColor,
         child: new Column(

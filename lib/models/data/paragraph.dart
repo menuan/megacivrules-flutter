@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'paragraph.g.dart';
+part 'package:mega_civ_rules/models/data/paragraph.g.dart';
 
 @JsonSerializable()
 class Paragraph extends Object with _$ParagraphSerializerMixin {

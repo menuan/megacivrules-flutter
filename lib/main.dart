@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 // Ours
-import 'package:mega_civ_rules/models/chapter.dart';
+import 'package:mega_civ_rules/models/data/chapter.dart';
 import 'package:mega_civ_rules/widgets/tableofcontent/tableofcontent.dart';
 import 'package:mega_civ_rules/widgets/wikipedia/wikipedia.dart';
 import 'package:mega_civ_rules/widgets/progress/progress.dart';

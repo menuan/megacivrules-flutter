@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mega_civ_rules/models/paragraph.dart';
+import 'package:mega_civ_rules/models/data/paragraph.dart';
 
 typedef void OnTapTocRow(int index);
 

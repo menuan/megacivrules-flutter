@@ -1,6 +1,6 @@
-import 'package:mega_civ_rules/models/paragraph.dart';
+import 'package:mega_civ_rules/models/data/paragraph.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'chapter.g.dart';
+part 'package:mega_civ_rules/models/data/chapter.g.dart';
 
 @JsonSerializable()
 class Chapter extends Object with _$ChapterSerializerMixin {

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mega_civ_rules/models/civilizationadvance.dart';
+import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 
 void main() {
   test('CivilizationAdvance deserialization', () {

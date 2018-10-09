@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:mega_civ_rules/models/chapter.dart';
+import 'package:mega_civ_rules/models/data/chapter.dart';
 import 'package:mega_civ_rules/services/utils.dart';
 import 'dart:async' show Future;
 

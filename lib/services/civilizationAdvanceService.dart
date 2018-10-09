@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async' show Future;
 
-import 'package:mega_civ_rules/models/civilizationadvance.dart';
+import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/utils.dart';
 
 class CivilizationAdvanceService {

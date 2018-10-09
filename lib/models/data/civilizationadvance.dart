@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'civilizationadvance.g.dart';
+part 'package:mega_civ_rules/models/data/civilizationadvance.g.dart';
 
 enum CivilizationAdvanceGroup { science, arts, crafts, civic, religion }
 

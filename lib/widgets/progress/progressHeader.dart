@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mega_civ_rules/models/civilizationadvance.dart';
+import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 
 class ProgressHeader extends StatelessWidget {
   ProgressHeader({this.advances});

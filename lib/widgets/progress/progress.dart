@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:mega_civ_rules/models/civilizationadvance.dart';
+import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 import 'package:mega_civ_rules/widgets/progress/civilizationAdvanceCard.dart';
 import 'package:mega_civ_rules/widgets/progress/progressHeader.dart';
+import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 
 class Progress extends StatefulWidget {
   Progress({Key key}) : super(key: key);
@@ -21,7 +22,6 @@ class _ProgressState extends State<Progress> {
     super.initState();
     CivilizationAdvanceService.getAcquired().then((acquired) {
       this.setState(() {
-        print(acquired);
         this.acquired = acquired;
       });
     });
@@ -73,14 +73,16 @@ class _ProgressState extends State<Progress> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, CivilizationAdvance> allAdvancesMap = Map.fromIterable(advances,
+        key: (item) => item.id, value: (item) => item);
     var advancesList = new ListView.builder(
       itemBuilder: (context, i) => new CivilizationAdvanceCard(
-          acquired: this.acquired,
-          advance: advances[i],
-          onTap: onTapAdvance,
-          allAdvances: Map.fromIterable(advances,
-              key: (item) => item.id, value: (item) => item),
-          shouldRenderReducedCost: true),
+            viewModel: new CivilizationAdvanceViewModel(
+                allAdvances: allAdvancesMap ?? Map(),
+                advance: advances[i],
+                acquired: acquired),
+            onTap: onTapAdvance,
+          ),
       itemCount: advances.length,
     );
 
