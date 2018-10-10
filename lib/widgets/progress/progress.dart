@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:typed_data';
-import 'dart:convert';
 
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 import 'package:mega_civ_rules/services/imageMemoization.dart';
 import 'package:mega_civ_rules/widgets/progress/civilizationAdvanceCard.dart';
-import 'package:mega_civ_rules/widgets/progress/progressHeader.dart';
 import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 
 enum ProgressDisplayMode { DetailedCard, Card }
@@ -22,7 +19,7 @@ class _ProgressState extends State<Progress> {
   List<CivilizationAdvance> advances = [];
   List<String> acquired = [];
   ProgressDisplayMode mode = ProgressDisplayMode.DetailedCard;
-  Map<String, Uint8List> decoded = Map();
+  Map<String, CivilizationAdvance> allAdvancesMap = Map();
 
   @override
   void initState() {
@@ -35,6 +32,9 @@ class _ProgressState extends State<Progress> {
     CivilizationAdvanceService.get().then((advances) {
       this.setState(() {
         this.advances = advances;
+        allAdvancesMap = Map.fromIterable(advances,
+            key: (item) => item.id, value: (item) => item);
+
         _sort();
       });
     });
@@ -74,66 +74,97 @@ class _ProgressState extends State<Progress> {
         });
   }
 
-  void _onChangeDisplayMode(ProgressDisplayMode mode) {
+  void _onChangeMode() {
     setState(() {
-      this.mode = mode;
+      mode = mode == ProgressDisplayMode.DetailedCard
+          ? ProgressDisplayMode.Card
+          : ProgressDisplayMode.DetailedCard;
     });
   }
 
   Widget _getCardGrid(BuildContext context) {
-    return Expanded(
-        child: GridView.count(
-      primary: false,
-      padding: const EdgeInsets.all(10.0),
-      crossAxisSpacing: 10.0,
-      mainAxisSpacing: 15.0,
-      crossAxisCount: 2,
-      children: advances
-          .map((a) => GestureDetector(
-                child: Image.memory(ImageMemoization.instance.getImage(a.name)),
-                onTap: () => this._showModal(a),
-              ))
-          .toList(),
-    ));
+    return SliverGrid(
+      gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200.0,
+        mainAxisSpacing: 10.0,
+      ),
+      delegate: SliverChildBuilderDelegate(
+          (context, pos) => GestureDetector(
+                child: Image.memory(
+                    ImageMemoization.instance.getImage(advances[pos].name)),
+                onTap: () => _showModal(advances[pos]),
+              ),
+          childCount: advances.length),
+    );
   }
 
-  Widget _getDetailedCard() {
-    Map<String, CivilizationAdvance> allAdvancesMap = Map.fromIterable(advances,
-        key: (item) => item.id, value: (item) => item);
-    var advancesList = new ListView.builder(
-      itemBuilder: (context, i) => new CivilizationAdvanceCard(
-            viewModel: new CivilizationAdvanceViewModel(
-                allAdvances: allAdvancesMap ?? Map(),
-                advance: advances[i],
-                acquired: acquired),
-            onTapAddRemove: _onTapAddRemoveAdvance,
-            onTapShowCard: _showModal,
-          ),
-      itemCount: advances.length,
+  Widget _getDetailedCardList() {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, pos) => _buildDetailedCardRow(context, advances[pos]),
+        childCount: advances.length,
+      ),
     );
-    List<Widget> cardLists = [new Expanded(child: advancesList)];
-    return Expanded(
-        child: Column(children: [Expanded(child: Row(children: cardLists))]));
+  }
+
+  Widget _buildDetailedCardRow(
+      BuildContext context, CivilizationAdvance advance) {
+    return new CivilizationAdvanceCard(
+      viewModel: new CivilizationAdvanceViewModel(
+          allAdvances: allAdvancesMap ?? Map(),
+          advance: advance,
+          acquired: acquired),
+      onTapAddRemove: _onTapAddRemoveAdvance,
+      onTapShowCard: _showModal,
+    );
+  }
+
+  String getVictoryPoints() {
+    if (advances.length > 0) {
+      return advances
+          .map((a) => a.victoryPoints)
+          .reduce((value, element) => value + element)
+          .toString();
+    }
+    return "0";
+  }
+
+  Widget getSliverBar() {
+    return SliverAppBar(
+      floating: true,
+      expandedHeight: 20.0,
+      leading: null,
+      automaticallyImplyLeading: false,
+      actions: <Widget>[
+        GestureDetector(
+          child: Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: Icon(mode == ProgressDisplayMode.DetailedCard
+                  ? Icons.grid_on
+                  : Icons.list)),
+          onTap: _onChangeMode,
+        )
+      ],
+      backgroundColor: Theme.of(context).cardColor,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text("Victory points: ${getVictoryPoints()}",
+            style: TextStyle(fontSize: 15.0)),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> children = [
-      ProgressHeader(
-          onChangeMode: _onChangeDisplayMode,
-          mode: mode,
-          advances: this.advances.where((advance) {
-            return this.acquired.contains(advance.id);
-          }).toList())
-    ];
+    Widget body;
     switch (mode) {
       case ProgressDisplayMode.Card:
-        children.add(_getCardGrid(context));
+        body = _getCardGrid(context);
         break;
       case ProgressDisplayMode.DetailedCard:
-        children.add(_getDetailedCard());
+        body = _getDetailedCardList();
         break;
     }
-    return Column(children: children);
+    return CustomScrollView(slivers: [getSliverBar(), body]);
+    ;
   }
 }
