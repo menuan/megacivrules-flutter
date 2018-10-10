@@ -40,9 +40,10 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   MaterialColor themeColor = Colors.lightGreen;
 
   List<Chapter> chapters = [];
-  int selectedIndex = 0;
   SearchBar searchBar;
   String searchString = "";
+  int _page = 0;
+  PageController _c;
 
   void loadSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -55,6 +56,9 @@ class _MegaCivRulesState extends State<MegaCivRules> {
 
   @override
   void initState() {
+    _c = new PageController(
+      initialPage: _page,
+    );
     super.initState();
     loadSharedPreferences();
     searchBar = new SearchBar(
@@ -110,7 +114,12 @@ class _MegaCivRulesState extends State<MegaCivRules> {
                 .textTheme
                 .copyWith(caption: TextStyle(color: Colors.white))),
         child: BottomNavigationBar(
-            currentIndex: this.selectedIndex,
+            currentIndex: _page,
+            onTap: (index) {
+              this._c.animateToPage(index,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut);
+            },
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
@@ -122,14 +131,7 @@ class _MegaCivRulesState extends State<MegaCivRules> {
                   title: const Text('Progress')),
               BottomNavigationBarItem(
                   icon: Icon(Icons.border_all), title: const Text('Cards'))
-            ],
-            onTap: _onBottomNavigationBarTapped));
-  }
-
-  void _onBottomNavigationBarTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
+            ]));
   }
 
   void _onSwitchValueChange(bool newValue) async {
@@ -153,7 +155,15 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   Widget getHome() {
     return Scaffold(
       appBar: searchBar.build(context),
-      body: getBody(),
+      body: PageView(
+        controller: _c,
+        onPageChanged: (newPage) {
+          setState(() {
+            this._page = newPage;
+          });
+        },
+        children: getBody(),
+      ),
       drawer: getDrawer(),
       bottomNavigationBar:
           getNavBar(), // This trailing comma makes auto-formatting nicer for build methods.
@@ -191,28 +201,20 @@ class _MegaCivRulesState extends State<MegaCivRules> {
     ));
   }
 
-  Widget getBody() {
-    switch (this.selectedIndex) {
-      case 0:
-        return new TableOfContents(
-          chapters: this.chapters,
-          searchString: this.searchString,
-        );
-      case 1:
-        return new Wikipedia();
-      case 2:
-        return new Progress();
-      case 3:
-        return Text('Cards');
-      default:
-        return Text('Not implemented');
-    }
+  List<Widget> getBody() {
+    return [
+      TableOfContents(
+        chapters: this.chapters,
+        searchString: this.searchString,
+      ),
+      Wikipedia(),
+      Progress(),
+      Text("cards")
+    ];
   }
 
   void handleSplashTimeout() {
-    print("Splash is done, setting state!");
     setState(() {
-      print("Splash is over!");
       hasShownSplash = true;
     });
   }

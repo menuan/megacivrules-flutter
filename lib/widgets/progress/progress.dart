@@ -15,7 +15,9 @@ class Progress extends StatefulWidget {
   _ProgressState createState() => new _ProgressState();
 }
 
-class _ProgressState extends State<Progress> {
+class _ProgressState extends State<Progress>
+    with AutomaticKeepAliveClientMixin<Progress> {
+  bool get wantKeepAlive => true;
   List<CivilizationAdvance> advances = [];
   List<String> acquired = [];
   ProgressDisplayMode mode = ProgressDisplayMode.DetailedCard;
