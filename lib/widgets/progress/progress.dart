@@ -5,6 +5,7 @@ import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 import 'package:mega_civ_rules/services/imageMemoization.dart';
 import 'package:mega_civ_rules/widgets/progress/civilizationAdvanceCard.dart';
 import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
+import 'package:mega_civ_rules/widgets/CheckboxView/checkboxView.dart';
 
 enum ProgressDisplayMode { DetailedCard, Card }
 
@@ -19,13 +20,23 @@ class _ProgressState extends State<Progress>
     with AutomaticKeepAliveClientMixin<Progress> {
   bool get wantKeepAlive => true;
   List<CivilizationAdvance> advances = [];
+  List<CivilizationAdvance> filteredAdvances = [];
   List<String> acquired = [];
   ProgressDisplayMode mode = ProgressDisplayMode.DetailedCard;
   Map<String, CivilizationAdvance> allAdvancesMap = Map();
 
+  Map<CivilizationAdvanceGroup, bool> filter = Map();
+
   @override
   void initState() {
     super.initState();
+    filter = {
+      CivilizationAdvanceGroup.science: true,
+      CivilizationAdvanceGroup.crafts: true,
+      CivilizationAdvanceGroup.civic: true,
+      CivilizationAdvanceGroup.arts: true,
+      CivilizationAdvanceGroup.religion: true
+    };
     CivilizationAdvanceService.getAcquired().then((acquired) {
       this.setState(() {
         this.acquired = acquired;
@@ -34,6 +45,7 @@ class _ProgressState extends State<Progress>
     CivilizationAdvanceService.get().then((advances) {
       this.setState(() {
         this.advances = advances;
+        this.filteredAdvances = advances;
         allAdvancesMap = Map.fromIterable(advances,
             key: (item) => item.id, value: (item) => item);
 
@@ -61,7 +73,7 @@ class _ProgressState extends State<Progress>
   }
 
   void _sort() {
-    advances.sort(_advancesSort);
+    filteredAdvances.sort(_advancesSort);
   }
 
   void _showModal(CivilizationAdvance a) {
@@ -92,19 +104,19 @@ class _ProgressState extends State<Progress>
       ),
       delegate: SliverChildBuilderDelegate(
           (context, pos) => GestureDetector(
-                child: Image.memory(
-                    ImageMemoization.instance.getImage(advances[pos].name)),
-                onTap: () => _showModal(advances[pos]),
+                child: Image.memory(ImageMemoization.instance
+                    .getImage(filteredAdvances[pos].name)),
+                onTap: () => _showModal(filteredAdvances[pos]),
               ),
-          childCount: advances.length),
+          childCount: filteredAdvances.length),
     );
   }
 
   Widget _getDetailedCardList() {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (context, pos) => _buildDetailedCardRow(context, advances[pos]),
-        childCount: advances.length,
+        (context, pos) => _buildDetailedCardRow(context, filteredAdvances[pos]),
+        childCount: filteredAdvances.length,
       ),
     );
   }
@@ -131,13 +143,65 @@ class _ProgressState extends State<Progress>
     return "0";
   }
 
+  void _filterAdvances() {
+    List<CivilizationAdvanceGroup> activeFilter = List();
+    this.filter.forEach((g, val) {
+      if (val) {
+        activeFilter.add(g);
+      }
+    });
+    print("_filterAdvances");
+    this.setState(() {
+      this.filteredAdvances = this.advances.where((a) {
+        for (var g in a.groups) {
+          if (activeFilter.contains(g)) {
+            return true;
+          }
+        }
+        return false;
+      }).toList();
+    });
+  }
+
   Widget getSliverBar() {
     return SliverAppBar(
       floating: true,
-      expandedHeight: 20.0,
+      expandedHeight: 40.0,
       leading: null,
       automaticallyImplyLeading: false,
       actions: <Widget>[
+        PopupMenuButton<String>(
+          //onSelected: _select,
+          onCanceled: () => _filterAdvances(),
+          itemBuilder: (BuildContext context) {
+            List<PopupMenuItem<String>> children = [];
+            filter.forEach((group, val) {
+              children.add(PopupMenuItem(
+                  child: CheckboxView(
+                      item: CheckBoxItem<CivilizationAdvanceGroup>(
+                          onChange: (dynamic key, value) {
+                            setState(() {
+                              filter[key] = value;
+                            });
+                          },
+                          key: group,
+                          title: group
+                              .toString()
+                              .replaceAll("CivilizationAdvanceGroup.", ""),
+                          value: filter[group]))));
+              /*children.add(PopupMenuItem(
+                  enabled: true,
+                  child: Row(children: [
+                    Checkbox(
+                        value: filter[group],
+                        onChanged: (val) => _selectedFilter(group)),
+                    Text(
+                        "${filter[group]}: ${group.toString().replaceAll("CivilizationAdvanceGroup.", "")}"),
+                  ])));*/
+            });
+            return children;
+          },
+        ),
         GestureDetector(
           child: Padding(
               padding: EdgeInsets.only(right: 20.0),
@@ -145,7 +209,7 @@ class _ProgressState extends State<Progress>
                   ? Icons.grid_on
                   : Icons.list)),
           onTap: _onChangeMode,
-        )
+        ),
       ],
       backgroundColor: Theme.of(context).cardColor,
       flexibleSpace: FlexibleSpaceBar(
@@ -167,6 +231,5 @@ class _ProgressState extends State<Progress>
         break;
     }
     return CustomScrollView(slivers: [getSliverBar(), body]);
-    ;
   }
 }
