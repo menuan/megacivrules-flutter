@@ -26,11 +26,13 @@ class _ProgressState extends State<Progress>
   Map<String, CivilizationAdvance> allAdvancesMap = Map();
 
   Map<CivilizationAdvanceGroup, bool> filter = Map();
-  bool showAcquired;
+  bool filterByAquiered;
+  bool filterByNotAquiered;
   @override
   void initState() {
     super.initState();
-    showAcquired = true;
+    filterByAquiered = true;
+    filterByNotAquiered = true;
     filter = {
       CivilizationAdvanceGroup.science: true,
       CivilizationAdvanceGroup.crafts: true,
@@ -41,6 +43,7 @@ class _ProgressState extends State<Progress>
     CivilizationAdvanceService.getAcquired().then((acquired) {
       this.setState(() {
         this.acquired = acquired;
+        _filterAdvances();
       });
     });
     CivilizationAdvanceService.get().then((advances) {
@@ -49,7 +52,6 @@ class _ProgressState extends State<Progress>
         this.filteredAdvances = advances;
         allAdvancesMap = Map.fromIterable(advances,
             key: (item) => item.id, value: (item) => item);
-
         _sort();
       });
     });
@@ -136,10 +138,11 @@ class _ProgressState extends State<Progress>
 
   String getVictoryPoints() {
     if (advances.length > 0) {
-      return advances
+      return "0";
+      /*advances
           .map((a) => a.victoryPoints)
           .reduce((value, element) => value + element)
-          .toString();
+          .toString();*/
     }
     return "0";
   }
@@ -155,83 +158,117 @@ class _ProgressState extends State<Progress>
         }
         return false;
       };
-      var filterByAquiered = (id) {
+      var filterByAcquiered = (id) {
         return this.acquired.contains(id);
       };
+      var filterByNotAquieredFunction = (id) {
+        return !this.acquired.contains(id);
+      };
       this.filteredAdvances = this.advances.where((a) {
+        // Filter by group
         var byGroup = filterByGroup(a.groups);
-        if (byGroup && this.showAcquired) {
-          return filterByAquiered(a.id);
+        if (byGroup) {
+          bool shouldFilter = true;
+          if (this.filterByAquiered) {
+            shouldFilter = filterByAcquiered(a.id);
+          } else {
+            shouldFilter = false;
+          }
+          if (this.filterByNotAquiered) {
+            shouldFilter = shouldFilter || filterByNotAquieredFunction(a.id);
+          }
+          return shouldFilter;
         }
-        return byGroup;
+        return false;
       }).toList();
     });
   }
 
   Widget getSliverBar() {
     return SliverAppBar(
-      floating: true,
-      expandedHeight: 40.0,
-      leading: null,
-      automaticallyImplyLeading: false,
-      actions: <Widget>[
-        PopupMenuButton<String>(
-          child: Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: Icon(Icons.filter_list)),
-          itemBuilder: (BuildContext context) {
-            List<PopupMenuItem<String>> children = [];
-            filter.forEach((group, val) {
+        floating: true,
+        expandedHeight: 40.0,
+        leading: Row(children: [
+          Padding(
+            child: Icon(Icons.stars),
+            padding: EdgeInsets.only(left: 5.0),
+          ),
+          Padding(
+            child:
+                Text("${getVictoryPoints()}", style: TextStyle(fontSize: 15.0)),
+            padding: EdgeInsets.only(left: 5.0),
+          )
+        ]),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            child: Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: Icon(Icons.filter_list)),
+            itemBuilder: (BuildContext context) {
+              List<PopupMenuItem<String>> children = [];
+              filter.forEach((group, val) {
+                children.add(PopupMenuItem(
+                    child: CheckboxView(
+                        item: CheckBoxItem<CivilizationAdvanceGroup>(
+                            onChange: (dynamic key, value) {
+                              setState(() {
+                                filter[key] = value;
+                                _filterAdvances();
+                              });
+                            },
+                            key: group,
+                            title: group
+                                .toString()
+                                .replaceAll("CivilizationAdvanceGroup.", ""),
+                            value: filter[group]))));
+              });
+              children.add(PopupMenuItem(
+                enabled: false,
+                child: Divider(),
+              ));
               children.add(PopupMenuItem(
                   child: CheckboxView(
-                      item: CheckBoxItem<CivilizationAdvanceGroup>(
-                          onChange: (dynamic key, value) {
-                            setState(() {
-                              filter[key] = value;
-                              _filterAdvances();
-                            });
-                          },
-                          key: group,
-                          title: group
-                              .toString()
-                              .replaceAll("CivilizationAdvanceGroup.", ""),
-                          value: filter[group]))));
-            });
-            children.add(PopupMenuItem(
-              enabled: false,
-              child: Divider(),
-            ));
-            children.add(PopupMenuItem(
-                child: CheckboxView(
-              item: CheckBoxItem<String>(
-                  onChange: (dynamic key, value) {
-                    setState(() {
-                      showAcquired = value;
-                      _filterAdvances();
-                    });
-                  },
-                  key: "acquired",
-                  title: "Acquired",
-                  value: showAcquired),
-            )));
-            return children;
-          },
-        ),
-        GestureDetector(
-          child: Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: Icon(mode == ProgressDisplayMode.DetailedCard
-                  ? Icons.grid_on
-                  : Icons.list)),
-          onTap: _onChangeMode,
-        ),
-      ],
-      backgroundColor: Theme.of(context).cardColor,
-      flexibleSpace: FlexibleSpaceBar(
-        title: Text("Victory points: ${getVictoryPoints()}",
-            style: TextStyle(fontSize: 15.0)),
-      ),
-    );
+                item: CheckBoxItem<String>(
+                    onChange: (dynamic key, value) {
+                      setState(() {
+                        filterByAquiered = value;
+                        print("showAcquired : $value");
+                        _filterAdvances();
+                      });
+                    },
+                    key: "acquired",
+                    title: "Acquired",
+                    value: filterByAquiered),
+              )));
+              children.add(PopupMenuItem(
+                  child: CheckboxView(
+                item: CheckBoxItem<String>(
+                    onChange: (dynamic key, value) {
+                      setState(() {
+                        filterByNotAquiered = value;
+                        print("showNotAquiered : $value");
+                        _filterAdvances();
+                      });
+                    },
+                    key: "not_acquired",
+                    title: "Not acquired",
+                    value: filterByNotAquiered),
+              )));
+              return children;
+            },
+          ),
+          GestureDetector(
+            child: Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: Icon(mode == ProgressDisplayMode.DetailedCard
+                    ? Icons.grid_on
+                    : Icons.list)),
+            onTap: _onChangeMode,
+          ),
+        ],
+        backgroundColor: Theme.of(context).cardColor,
+        flexibleSpace: null);
   }
 
   @override
