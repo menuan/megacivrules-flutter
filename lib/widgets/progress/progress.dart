@@ -26,10 +26,11 @@ class _ProgressState extends State<Progress>
   Map<String, CivilizationAdvance> allAdvancesMap = Map();
 
   Map<CivilizationAdvanceGroup, bool> filter = Map();
-
+  bool showAcquired;
   @override
   void initState() {
     super.initState();
+    showAcquired = true;
     filter = {
       CivilizationAdvanceGroup.science: true,
       CivilizationAdvanceGroup.crafts: true,
@@ -144,21 +145,25 @@ class _ProgressState extends State<Progress>
   }
 
   void _filterAdvances() {
-    List<CivilizationAdvanceGroup> activeFilter = List();
-    this.filter.forEach((g, val) {
-      if (val) {
-        activeFilter.add(g);
-      }
-    });
-    print("_filterAdvances");
+    var activeFilter = this.filter.keys.where((key) => filter[key]);
     this.setState(() {
-      this.filteredAdvances = this.advances.where((a) {
-        for (var g in a.groups) {
+      var filterByGroup = (groups) {
+        for (var g in groups) {
           if (activeFilter.contains(g)) {
             return true;
           }
         }
         return false;
+      };
+      var filterByAquiered = (id) {
+        return this.acquired.contains(id);
+      };
+      this.filteredAdvances = this.advances.where((a) {
+        var byGroup = filterByGroup(a.groups);
+        if (byGroup && this.showAcquired) {
+          return filterByAquiered(a.id);
+        }
+        return byGroup;
       }).toList();
     });
   }
@@ -171,8 +176,9 @@ class _ProgressState extends State<Progress>
       automaticallyImplyLeading: false,
       actions: <Widget>[
         PopupMenuButton<String>(
-          //onSelected: _select,
-          onCanceled: () => _filterAdvances(),
+          child: Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: Icon(Icons.filter_list)),
           itemBuilder: (BuildContext context) {
             List<PopupMenuItem<String>> children = [];
             filter.forEach((group, val) {
@@ -182,6 +188,7 @@ class _ProgressState extends State<Progress>
                           onChange: (dynamic key, value) {
                             setState(() {
                               filter[key] = value;
+                              _filterAdvances();
                             });
                           },
                           key: group,
@@ -189,16 +196,24 @@ class _ProgressState extends State<Progress>
                               .toString()
                               .replaceAll("CivilizationAdvanceGroup.", ""),
                           value: filter[group]))));
-              /*children.add(PopupMenuItem(
-                  enabled: true,
-                  child: Row(children: [
-                    Checkbox(
-                        value: filter[group],
-                        onChanged: (val) => _selectedFilter(group)),
-                    Text(
-                        "${filter[group]}: ${group.toString().replaceAll("CivilizationAdvanceGroup.", "")}"),
-                  ])));*/
             });
+            children.add(PopupMenuItem(
+              enabled: false,
+              child: Divider(),
+            ));
+            children.add(PopupMenuItem(
+                child: CheckboxView(
+              item: CheckBoxItem<String>(
+                  onChange: (dynamic key, value) {
+                    setState(() {
+                      showAcquired = value;
+                      _filterAdvances();
+                    });
+                  },
+                  key: "acquired",
+                  title: "Acquired",
+                  value: showAcquired),
+            )));
             return children;
           },
         ),
