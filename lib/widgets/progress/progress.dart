@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
@@ -6,6 +7,7 @@ import 'package:mega_civ_rules/services/imageMemoization.dart';
 import 'package:mega_civ_rules/widgets/progress/civilizationAdvanceCard.dart';
 import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 import 'package:mega_civ_rules/widgets/CheckboxView/checkboxView.dart';
+import 'package:mega_civ_rules/models/viewmodels/ProgressViewModel.dart';
 
 enum ProgressDisplayMode { DetailedCard, Card }
 
@@ -19,64 +21,32 @@ class Progress extends StatefulWidget {
 class _ProgressState extends State<Progress>
     with AutomaticKeepAliveClientMixin<Progress> {
   bool get wantKeepAlive => true;
-  List<CivilizationAdvance> advances = [];
-  List<CivilizationAdvance> filteredAdvances = [];
-  List<String> acquired = [];
-  ProgressDisplayMode mode = ProgressDisplayMode.DetailedCard;
-  Map<String, CivilizationAdvance> allAdvancesMap = Map();
+  ProgressDisplayMode mode = ProgressDisplayMode.Card;
+  ProgressViewModel viewModel = ProgressViewModel();
+  List<CivilizationAdvance> advancesToRender = [];
 
-  Map<CivilizationAdvanceGroup, bool> filter = Map();
-  bool filterByAquiered;
-  bool filterByNotAquiered;
   @override
   void initState() {
     super.initState();
-    filterByAquiered = true;
-    filterByNotAquiered = true;
-    filter = {
-      CivilizationAdvanceGroup.science: true,
-      CivilizationAdvanceGroup.crafts: true,
-      CivilizationAdvanceGroup.civic: true,
-      CivilizationAdvanceGroup.arts: true,
-      CivilizationAdvanceGroup.religion: true
-    };
     CivilizationAdvanceService.getAcquired().then((acquired) {
       this.setState(() {
-        this.acquired = acquired;
-        _filterAdvances();
+        viewModel.setAcquired(acquired);
+        advancesToRender = viewModel.getAdvancesToRender();
       });
     });
     CivilizationAdvanceService.get().then((advances) {
       this.setState(() {
-        this.advances = advances;
-        this.filteredAdvances = advances;
-        allAdvancesMap = Map.fromIterable(advances,
-            key: (item) => item.id, value: (item) => item);
-        _sort();
+        viewModel.setAdvances(advances);
+        advancesToRender = viewModel.getAdvancesToRender();
       });
     });
   }
 
   void _onTapAddRemoveAdvance(CivilizationAdvance advance, bool add) {
     this.setState(() {
-      if (add) {
-        this.acquired.add(advance.id);
-      } else {
-        this.acquired.remove(advance.id);
-      }
-      CivilizationAdvanceService.setAcquired(this.acquired);
+      CivilizationAdvanceService.setAcquired(
+          viewModel.addRemoveAcquiered(advance.id, add));
     });
-  }
-
-  int _advancesSort(CivilizationAdvance a, CivilizationAdvance b) {
-    int sort = a.cost - b.cost;
-    if (sort < 0) return -1;
-    if (sort > 0) return 1;
-    return sort;
-  }
-
-  void _sort() {
-    filteredAdvances.sort(_advancesSort);
   }
 
   void _showModal(CivilizationAdvance a) {
@@ -87,7 +57,9 @@ class _ProgressState extends State<Progress>
           return Container(
               child: Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-                  child: Image.memory(data)));
+                  child: Image.memory(
+                    data,
+                  )));
         });
   }
 
@@ -103,23 +75,31 @@ class _ProgressState extends State<Progress>
     return SliverGrid(
       gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200.0,
-        mainAxisSpacing: 10.0,
+        mainAxisSpacing: 5.0,
+        crossAxisSpacing: 5.0,
       ),
       delegate: SliverChildBuilderDelegate(
-          (context, pos) => GestureDetector(
-                child: Image.memory(ImageMemoization.instance
-                    .getImage(filteredAdvances[pos].name)),
-                onTap: () => _showModal(filteredAdvances[pos]),
-              ),
-          childCount: filteredAdvances.length),
+          (context, pos) => Container(
+              padding: EdgeInsets.all(5.0),
+              color: viewModel.isAcquiered(advancesToRender[pos])
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).cardColor,
+              child: GestureDetector(
+                child: FadeInImage(
+                    placeholder: MemoryImage(kTransparentImage),
+                    image: MemoryImage(ImageMemoization.instance
+                        .getImage(advancesToRender[pos].name))),
+                onTap: () => _showModal(advancesToRender[pos]),
+              )),
+          childCount: advancesToRender.length),
     );
   }
 
   Widget _getDetailedCardList() {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (context, pos) => _buildDetailedCardRow(context, filteredAdvances[pos]),
-        childCount: filteredAdvances.length,
+        (context, pos) => _buildDetailedCardRow(context, advancesToRender[pos]),
+        childCount: advancesToRender.length,
       ),
     );
   }
@@ -128,60 +108,12 @@ class _ProgressState extends State<Progress>
       BuildContext context, CivilizationAdvance advance) {
     return new CivilizationAdvanceCard(
       viewModel: new CivilizationAdvanceViewModel(
-          allAdvances: allAdvancesMap ?? Map(),
+          allAdvances: viewModel.getAllAdvancesMap(),
           advance: advance,
-          acquired: acquired),
+          acquired: viewModel.getAcquired()),
       onTapAddRemove: _onTapAddRemoveAdvance,
       onTapShowCard: _showModal,
     );
-  }
-
-  String getVictoryPoints() {
-    if (advances.length > 0) {
-      return "0";
-      /*advances
-          .map((a) => a.victoryPoints)
-          .reduce((value, element) => value + element)
-          .toString();*/
-    }
-    return "0";
-  }
-
-  void _filterAdvances() {
-    var activeFilter = this.filter.keys.where((key) => filter[key]);
-    this.setState(() {
-      var filterByGroup = (groups) {
-        for (var g in groups) {
-          if (activeFilter.contains(g)) {
-            return true;
-          }
-        }
-        return false;
-      };
-      var filterByAcquiered = (id) {
-        return this.acquired.contains(id);
-      };
-      var filterByNotAquieredFunction = (id) {
-        return !this.acquired.contains(id);
-      };
-      this.filteredAdvances = this.advances.where((a) {
-        // Filter by group
-        var byGroup = filterByGroup(a.groups);
-        if (byGroup) {
-          bool shouldFilter = true;
-          if (this.filterByAquiered) {
-            shouldFilter = filterByAcquiered(a.id);
-          } else {
-            shouldFilter = false;
-          }
-          if (this.filterByNotAquiered) {
-            shouldFilter = shouldFilter || filterByNotAquieredFunction(a.id);
-          }
-          return shouldFilter;
-        }
-        return false;
-      }).toList();
-    });
   }
 
   Widget getSliverBar() {
@@ -194,8 +126,8 @@ class _ProgressState extends State<Progress>
             padding: EdgeInsets.only(left: 5.0),
           ),
           Padding(
-            child:
-                Text("${getVictoryPoints()}", style: TextStyle(fontSize: 15.0)),
+            child: Text("${viewModel.getVictoryPoints()}",
+                style: TextStyle(fontSize: 15.0)),
             padding: EdgeInsets.only(left: 5.0),
           )
         ]),
@@ -207,21 +139,21 @@ class _ProgressState extends State<Progress>
                 child: Icon(Icons.filter_list)),
             itemBuilder: (BuildContext context) {
               List<PopupMenuItem<String>> children = [];
-              filter.forEach((group, val) {
+              viewModel.getGroupFilter().forEach((group, val) {
                 children.add(PopupMenuItem(
                     child: CheckboxView(
                         item: CheckBoxItem<CivilizationAdvanceGroup>(
                             onChange: (dynamic key, value) {
                               setState(() {
-                                filter[key] = value;
-                                _filterAdvances();
+                                viewModel.setGroupFilter(key, value);
+                                viewModel.filterAdvances();
+                                advancesToRender =
+                                    viewModel.getAdvancesToRender();
                               });
                             },
                             key: group,
-                            title: group
-                                .toString()
-                                .replaceAll("CivilizationAdvanceGroup.", ""),
-                            value: filter[group]))));
+                            title: viewModel.groupToString(group),
+                            value: viewModel.getGroupFilterValue(group)))));
               });
               children.add(PopupMenuItem(
                 enabled: false,
@@ -232,28 +164,26 @@ class _ProgressState extends State<Progress>
                 item: CheckBoxItem<String>(
                     onChange: (dynamic key, value) {
                       setState(() {
-                        filterByAquiered = value;
-                        print("showAcquired : $value");
-                        _filterAdvances();
+                        viewModel.setFilterByAcquiered(value);
+                        advancesToRender = viewModel.getAdvancesToRender();
                       });
                     },
                     key: "acquired",
                     title: "Acquired",
-                    value: filterByAquiered),
+                    value: viewModel.getFilterByAcquiered()),
               )));
               children.add(PopupMenuItem(
                   child: CheckboxView(
                 item: CheckBoxItem<String>(
                     onChange: (dynamic key, value) {
                       setState(() {
-                        filterByNotAquiered = value;
-                        print("showNotAquiered : $value");
-                        _filterAdvances();
+                        viewModel.setFilterByNotAcquiered(value);
+                        advancesToRender = viewModel.getAdvancesToRender();
                       });
                     },
                     key: "not_acquired",
                     title: "Not acquired",
-                    value: filterByNotAquiered),
+                    value: viewModel.getFilterByNotAquiered()),
               )));
               return children;
             },
