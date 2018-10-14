@@ -1010,7 +1010,8 @@
             "text": "Each area can only contain 1 city. For each city built, the player removes all tokens from the area (irrespective of ownership) and places a city in the area from stock. All removed tokens are returned to stock. The maximum number of cities in play for any player is 9."
           },
           {
-            "text": "Note: The map-board contains white and black city sites. For the purpose of city construction they are treated in the same way."
+            "title": "Note: ",
+            "text": "The map-board contains white and black city sites. For the purpose of city construction they are treated in the same way."
           }
         ]
       },
@@ -1140,11 +1141,623 @@
             "text": "Jacob holds 5 calamities in a 16-player game: ‘Superstition’, another ‘Superstition’, ‘Tyranny’, ‘Squandered Wealth’ and ‘Coastal Migration’. That is 3 Major Calamities and 2 Minor Calamities. He first has to discard 1 of the 2 ‘Superstitions’ at random. Next, since he still exceeds the limit, 1 of his 4 calamities left is discarded randomly. This could possibly be ‘Tyranny’, the one he wishes to get rid of most, but also the considerably less harmful ‘Squandered Wealth’."
           }
         ]
+      },
+      {
+        "title": "9. Calamity Resolution",
+        "items": [
+          {
+            "text": "This phase is divided into 2 steps, where first all Minor Calamities are resolved simultaneously, and then, in a specific order, all Major Calamities."
+          },
+          {
+            "text": "When resolving any calamity, the rules as described in chapter 8 ‘Card-specific Rules - The Calamities’ (page 32) must be respected. The Calamity Resolution Quickchart may by used for this purpose, however, it does not specify all details, tie breakers and possible exceptions; it only acts as a guide."
+          },
+          {
+            "text": "f a player is the primary victim of a calamity that forces to assign damage to secondary victims, he first selects these players before deciding where to take his own losses. For each calamity, preferably all victims of this calamity resolve this simultaneously, but players may insist waiting for their turn in A.S.T.- order if this might influence their choices. This may result in a primary victim taking his losses after a secondary victim."
+          }
+        ]
+      },
+      {
+        "title": "9a. Minor Calamities",
+        "items": [
+          {
+            "text": "Simultaneously all players must reveal all Minor Calamities that they hold and resolve them simultaneously. Players may wait for players with a higher A.S.T.-ranking,  before resolving their own Minor Calamities, if this influences their decisions. If a player is the victim of more than 1 Minor Calamity, his Minor Calamities must be resolved in ascending stack order. Civilization Advances do not directly influence the effects of Minor Calamities."
+          }
+        ]
+      },
+      {
+        "title": "9b. Major Calamities",
+        "items": [
+          {
+            "text": "One player (or the game master) calls all calamities, one at a time, in order of ascending stack number. There are 2 Major Calamities per stack and the Non Tradeable of the two is always called and resolved before the Tradeable is (thus always starting with ‘Volcanic Eruption or Earthquake’)."
+          },
+          {
+            "text": "Once a player holds a calamity that is called, he must reveal it and resolve it, before the next calamity is called,  until all calamities are revealed and resolved. After all calamities are resolved, the calamity cards (and possibly any commodity cards discarded) must be placed on their appropriate discard piles, 1 stack for each number. A large number of Civilization Advances have an impact on the resolution of calamities. Unless specified as ‘you may choose to’, all prevention attributes are applied automatically."
+          },
+          {
+            "text": "At this point no checks are made for surplus population, city support or conflict.",
+            "punctuatedTextList": [
+              {
+                "title": "Separate trade card blocks",
+                "text": "If 2 players reveal calamities of the same name, these 2 calamities are resolved in A.S.T.-order, but may be resolved simultaneously. A player cannot be selected as a secondary victim of a specific calamity during the same turn, when the player:",
+                "items": [
+                  {
+                    "text": "is also the primary victim of a calamity of the same name;",
+                    "title": "Primary",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "has been selected as the secondary victim of a calamity of the same name.",
+                    "title": "Selected",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "is the beneficiary of a calamity with the same name.",
+                    "title": "Beneficiary",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "When selecting the beneficiary or secondary victim of a Non Tradeable Calamity, players must choose a player from their own block. It may still occur that a player suffers from secondary damage if one or more areas are selected for the calamity resolution instead of players (for example Volcanic Eruption or Earthquake, Flood, Cyclone)."
+          },
+          {
+            "text": "If 2 players reveal calamities of the same name, these 2 calamities are preferably resolved simultaneously as they may influence choices made by all victims. In this case, all secondary victims, if applicable, are first selected before taking the actual damage. However, the primary victims may insist resolving them entirely in A.S.T.-order. Secondary victims of the second calamity may insist waiting for the first copy to be resolved before resolving the second, even if they are higher on the A.S.T. than one or more victims of the first calamity."
+          },
+          {
+            "text": "If 2 copies of a calamity are revealed, canceling onecopy does not necessarily cancel the second copy. A check for canceling the second copy may be done after fully resolving the first of two copies this way."
+          },
+          {
+            "text": "When selecting the beneficiary or secondary victim of a Tradeable Calamity, players may choose from players of either block. A player may still become the beneficiary of a tradeable calamity if he also is the primary victim of a calamity of the same name."
+          }
+        ]
+      },
+      {
+        "title": "10. Special Abilities",
+        "items": [
+          {
+            "text": "This phase is resolved in A.S.T.-position order (the player progressed furthest on the A.S.T. is first). Each player that wants to use special abilities must wait for his turn."
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Special abilities",
+                "text": "The attributes on specific Civilization Advances that say ‘SPECIAL ABILITY’ are referred to as Special Abilities: Diaspora, Fundamentalism, Monotheism,  Politics, Provincial Empire, Trade Routes and Universal Doctrine.",
+                "items": [
+                  {
+                    "text": "The attributes are described in chapter 9 ‘Card-specific Rules - The Civilization Advances’ ",
+                    "title": "Card-specific Rules",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Special Abilities may be used either entirely or not at all.",
+                    "title": "Special Abilities ",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Special abilities that refer to units refer to cities and/or population tokens, not ships.",
+                    "title": "Special Abilities ",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Placing, destroying or annexing units is not considered attacking or causing conflict.",
+                    "title": "Placing, destroying or annexing ",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "In between any Special Abilities, no check is made for surplus population, city support or conflict",
+                    "title": "In between any Special Abilities",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Protection against special abilities",
+            "text": "If a player holds a Civilization Advance that says ‘protects against X’, this player cannot be the target of another player’s Special Ability with name X and his units are unaffected if involved."
+          },
+          {
+            "text": "In A.S.T.-position order, players may choose to use any of their special abilities in any desired order. Players are not allowed to take their actions before their turn, as this may influence other player’s decisions."
+          }
+
+        ]
+      },
+      {
+        "title": "11. Remove Surplus Population",
+        "items": [
+          {
+            "text": " Order: simultaneously"
+          },
+          {
+            "text": "Each player must check for and remove any surplus population and consequently do a check for city support. If needed, cities should be reduced in accordance with the rules described in phases 5b and 5c."
+          },
+          {
+            "text": "In those rare occasions that there is a conflict situation at this point, it is resolved as if it were a conflict in accordance with the rules described in phase 4, before doing a check for surplus population and city support."
+          }
+        ]
+      },
+      {
+        "title": "12. Civilization Advances Acquisition",
+        "items": [
+          {
+            "text": "Order: This phase is resolved in A.S.T.-position order (the player progressed furthest on the A.S.T. purchases first), with A.S.T.-ranking as a tiebreaker (the higher player purchases first). If desired, players may make purchases simultaneously, to speed up game-play, but any player may choose to wait for his turn."
+          },
+          {
+            "title": "Hand limit ",
+            "text": "After this phase, each player must keep a hand limit of commodity cards, regardless of whether he purchased any Civilization Advances or not. The hand limits vary per number of players: 5-11 players: 8 commodity cards. 12-18 players: 9 commodity cards"
+          },
+          {
+            "text": "The attributes and clarifications of each advance are described in chapter 9 ‘Card-specific rules - The Advances’ "
+          },
+          {
+            "text": "Each player may choose to purchase any number of Civilization Advances. Players can spend the trade cards (set value) in any combination with treasury tokens (worth 1 point each). Keep in mind the hand limit of trade cards that is mentioned above, which must be regarded at the end of this phase. If a player does not purchase anything he must discard his excess trade cards to meet the hand limit mentioned."
+          },
+          {
+            "text": "Once a player purchases a Civilization Advance he immediately receives the credit tokens printed on it. Credit tokens are not used as a single-use credit; players keep any credit tokens obtained for the remainder of the game. Players cannot use credit tokens during the same turn that they receive them"
+          },
+          {
+            "text": "Civilization Advances are acquired in a single transaction. Credit tokens count for each Civilization Advance of the same color/group acquired during the same turn"
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Price of a Civilization Advance",
+                "text": "The default price of a Civilization Advance is printed on the card. This price may be reduced in the following ways:",
+                "items": [
+                  {
+                    "text": "Credit tokens a player has received in previous turns;",
+                    "title": "Credit tokens",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Additional credits printed on other Civilization Advances players have bought in previous turns.",
+                    "title": "Additional credits",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "If a Civilization Advance belongs to 2 groups/colors, the discount from the color with the highest value of credit tokens applies. The credit value of the 2 colors is never combined."
+          },
+          {
+            "text": "Credit tokens held by a player may be counted for purchasing more than 1 number of Civilization Advances during a single transaction."
+          },
+          {
+            "title": "Example 1:",
+            "text": "John has bought ‘Music’ (80 - blue - arts) in the previous turn. He now has 10 credits to all blue cards (arts) and 5 credits to all yellow cards (religion). If he purchases ‘Drama and Poetry’ (80 - blue - arts) this turn, he may subtract 10, and buy it for 70. If he would buy ‘Mysticism’ (50 dual yellow/blue - dual religion/arts) during the same turn,  he may subtract 10 from that as well and buy it for 40. Even though ‘Mysticism’ is both blue and yellow and he also holds 5 yellow credits, he cannot add this to the blue credits, as he should only count the highest color credits."
+          },
+          {
+            "title": "Example 2:",
+            "text": "Flo has bought ‘Pottery’ (60 - orange - crafts) and ‘Masonry’ (60 - orange - crafts) in a previous turn. He now holds 20 orange credits, 5 green credits and 5 blue credits. He wants to buy ‘Agriculture’ (120 - orange - crafts). He may subtract the 20 orange credits and ‘Pottery’ provides 10 additional credits to ‘Agriculture’ alone. Therefore he may buy it for 90 rather than 120. It will provide him with an additional 10 orange credit tokens, so next turn he could subtract 30 from all orange cards."
+          },
+          {
+            "text": "As long as players have enough trade points, they can purchase any card they like. They do not have to hold any pre-requisite cards. A player can only buy 1 copy of each Civilization Advance. If a player spends trade points,  the combined total of trade cards and treasury used is counted. If he spends more points than required he will not receive any ‘change’, neither in treasury tokens, nor in trade cards."
+          },
+          {
+            "text": "If players forget to subtract credit points, they will not receive any change in a later phase or turn. It may occur that a player can get a card for free if he has built up sufficient value in credit tokens. The purchase price can never be lower than zero"
+          },
+          {
+            "text": "A player cannot spend more treasury tokens than required."
+          },
+          {
+            "text": "Civilization Advances and credit tokens held by players are open for all other players to see. They cannot be exchanged or lost. The attributes on each Civilization Advance only apply to the holder of the card and go into effect as soon as the transaction is completed. All effects and credits are cumulative."
+          },
+          {
+            "title": "Note:",
+            "text": "The game does not include 18 copies of each Civilization Advance card. However, all 51 advances are available for each player. The most common Civilization Advances are printed more often than more rarely bought ones. Once a stack of cards runs out, players can use a substitute note instead."
+          },
+          {
+            "title": "Example 3:",
+            "text": " If Michael bought ‘Pottery’ in a previous turn, he has 10 credits to all crafts (orange). That would make ‘Agriculture’ 110. But the card itself gives 10 additional credits to ‘Agriculture’ as well. Therefore ‘Agriculture’ will cost 100. If he buys it, this will mean that next turn he has 20 specific credits to ‘Democracy’, which then will cost 200 instead of 220.‘"
+          },
+          {
+            "text": "TODO: Add images"
+          },
+          {
+            "title": "Strategy Explorer - Quickchart’",
+            "text": "When buying Civilization Advances players may use this quickchart to define their strategy. It gives an overview of how the system of all 51 Civilizations is built up in 3 groups of 17 cards. Each card in the low range gives 10 credits to a specific card in the midrange, which in turn gives 20 credits to a specific card in the high range. Also, it shows the color of each card and the number of credits it provides."
+          }
+        ]
+      },
+      {
+        "title": "13. A.S.T. Alteration",
+        "items": [
+          {
+            "text": "This phase is divided into 5 steps which are resolved in A.S.T.-ranking order.",
+            "punctuatedTextList": [
+              {
+                "title": "Basic A.S.T.",
+                "text": "For the Basic A.S.T. the 6 different epochs and their requirements are:",
+                "items": [
+                  {
+                    "text": "Stone Age: no requirements.",
+                    "title": "Stone Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Early Bronze Age: at least 2 cities.",
+                    "title": "Early Bronze Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Middle Bronze Age: at least 3 cities and 3 Civilization Advances.",
+                    "title": "Middle Bronze Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Late Bronze Age: at least 3 cities and 3 Civilization Advances with a minimal cost price of 100 each.",
+                    "title": "Late Bronze Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Early Iron Age: at least 4 cities and 2 Civilization Advances with a minimal cost price of 200 each",
+                    "title": "Early Iron Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Late Iron Age: at least 5 cities and 3 Civilization Advances with a minimal cost price of 200 each.",
+                    "title": "Late Iron Age",
+                    "leading": "-"
+                  }
+                ]
+              },
+              {
+                "title": "Expert A.S.T.",
+                "text": "For the Expert A.S.T. the 6 different epochs and their requirements are:",
+                "items": [
+                  {
+                    "text": "Stone Age: no requirements.",
+                    "title": "Stone Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Early Bronze Age: at least 3 cities.",
+                    "title": "Early Bronze Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Middle Bronze Age: at least 3 cities and 5 Victory Points in Civilization Advances",
+                    "title": "Middle Bronze Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Late Bronze Age: at least 4 cities and 12 Civilization Advances.",
+                    "title": "Late Bronze Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Early Iron Age: at least 5 cities and 10 Civilization Advances with a cost price of less than 100 each and a total of 38 Victory Points in Civilization Advances.",
+                    "title": "Early Iron Age",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Late Iron Age: at least 6 cities and 17 Civilization Advances with a cost price of less than 100 each plus 56 Victory Points in Civilization Advances.",
+                    "title": "Late Iron Age",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "Requirements count for both entering and moving through an epoch. The calamity effect of ‘Regression’ does not prevent a player from advancing in the same turn,  providing that he fulfills all epoch requirements"
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "IMPORTANT:",
+                "text": "After the A.S.T. has been altered:",
+                "items": [
+                  {
+                    "text": "Check that all trade cards discarded or used this turn have been turned in.",
+                    "title": "Check trade cards",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Check that all cards are on the right discard pile",
+                    "title": "Chack cards",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Follow the right procedure when shuffling all piles.",
+                    "title": "Shuffling",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "13a. Succession Markers",
+        "items": [
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Actions",
+                "text": "In A.S.T.-ranking order, each player checks for the requirements of the next space on his track and takes either of the following actions:",
+                "items": [
+                  {
+                    "text": "If he meets the requirements his succession marker is moved 1 space forward.",
+                    "title": "Meet requirements",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "If player does not meet the requirements, his succession marker stays in place this turn.",
+                    "title": "Not meet requirements",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Additional rules: ",
+            "text": "Only if the Expert version of the A.S.T. is used, if a player has no cities on the board at this point, his succession marker is moved 1 space backward (except for markers in the Stone Age, where there is no requirement)."
+          },
+          {
+            "text": "After all players have checked/moved their A.S.T.-marker, also move the turn marker one space to the right."
+          }
+        ]
+      },
+      {
+        "title": "13b. Game end",
+        "items": [
+          {
+            "text": "The game ends when the succession marker of 1 or more players enters the final (colored) space. In that case move to 13d: Victory Determination, otherwise this phase is finished."
+          },
+          {
+            "title": "Additional rules:",
+            "text": " Only if the Expert version of the A.S.T. is used, the game runs for 1 additional turn after 1 or more players have entered the first of 2 final (colored spaces). In this final turn, player’s markers may advance, stay in place or move back, even out of the colored zone, but in any case the game ends after this final turn. In this case move to 13d: Victory Determination."
+          }
+        ]
+      },
+      {
+        "title": "13c. Reshuffling Trade Cards",
+        "items": [
+          {
+            "text": "All trade cards discarded or used this turn must be placed on their appropriate discard piles, 1 stack for each number."
+          },
+          {
+            "title": "Separate trade card blocks",
+            "text": "If the separate trade card blocks East and West are used (12-18 players), all cards belonging to each individual block must be gathered and sorted separately. In this case the following rules must be applied to either block separately. WARNING: Do not mix any cards from the East and West blocks."
+          },
+          {
+            "text": "Cards are not shuffled through the remaining stacks. Rather, for each of the 9 discard piles, all cards except for the Non Tradeable Calamity are first shuffled and then placed face down under the remaining stack of trade cards of the appropriate number"
+          },
+          {
+            "text": "Next all Non Tradeable Calamities are placed under each stack accordingly. This way, the remaining undrawn cards are still on top of each stack and the Non Tradeable Calamity is always placed at the bottom."
+          }
+        ]
+      },
+      {
+        "title": "13d. Victory Determination",
+        "items": [
+          {
+            "text": "At the end of the game, each player is granted the following Victory Points (VP):"
+          },
+          {
+            "text": "TODO: Add image"
+          },
+          {
+            "text": "The player with the highest number of Victory Points is the winner!"
+          }
+        ]
       }
     ]
   },
   {
-    "title": "TODO",
-    "paragraphs": []
+    "title": "Leaving the game",
+    "paragraphs": [
+      {
+        "title": "Leaving the game prematurely",
+        "items": [
+          {
+            "text": "Whenever during the game any player should leave the game, the remaining players can agree to continue playing following the rules below."
+          },
+          {
+            "text": "Before the player quits, finish the current phase. If possible, finish the current turn until just before altering the A.S.T. and shuffling the trade cards."
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "The player’s cards and census/A.S.T.-markers",
+                "text": "",
+                "items": [
+                  {
+                    "text": "All Civilization Advances purchased by the leaving player and his credit tokens are discarded.",
+                    "title": "Civilization Advances ",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "All trade cards held by the leaving player are discarded, shuffled and placed under in the appropriate stacks during ‘Reshuffling Trade Cards’ in the A.S.T.- Alteration-phase. It is important that these cards are returned to the stacks, otherwise some commodity sets will be left incomplete!",
+                    "title": "Trade cards",
+                    "leading": "-"
+                  }
+                ]
+              },{
+                "title": "The player’s appearance on the map-board",
+                "text": "",
+                "items": [
+                  {
+                    "text": "Remove all of his remaining ships.",
+                    "title": "Ships",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Place 1 ‘out of play’ token in each area associated with the region (as mentioned in chapter 5, page 18/19) and remove all of the player’s playing pieces, as well as all pirate cities and all barbarian tokens from these areas. All units belonging to other players remain in these areas.",
+                    "title": "OoP Tokens",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "For all of the player’s remaining units on the board outside of the player’s associated region, replace his tokens by barbarian tokens and his cities by pirate cities. These are considered barbarian tokens and pirate cities and may be attacked as normal.",
+                    "title": "Remaining units",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Units within ‘Out of Play’ areas",
+        "items": [
+          {
+            "text": "Out of play units",
+            "punctuatedTextList": [
+              {
+                "title": "Tokens and cities",
+                "text": "There may still be other player’s tokens or cities in areas containing an ‘out of play’ token. In A.S.T.- order, players involved must do the following (applying to these areas only):",
+                "items": [
+                  {
+                    "text": "Destroy all ships",
+                    "title": "Ships",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Reduce all cities. If a player has insufficient tokens in stock, he places as many tokens as possible following his choice.",
+                    "title": "Cities",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Any tokens left must be removed and placed elsewhere on the map-board, providing that these areas already contain 1 of their tokens and no conflict situation occurs",
+                    "title": "Tokens",
+                    "leading": "-"
+                  }
+                ]
+              },
+              {
+                "title": "This should result in no tokens occupying an area containing an ‘out of play’ token.",
+                "text": "OoP tokens",
+                "items": [
+                  {
+                    "text": "All players must make an additional check for surplus population and remove any surplus",
+                    "title": "Surplus",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "All players must make an additional check for city support and reduce unsupported cities.",
+                    "title": "City support",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Note: ",
+            "text": "An area containing an ‘out of play’ token cannot be used. Exception: the water part of the area may be used to sail a ship through, but a player may neither end his ship-movement, nor disembark tokens in this area, nor enter the area by land."
+          }
+        ]
+      },
+      {
+        "title": "(re)joining the game at a later stage",
+        "items": [
+          {
+            "text": "The rules of Mega Civilization do not provide options for players (re-)joining the game once it has already been started. Although this was possible in previous versions of Avalon Hill’s Civilization, this feature is no longer supported."
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Same points",
+                "text": "If two or more players have the same number of points, ties are broken in the following order:",
+                "items": [
+                  {
+                    "text": "The position of his succession marker on the A.S.T",
+                    "title": "A.S.T",
+                    "leading": "I"
+                  },
+                  {
+                    "text": "The player with the single largest number of Civilization Advances (in order): - worth 6 VP, - worth 3 VP.",
+                    "title": "Most CA",
+                    "leading": "II"
+                  },
+                  {
+                    "text": "The total price of all Civilization Advances the player holds",
+                    "title": "Price",
+                    "leading": "III"
+                  },
+                  {
+                    "text": "The highest total value of credit tokens of a single color",
+                    "title": "Credit",
+                    "leading": "IV"
+                  },
+                  {
+                    "text": "The highest total number of credit tokens",
+                    "title": "Credit",
+                    "leading": "V"
+                  },
+                  {
+                    "text": "The number of cities the player has on the board",
+                    "title": "Cities",
+                    "leading": "VI"
+                  },
+                  {
+                    "text": "The number of tokens the player has on the board.",
+                    "title": "Tokens",
+                    "leading": "VII"
+                  },
+                  {
+                    "text": "A.S.T.-ranking order",
+                    "title": "A.S.T",
+                    "leading": "VIII"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Card-specific Rules - The Calamities",
+    "paragraphs": [
+      {
+        "title": "TODO: Add images",
+        "items": []
+      }
+    ]
+  },
+  {
+    "title": "Card-specific Rules - Civilization Advances",
+    "paragraphs": [
+      {
+        "title": "See progress tab",
+        "items": []
+      }
+    ]
+  },
+  {
+    "title": "The Short Game",
+    "paragraphs": [
+      {
+        "title": "The Short Game",
+        "items": [
+          {
+            "text": "TODO: Add text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Division of Trade Cards",
+    "paragraphs": [
+      {
+        "title": "Division of Trade Cards",
+        "items": [
+          {
+            "text": "TODO: Add images"
+          }
+        ]
+      }
+    ]
   }
 ]

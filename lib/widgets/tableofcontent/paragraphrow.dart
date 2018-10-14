@@ -70,16 +70,15 @@ class ParagraphRow extends StatelessWidget {
 
       // Add text
       if (p.text != null && p.text.length > 0) {
-        c.add(Row(children: [
+        c.add(Column(children: [
           Container(
               padding: textPadding,
-              child: Expanded(
-                  child: Text(
+              child: Text(
                 p.text,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.left,
                 style: TextStyle(fontStyle: FontStyle.italic),
-              )))
+              ))
         ]));
       }
 
@@ -131,7 +130,7 @@ class ParagraphRow extends StatelessWidget {
     return new ExpansionTile(
       title: new Padding(
         padding: new EdgeInsets.only(left: 5.0),
-        child: new Text("$parentIndex:$paragraphIndex: ${paragraph.title}",
+        child: new Text("$parentIndex:$paragraphIndex ${paragraph.title}",
             textAlign: TextAlign.start, style: TextStyle(fontSize: 15.0)),
       ),
       children: children,
