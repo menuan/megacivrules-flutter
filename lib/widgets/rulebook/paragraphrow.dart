@@ -5,15 +5,49 @@ typedef void OnTapTocRow(int index);
 
 class ParagraphRow extends StatelessWidget {
   ParagraphRow(
-      {this.paragraph,
+      {Key key,
+      @required this.context,
+      this.paragraph,
       this.parentIndex,
       this.paragraphIndex,
-      this.searchString});
+      this.searchString})
+      : super(key: key);
 
+  final BuildContext context;
   final Paragraph paragraph;
   final int parentIndex;
   final int paragraphIndex;
-  String searchString;
+  final String searchString;
+
+  List<TextSpan> getMassagedTexts(String content, String searchPattern) {
+    List<TextSpan> spans = [];
+    final defaultStyle =
+        TextStyle(fontWeight: FontWeight.normal, color: Colors.white);
+    if (searchPattern != null && searchPattern.length > 2) {
+      final contentList = content.split(searchPattern);
+      final contentListLength = contentList.length;
+      final matches = contentList.length > 1 ? contentList.length - 1 : 0;
+      final searchMatchStyle =
+          TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent);
+      print("Search pattern is not nil and we have: $contentList, $matches");
+      if (matches > 0) {
+        print("More than 0 matches!");
+//        contentList.forEach((content) {});
+        for (var i = 0; i < contentListLength; i++) {
+          var content = contentList[i];
+          spans.add(TextSpan(style: defaultStyle, text: content));
+          if ((contentListLength - 1) != i) {
+            spans.add(TextSpan(style: searchMatchStyle, text: searchPattern));
+          }
+        }
+      } else {
+        spans.add(TextSpan(style: defaultStyle, text: content));
+      }
+    } else {
+      spans.add(TextSpan(style: defaultStyle, text: content));
+    }
+    return spans;
+  }
 
   Widget getTitleWidget(String text) {
     var textWidget = Container(
@@ -30,18 +64,21 @@ class ParagraphRow extends StatelessWidget {
   }
 
   Widget getTextWidget(String text) {
-    var textWidget = new Text(
-      text,
-      textAlign: TextAlign.left,
-      softWrap: true,
-      overflow: TextOverflow.clip,
-      style: TextStyle(fontSize: 15.0),
-    );
-    var container = Container(
-      child: textWidget,
+//    var textWidget = Text(
+//      text,
+//      textAlign: TextAlign.left,
+//      softWrap: true,
+//      overflow: TextOverflow.clip,
+//      style: TextStyle(fontSize: 15.0),
+//    );
+    return Container(
+      child: RichText(
+        text: TextSpan(
+            style: DefaultTextStyle.of(context).style,
+            children: getMassagedTexts(text, searchString)),
+      ),
       padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
     );
-    return container;
   }
 
   Widget getImageWidget(String src) {
@@ -50,10 +87,10 @@ class ParagraphRow extends StatelessWidget {
         child: Image(image: AssetImage("assets/img/chapters/$src")));
   }
 
-  List<Widget> getPunctuatedListWidget(List<PunctuatedList> puncuated) {
+  List<Widget> getPunctuatedListWidget(List<PunctuatedList> punctuated) {
     List<Widget> children = List<Widget>();
     EdgeInsets textPadding = EdgeInsets.only(left: 20.0, top: 10.0);
-    puncuated.forEach((p) {
+    punctuated.forEach((p) {
       List<Widget> c = List<Widget>();
       // Add title
       c.add(Column(children: [

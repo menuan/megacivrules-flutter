@@ -17,8 +17,8 @@ dependencies:
     sdk: flutter
 
   shared_preferences: ^0.4.3
+  rxdart: ^0.19.0
   json_annotation: ^0.2.3
-  flutter_search_bar:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -44,6 +44,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/img/logo.png
+    - assets/img/splash.png
     - assets/img/chapters/1/
     - assets/img/chapters/2/
     - assets/img/chapters/3/
@@ -51,7 +53,6 @@ flutter:
     - assets/data/json/chapters.json
     - assets/data/json/civilizationadvances.json
     - assets/data/json/wikipedia.json
-  #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
