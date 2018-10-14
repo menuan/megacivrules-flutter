@@ -13,6 +13,7 @@ import 'package:mega_civ_rules/widgets/wikipedia/wikipedia.dart';
 import 'package:mega_civ_rules/widgets/progress/progress.dart';
 import 'package:mega_civ_rules/services/chapterservice.dart';
 import 'package:mega_civ_rules/services/themeservice.dart';
+import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -61,6 +62,8 @@ class _MegaCivRulesState extends State<MegaCivRules> {
     );
     super.initState();
     loadSharedPreferences();
+    CivilizationAdvanceService.get();
+
     searchBar = new SearchBar(
         inBar: false,
         buildDefaultAppBar: buildAppBar,
