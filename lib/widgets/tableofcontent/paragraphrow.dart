@@ -42,11 +42,13 @@ class ParagraphRow extends StatelessWidget {
     puncuated.forEach((p) {
       List<Widget> c = List<Widget>();
       // Add title
-      c.add(Row(children: [
+      print("${p.title}");
+      c.add(Column(children: [
         Container(
             padding: textPadding,
             child: Text(
               p.title,
+              overflow: TextOverflow.clip,
               textAlign: TextAlign.left,
               style: TextStyle(fontWeight: FontWeight.bold),
             )),
@@ -57,7 +59,12 @@ class ParagraphRow extends StatelessWidget {
         c.add(Row(children: [
           Container(
               padding: textPadding,
-              child: Text(p.text, textAlign: TextAlign.left))
+              child: Expanded(
+                  child: Text(
+                p.text,
+                overflow: TextOverflow.clip,
+                textAlign: TextAlign.left,
+              )))
         ]));
       }
 

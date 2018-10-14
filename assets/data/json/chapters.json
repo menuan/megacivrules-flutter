@@ -312,8 +312,558 @@
         "title": "Setting up the game",
         "items": [
           {
-            "text": "TODO",
+            "text": "Mega Civilization is a game that can be played from 5 up to 18 players. There are some differences in the setup rules when playing with 5-8 players, 9-11 players, 12-14 players or 15-18 players. When starting a game, you should follow these adjustments accordingly if mentioned. If this is your first game, it is recommended that you use the scenario ‘The First Game’ which is designed to explain the rules to any new group of preferably 5 players. ‘The First Game’-scenario will take 1-2 hours. Once you have finished ‘The First Game’ you are ready to start a full game.",
             "images": []
+          }
+        ]
+      },
+      {
+        "title": "Setting game limits for the full game",
+        "items": [
+          {
+            "text": "You can choose between either side of the A.S.T. These show the Basic or Expert version. The basic A.S.T. is recommended for beginners and regular players, where the Expert version is served for the more experienced groups of players. The Expert version will take 1-2 more turns and thus 1-2 hours more than the Basic version. The Expert version has some added rules which will be explained later."
+          },
+          {
+            "text": "You may consider setting your own time limit. If no specific game limit is set, by default the game ends if the succession marker of 1 or more players has entered the ‘Late Iron Age’ epoch on the A.S.T. A full game of Mega Civilization will take approximately 10-12 hours to complete, depending on the number of players and their experience. Regard the additional time needed for taking breaks during the game."
+          },
+          {
+            "text": "If you want a shorter game (6-8 hours), follow the rules for setting up ‘The Short Game’. This scenario is not a beginners scenario, but a shorter version of the game for experienced players."
+          }
+        ]
+      },
+      {
+        "title": "Selecting the map-board",
+        "items": [
+          {
+            "text": "The game is divided into ‘West’ and ‘East’ which can be played independently by 5-9 players. For 10 players ‘West’ is played and for 11 players ‘East’ is played. For 12-18 players, ‘West’ and ‘East’ are combined and then referred to as ‘blocks’. "
+          },
+          {
+            "text": "Depending on the number of players, use the setups as defined in chapter 5. Map-board setups (page 14). "
+          },
+          {
+            "text": "Take the playing pieces for only the civilizations mentioned in this setup and leave the others in the box. You will also need the set of black Barbarian tokens and pirate cities for later in the game"
+          }
+        ]
+      },
+      {
+        "title": "Regions",
+        "items": [
+          {
+            "text": "Each civilization is associated with a ‘region’; a group of areas which are most commonly occupied by the civilization. This does not mean that players should not try to occupy areas assigned to another civilization’s region. In fact, to win the game, players will have to expand their boundaries. The regions are specified at the map-board setups."
+          }
+        ]
+      },
+      {
+        "title": "Starting civilizations",
+        "items": [
+          {
+            "text": "Deal the numbered startup cards after which, in order, each player may choose a civilization to play. Each player receives a player mat and places all 55 population tokens,  9 cities and 4 ships on the ‘stock’ area of his player mat (colored side up). Each player takes 1 token from stock and places it on the corresponding starting location on the map-board"
+          },
+          {
+            "text": "Keep in mind that when playing both blocks combined (12 to 18 players), players from the East and West blocks do not necessarily start on the 2 most Eastern or Western map-boards respectively (see also page 16). It is clearly specified in the setups which civilizations belong to either East or West. Players should remember to which block they belong and for the remainder of the game draw only trade cards from that block."
+          },
+          {
+            "text": "For each player, place a census marker on the Census track (in the large empty area above ‘1-12’) and a succession marker in the arrow on the A.S.T."
+          },
+          {
+            "text": "Place a turn marker on turn 1 on the A.S.T."
+          },
+          {
+            "text": "Sort out all Civilization Advances and create stacks sorted in ascending cost price order. Sort out the Credit tokens and place them next to the Civilization Advances. It is not necessary to place the 51 stacks directly within reach."
+          }
+        ]
+      },
+      {
+        "title": "Selecting trade cards",
+        "items": [
+          {
+            "text": "This is an important part of setting up the game."
+          },
+          {
+            "text": "The game is provided with trade cards containing either blue E/W-symbols or orange E/W-symbols. The blue set and the orange set have different backsides. There is no situation where these two types are mixed. For each number of players involved an exact selection of trade cards is used. You can use the ‘Division of Trade cards’- chart (page 46/47) to select the right sets of commodities and calamities. In all cases the ‘water’ commodities are used. Place a stack of water cards face up next to all other trade cards. The function will be explained later"
+          }
+        ]
+      },
+      {
+        "title": "5-9 players (Choose either West or East)",
+        "items": [
+          {
+            "text": "For a game of 5-9 players, only cards containing the blue symbols are used. If you play ‘West’ then only take the cards showing a ‘W’. The same applies to cards showing an ‘E’ when playing ‘East’. Take only the cards showing the right number of players (right of the E/W-symbol)."
+          }
+        ]
+      },
+      {
+        "title": "10 players (West)",
+        "items": [
+          {
+            "text": "In a 10-player game, the only option is to play ‘West’. All cards containing the blue W-symbols are used in this case."
+          }
+        ]
+      },
+      {
+        "title": "11 players (East)",
+        "items": [
+          {
+            "text": "In an 11-player game, the only option is to play ‘East’. All cards containing the blue E-symbols are used in this case."
+          }
+        ]
+      },
+      {
+        "title": "12-14 players",
+        "items": [
+          {
+            "text": "For a game of 12-14 players, it is divided into 2 combined games. ‘West’ uses only cards containing the orange W-symbols. ‘East’ uses only cards containing the orange E-symbols. Take only the cards showing the right number of players (right of the E/W-symbol)."
+          }
+        ]
+      },
+      {
+        "title": "15-18 players",
+        "items": [
+          {
+            "text": "For a game of 12-18 players, it is divided into 2 combined games. ‘West’ uses only cards containing the orange W-symbols. ‘East’ uses only cards containing the orange E-symbols. All orange cards are used for 15-18 players."
+          }
+        ]
+      },
+      {
+        "title": "Preshuffling trade cards",
+        "items": [
+          {
+            "text": "From the start of the game, the trade cards are not just randomly piled in stacks, but are prepared in a defined order. To prepare this, follow the specific instructions depending on the number of players. "
+          }
+        ]
+      },
+      {
+        "title": "Setting up the game for 5-8 players",
+        "items": [
+          {
+            "text": "Make sure the following cards are present:",
+            "punctuatedTextList": [
+              {
+                "title": "If playing West:",
+                "text": "",
+                "items": [
+                  {
+                    "text": "Ochre, Clay, Fruit",
+                    "title": "9 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Papyri, Iron, Fish, Oil,",
+                    "title": "8 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Wool, Textiles",
+                    "title": "7 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Wines, Copper, Incense",
+                    "title": "6 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Tin, Resin, Gemstones, Gold",
+                    "title": "5 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Marble, Ivory",
+                    "title": "4 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "8 Major Calamities (Non Tradeable)",
+                    "title": "8 Major Calamities (Tradeable) and 8 8 Major Calamities (Non Tradeable)",
+                    "leading": "-"
+                  }
+                ]
+              },
+              {
+                "title": "If playing East:",
+                "text": "",
+                "items": [
+                  {
+                    "text": "Flax, Hides, Salt",
+                    "title": "9 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Stone, Furs, Timber",
+                    "title": "8 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Cotton, Livestock",
+                    "title": "7 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Bronze, Spice",
+                    "title": "6 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Silver, Jade, Pearls",
+                    "title": "5 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Dye, Silk",
+                    "title": "4 of these",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "8 Major Calamities",
+                    "title": "8 Major Calamities (Tradeable) and 8 8 Major Calamities (Non Tradeable)",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "Preshuffling the trade cards. Sort all trade cards into 9 stacks (per number)."
+          },
+          {
+            "text": "Each stack contains 2 different sets of commodities and, with the exception of the first stack, 2 different calamities"
+          },
+          {
+            "text": "",
+            "punctuatedTextList": [
+              {
+                "title": "",
+                "text": "For each of the 9 stacks take all of the following steps in turn (with the cards facing down):",
+                "items": [
+                  {
+                    "text": "",
+                    "title": "Shuffle the combination of both sets of commodities (without the calamities).",
+                    "leading": "1"
+                  },
+                  {
+                    "text": "",
+                    "title": "From this stack, set an amount of cards aside equal to the number of players.",
+                    "leading": "2"
+                  },
+                  {
+                    "text": "",
+                    "title": "Shuffle the Tradeable Major Calamity through the stack of remaining commodities (stack 1 does not contain calamities).",
+                    "leading": "3"
+                  },
+                  {
+                    "text": "",
+                    "title": "Place the Non Tradeable Calamity at the bottom of the stack.",
+                    "leading": "4"
+                  },
+                  {
+                    "text": "",
+                    "title": "Place the cards previously set aside on top of the stack.",
+                    "leading": "5"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "Place all 9 stacks in their stack holders and use the same number of holders for discard piles."
+          },
+          {
+            "text": "Additional rules for 5 and 6 players. For a 5-player game only, each player collects 1 credit token worth 10 of each color at the start of the game. For a 6-player game only, each player collects 1 credit token worth 5 of each color at the start of the game. These credits are not collected when playing ‘The Short Game’"
+          }
+        ]
+      },
+      {
+        "title": "Setting up the game for 9-11 players",
+        "items": []
+      },
+      {
+        "title": "Setting up the game for 15-18 players",
+        "items": []
+      },
+      {
+        "title": "Setting up the game for 12-14 players",
+        "items": []
+      }
+    ]
+  },
+  {
+    "title": "Map-board setups",
+    "paragraphs": [
+      {
+        "title": "Map-board setups",
+        "items": [
+          {
+            "text": "The game is divided into ‘West’ and ‘East’ which can be played independently by 5-9 players. For 10 players ‘West’ is played and for 11 players ‘East’ is played. For 12-18 players, ‘West’ and ‘East’ are combined and then referred to as ‘blocks’."
+          },
+          {
+            "text": "The civilizations mentioned and the colored parts are the areas being used. Place ‘out of play’ tokens on the population limit of each area that is grayed out in the map-board setup. The regions-divisions in the last two images represent the same areas that are being used for each specific civilization."
+          },
+          {
+            "text": "TODO: Add images..."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Sequence of Play",
+    "paragraphs": [
+      {
+        "title": "Turn-by-turn procedure",
+        "items": [
+          {
+          "text": "",
+          "punctuatedTextList": [
+              {
+                "title": "",
+                "text": "",
+                "items": [
+                  {
+                    "text": "The game is played in turns, divided into phases, which in turn may be divided into several steps. During each phase most activities are resolved simultaneously by all players or sometimes in a specific order. At the end of each turn, players check whether goals are reached and start a new turn or determine victory.",
+                    "title": "The game turn",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "At any time, if a tie occurs between players’ activities, unless clearly specified, it is resolved in A.S.T.- ranking order. Players do not necessarily need to stick to this order and may act before their turn to speed up play. However, players may insist on waiting for their turn. In all other cases, players must follow the right order as specified. Players may never proceed to a new phase before their turn.",
+                    "title": "A.S.T.-ranking order",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "At several points, the rules speak of ‘the beneficiary’. This is a player that often acts as the controller of an event and is often immune to certain negative effects. A player may or may not directly benefit from being the ‘beneficiary’.",
+                    "title": "The Beneficiary",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "The player with the most cities in stock. In case of a tie, from these players, the player with the most tokens in stock becomes the beneficiary. Next, from these players, A.S.T.-ranking order breaks ties. In the case of calamities there is a more specific definition described in chapter 8. Card-specific Rules.",
+                    "title": "The beneficiary is usually defined as:",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "The order of phases",
+        "items": [
+          {
+            "punctuatedTextList": [
+              {
+                "title": "",
+                "text": "",
+                "items": [
+                  {
+                    "text": "",
+                    "title": "Tax collection",
+                    "leading": "1"
+                  },
+                  {
+                    "text": "",
+                    "title": "Population expansion (and Census)",
+                    "leading": "2"
+                  },
+                  {
+                    "text": "",
+                    "title": "Movement",
+                    "leading": "3"
+                  },
+                  {
+                    "text": "",
+                    "title": "Conflict",
+                    "leading": "4"
+                  },
+                  {
+                    "text": "(and Remove surplus population and Check for city support)",
+                    "title": ". City construction",
+                    "leading": "5"
+                  },
+                  {
+                    "text": "",
+                    "title": "Trade cards acquisition",
+                    "leading": "6"
+                  },
+                  {
+                    "text": "",
+                    "title": "Trade",
+                    "leading": "7"
+                  },
+                  {
+                    "text": "",
+                    "title": "Calamity selection",
+                    "leading": "8"
+                  },
+                  {
+                    "text": "",
+                    "title": "Calamity resolution",
+                    "leading": "9"
+                  },
+                  {
+                    "text": "",
+                    "title": "Special abilities",
+                    "leading": "10"
+                  },
+                  {
+                    "text": "(and Check for city support)",
+                    "title": "Remove surplus population",
+                    "leading": "11"
+                  },
+                  {
+                    "text": "",
+                    "title": "Civilization advances acquisition",
+                    "leading": "12"
+                  },
+                  {
+                    "text": "",
+                    "title": "A.S.T.-alteration",
+                    "leading": "13"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1. Tax Collection",
+        "items": [
+          {
+            "text": "Order: Simultaneously"
+          }
+        ]
+      },
+      {
+        "title": "1a. Tax Collection",
+        "items": [
+          {
+            "text": "All players must transfer a number of tokens from stock to treasury equal to their tax rate for each of their cities on the map-board and flip them upside down in the treasury box. The default ‘tax rate’ is 2 and this may be <adjusted later in the game through specific Civilization Advances. Players cannot choose to refrain from collecting tax. As long as all players have sufficient tokens in stock to comply, step 1b can be skipped."
+          },
+          {
+            "text": "Example: John has 5 cities on the board. He must transfer 10 tokens from stock to treasury"
+          }
+        ]
+      },
+      {
+        "title": "1b. Tax Revolts",
+        "items": [
+          {
+            "text": "It might occur that 1 or more players do not have sufficient tokens in stock to collect their taxes. If this occurs,  all other players must first finish their tax collection as usual. Players that had insufficient tokens in stock move all their tokens in stock to treasury."
+          },
+          {
+            "text": "For each city that this player could not collect tax from, ‘the beneficiary’ may choose and annex 1 of his cities,  referred to as ‘tax revolt’. This beneficiary does not collect taxes for any newly gained cities this way in the same turn. In this phase no check for city support is made. If the beneficiary of a tax revolt has insufficient cities to replace a city, for the remaining city or cities a new beneficiary is selected. If all players have 9 cities on the board, any remaining cities affected by tax revolt are destroyed instead."
+          },
+          {
+            "text": "Example: Michael has 5 cities on the board. He must transfer 10 tokens from stock to treasury, but he has only 7 tokens in stock. He must transfer all 7 to treasury and 2 of his cities revolt. Frank has the most cities in stock and becomes the beneficiary. He may choose 2 of Michael’s cities and replace them with his own, from stock."
+          },
+          {
+            "text": "If 2 or more players are victims of a tax revolt, the tax revolts are resolved in A.S.T.-ranking order. A victim of a tax revolt cannot be the beneficiary of his own or any other player’s tax revolt during the same turn."
+          }
+        ]
+      },
+      {
+        "title": "2. Population Expansion",
+        "items": [
+          {
+            "text": "Order: Simultaneously, but may be resolved in A.S.T.- ranking order if desired."
+          }
+        ]
+      },
+      {
+        "title": "2a. Population Expansion",
+        "items": [
+          {
+            "text": "Each player must place tokens from stock in each area containing his tokens:"
+          },
+          {
+            "text": "1 token in each area containing 1 of his tokens and 2 tokens in each area containing 2 or more of his tokens (so an area containing 3 or 4 tokens only gets an additional 2; not 3 or 4). If an area contains tokens "
+          },
+          {
+            "text": "TODO: Add image"
+          },
+          {
+            "text": "Tip: It is preferable to place each expanded token upside down so that each player can clearly see which tokens were originally situated in the area and which are expanded. Flip all tokens to the colored side when finished."
+          },
+          {
+            "text": "If a player does not have sufficient tokens in stock to complete his population expansion, he may choose where to add available tokens from stock taking into account the above guidelines. This may include re-dividing his previously placed tokens this turn. Players cannot choose to expand fewer tokens than possible. Adding tokens during the Population Expansion-phase is not considered attacking. Barbarian tokens do not expand."
+          }
+        ]
+      },
+      {
+        "title": "2b. Census",
+        "items": [
+          {
+            "text": "After a player has expanded his population according to the rules, he must count all of his tokens on the board and change the status of his Census-marker on the Census track (cities and ships are not counted)."
+          },
+          {
+            "text": "Tip: Since a player has exactly 55 tokens, sometimes it is easier to count the tokens in stock and treasury combined and subtract this number from 55."
+          },
+          {
+            "text": "TODO: Add image"
+          }
+        ]
+      },
+      {
+        "title": "3. Movement",
+        "items": [
+          {
+            "text": "This phase is resolved in Census order. The player with the highest Census takes all of the actions in turn. After he has finished all steps in this phase,  the player with the next highest census-count takes all of these steps and so on, until all players have done so. A.S.T.-ranking order breaks ties. However, it is preferable that players move simultaneously if possible as this speeds up game play. All players may take their movement action as soon as they like, but players may insist to wait for their turn. As long as a player is busy moving, that player may revert any of his moved tokens when changing his mind. However,  once the player declares his movement has ended he cannot change his movement. Barbarian tokens do not move."
+          },
+          {
+            "text": "Players may move each of their tokens on the board either 1 step to an area adjacent by land or onto a ship."
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "",
+                "text": "",
+                "items": [
+                  {
+                    "text": "",
+                    "title": "Pay 2 treasury tokens.",
+                    "leading": "1"
+                  },
+                  {
+                    "text": "",
+                    "title": "Pay 1 treasury token and destroy 1 population token from the ship area.",
+                    "leading": "2"
+                  },
+                  {
+                    "text": "",
+                    "title": "Destroy 2 tokens from the board, at least 1 of which is from the ship area.",
+                    "leading": "3"
+                  },
+                  {
+                    "text": "",
+                    "title": "A ship can be used the turn it is built.",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "Ship maintenance: As soon as a player wants to use a ship that was built during a previous turn, he must first either pay 1 treasury token or destroy one of his tokens from anywhere on the board for that ship. This can be done at any moment during his movement action before using the ship,  and this may be decided for each ship independently at different moments during his movement action. He may also choose to maintain a ship this way and choose to not move it, or possibly move it later during his movement action. A player can only pay maintenance once per ship per turn this way. A player may choose not to maintain a ship this way and destroy it in order to rebuild it in the same turn. A player cannot voluntary destroy a ship that was built in the current turn or is maintained from previous turn in order to build it again in the same turn."
+          },
+          {
+            "text": "Ship movement: Players may move each of their ships 4 areas by water per turn. By default, ships cannot be moved through open sea areas. At any moment during ship movement, the ship may embark or disembark any number of tokens,  but a ship can only carry up to 5 tokens at the same time by default. After the ship’s last step any tokens on it are automatically disembarked in the area. Tokens cannot stay on ships after momevent. Tokens may move either by ship or by land (not both). Ships may move through an area containing an ‘out of play’ token, but cannot end movement or disembark tokens there"
+          },
+          {
+            "text": "End of movement: As soon as a player declares his movement has ended,  he must destroy all of his ships that were not built or maintained this turn."
+          },
+          {
+            "text": "Tip: Once a token or ship has moved or if you choose to not move it, flip it. After you have declared your movement has ended flip all your tokens and ships back to the colored side."
+          },
+          {
+            "text": "City building: Cities are only built in the City Construction-phase. However, in order to build a city, players must have at least 6 tokens in an area containing a city site during the Movement-phase. If, after a conflict, a player still has 6 or more tokens in an area he may build a city there in the appropriate phase. Players can also attempt to build a ‘wilderness city’ in an area without a city site, but in this case 12 tokens are required. Wilderness cities can never be built in areas with a population limit of ‘0’, regardless of holding any Civilization Advances."
+          },
+          {
+            "text": "Causing a conflict situation As soon as a player enters an area that contains 1 or more tokens belonging to other player(s) or barbarian tokens and as a result the population limit this exceeded,  or the area contains an enemy city or a pirate city,  this is considered ‘causing conflict’ and in this case ‘a conflict situation’ occurs. This conflict situation may be voided if the enemy player moves later and moves tokens out of the area afterwards. In that case there is no longer a conflict situation in that area. The conflict itself, if occurring, is only resolved during Conflict-phase. ‘Entering an area’ is defined by either moving a token into the area by land, or a token disembarking a ship in the area. The movement of a ship (with or without tokens on it) into an area is not regarded as entering the area, attacking, or causing conflict. If players share an area and the population limit of the area is not exceeded, all tokens co-exist and no conflict situation occurs in this area."
+          },
+          {
+            "text": "Attacking a city As soon as a player enters an area containing an enemy city or a pirate city, this is considered ‘attacking the city’,  regardless of the number of tokens used (even if it is 1). To successfully attack a city a player must move at least 7 tokens into the city area or the attack fails. ‘Attacking’ only applies to attacking a city; tokens can not be attacked."
+          },
+          {
+            "text": "Defending a city: A city under attack can be defended by moving tokens into the area, either before or after the attack. The defending player should of course regard the order of movement. Only during the Conflict-phase it will first result in a token conflict. It is not possible for two or more players to combine in attack; it will result in a token conflict between all players involved. Any remaining tokens are regarded as attacking the city, even if the number of tokens proves insufficient. If the city is not attacked successfully, this will eventually result in surplus population."
           }
         ]
       }
