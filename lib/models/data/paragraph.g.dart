@@ -31,15 +31,18 @@ ParagraphItem _$ParagraphItemFromJson(Map<String, dynamic> json) {
           ?.map((e) => e == null
               ? null
               : new PunctuatedList.fromJson(e as Map<String, dynamic>))
-          ?.toList());
+          ?.toList())
+    ..title = json['title'] as String;
 }
 
 abstract class _$ParagraphItemSerializerMixin {
   String get text;
+  String get title;
   List<PunctuatedList> get punctuatedTextList;
   List<String> get images;
   Map<String, dynamic> toJson() => <String, dynamic>{
         'text': text,
+        'title': title,
         'punctuatedTextList': punctuatedTextList,
         'images': images
       };

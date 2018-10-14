@@ -15,6 +15,20 @@ class ParagraphRow extends StatelessWidget {
   final int paragraphIndex;
   String searchString;
 
+  Widget getTitleWidget(String text) {
+    var textWidget = Container(
+        padding: EdgeInsets.only(left: 20.0),
+        child: Text(
+          text,
+          textAlign: TextAlign.left,
+          softWrap: true,
+          overflow: TextOverflow.clip,
+          style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+        ));
+    var container = Row(children: [textWidget]);
+    return container;
+  }
+
   Widget getTextWidget(String text) {
     var textWidget = new Text(
       text,
@@ -25,7 +39,7 @@ class ParagraphRow extends StatelessWidget {
     );
     var container = Container(
       child: textWidget,
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
     );
     return container;
   }
@@ -42,7 +56,6 @@ class ParagraphRow extends StatelessWidget {
     puncuated.forEach((p) {
       List<Widget> c = List<Widget>();
       // Add title
-      print("${p.title}");
       c.add(Column(children: [
         Container(
             padding: textPadding,
@@ -50,7 +63,8 @@ class ParagraphRow extends StatelessWidget {
               p.title,
               overflow: TextOverflow.clip,
               textAlign: TextAlign.left,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
             )),
       ]));
 
@@ -64,6 +78,7 @@ class ParagraphRow extends StatelessWidget {
                 p.text,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.left,
+                style: TextStyle(fontStyle: FontStyle.italic),
               )))
         ]));
       }
@@ -88,7 +103,11 @@ class ParagraphRow extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> children = [];
     for (var item in paragraph.items) {
-      // Add text
+      // Add title/text
+      if (item.title != null && item.title.length > 0) {
+        var textWidget = getTitleWidget(item.title);
+        children.add(textWidget);
+      }
       if (item.text != null && item.text.length > 0) {
         var textWidget = getTextWidget(item.text);
         children.add(textWidget);

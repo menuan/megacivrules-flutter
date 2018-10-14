@@ -814,8 +814,8 @@
           {
             "punctuatedTextList": [
               {
-                "title": "",
-                "text": "",
+                "title": "Ship construction",
+                "text": "At any time during his Movement-phase, before, during or after moving his tokens, until the moment he declares his movement has ended, a player may choose to build ships. This can only be done in coastal areas containing 1 or more of his tokens. A player can built no more than 4 ships per turn. There are 3 ways to build a ship:",
                 "items": [
                   {
                     "text": "",
@@ -866,7 +866,285 @@
             "text": "Defending a city: A city under attack can be defended by moving tokens into the area, either before or after the attack. The defending player should of course regard the order of movement. Only during the Conflict-phase it will first result in a token conflict. It is not possible for two or more players to combine in attack; it will result in a token conflict between all players involved. Any remaining tokens are regarded as attacking the city, even if the number of tokens proves insufficient. If the city is not attacked successfully, this will eventually result in surplus population."
           }
         ]
+      },
+      {
+        "title": "4. Conflict",
+        "items": [
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Order of resolution in a Conflict-phase",
+                "text": "There are 2 different types of conflict. Conflict between tokens of a single player and a city is defined as ‘city attack’. A conflict between tokens of two or more players in an area that also contains a city is considered a ‘token conflict’.",
+                "items": [
+                  {
+                    "text": "All token conflicts are resolved before all city attacks are resolved. It is preferable to resolve all token conflicts simultaneously. Any possible unsuccessful city attacks are not considered token conflict and these tokens are only removed during the resolution of city attacks. Any foreseen surplus population may not be removed during the Conflict-phase.",
+                    "title": "",
+                    "leading": "4a."
+                  },
+                  {
+                    "text": "Only after all token conflicts have been resolved, all city attacks must be resolved one at a time,  in A.S.T.-ranking order of the defending players. Attacks on pirate cities are always resolved before any other city attacks. If more than 1 city belonging to a single player is attacked, he may choose the order.",
+                    "title": "",
+                    "leading": "4b."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "The barbarians: For the purpose of the Conflict-phase only, other than clearly specified, all barbarian tokens and pirate cities are considered as if they would belong to a single player defined as ‘The Barbarians’. If a rule refers to players, this rule may refer to ‘The Barbarians’ as well. ‘The Barbarians’ do not benefit from any Civilization Advances"
+          }
+        ]
+      },
+      {
+        "title": "4a. Resolution of token conflicts",
+        "items": [
+          {
+            "text": "Token conflicts are resolved in ‘rounds of token removal’. For each area in which a token conflict occurs, players must count all tokens involved. In each round, the player having the minority must first remove 1 of his tokens. Next, the following player in minority order must remove 1 of his tokens from the area, and so on, until all players involved have done so, or until the token conflict has ended. If players have an equal number of tokens to start with, they must remove their tokens simultaneously."
+          },
+          {
+            "text": "After each round of token removal, the check for token majority is done again and a new round of token removal starts, and so forth. The conflict in an area immediately ends as soon as at any moment the population limit is no longer exceeded or a single player is the only player occupying the area with tokens (even if he exceeds the population limit). A conflict may end before a full round of token removal is completed. Any excess tokens remain in the area. It may occur that by removing tokens simultaneously the area ends up depopulated or occupied by fewer tokens than the population limit"
+          },
+          {
+            "text": "If a token conflict occurs in an area that also contains a city, the conflict ends as soon as only a single player has tokens left in the area. Any remaining tokens this way are not removed during token conflict, and this is considered a city attack. Removed tokens are returned to stock."
+          }
+        ]
+      },
+      {
+        "title": "4b. Resolution of city attacks",
+        "items": [
+          {
+            "text": "For each city attack, first define whether the attack is successful or not. By default, an attack is successful if the attacker has at least 7 tokens in the area containing the enemy city. In the case of an unsuccessful attack,  all tokens from the attacking player in the city area are destroyed."
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Resolution of a successful city attack",
+                "text": "A successful city attack is divided into 4 steps. Each city attack must be resolved completely, one at a time, in the following order:",
+                "items": [
+                  {
+                    "text": "The defending player replaces his city by 6 of his tokens from stock. If he has insufficient tokens, he replaces it with whatever tokens he has left in stock,  even if it is 0. Only if a defender has insufficient tokens to replace his cities by and he is attacking another city in the same turn, he may wait for this to be resolved first. He may do this once",
+                    "title": "Defending",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "A token conflict is resolved following the exact same rules as a normal token conflict.",
+                    "title": "Token conflict",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "As a result of the successful attack, the attacking player may choose to draw a trade card at random from the defending player’s hand. If the defending player does not hold any trade cards at this point,  the attacking player cannot draw a card and this option is canceled. Both players are not allowed to inform the other players which card was drawn.",
+                    "title": "successful attack",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "As a result of the successful attack, the attacking player may also choose to gain up to 3 treasury from his stock. The defending player’s treasury is unaffected.",
+                    "title": "successful attack",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "Attacking a pirate city If a pirate city is successfully attacked, the city is replaced by 6 barbarian tokens. The attacker cannot draw a trade card, but may still gain up to 3 treasury."
+          }
+        ]
+      },
+      {
+        "title": "5. City Construction",
+        "items": [
+          {
+            "punctuatedTextList": [
+              {
+                "title": "City Construction",
+                "text": "This phase is divided into 3 steps:",
+                "items": [
+                  {
+                    "text": "City Construction",
+                    "title": "Construction",
+                    "leading": "5a"
+                  },
+                  {
+                    "text": "Surplus Population Removal.",
+                    "title": "Surplus Population.",
+                    "leading": "5b"
+                  },
+                  {
+                    "text": "Check for support and unsupported city reduction",
+                    "title": "Support",
+                    "leading": "5"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "All players must take all 3 steps in this specific order. All players take their actions simultaneously, but players may choose to take their action in A.S.T.- ranking order"
+          }
+        ]
+      },
+      {
+        "title": "5a. City Construction",
+        "items": [
+          {
+            "punctuatedTextList": [
+              {
+                "title": "City Construction",
+                "text": "Players may choose to build any number of cities per turn in areas following the minimum requirements:",
+                "items": [
+                  {
+                    "text": "At least 6 tokens in an area with a city site. ",
+                    "title": "6 tokens ",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "At least 12 tokens in an area without a city site (referred to as ‘wilderness city’). Cities cannot be built in an area with population limit ‘0’,  regardless of holding any Civilization Advances.",
+                    "title": "12 tokens",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "Each area can only contain 1 city. For each city built, the player removes all tokens from the area (irrespective of ownership) and places a city in the area from stock. All removed tokens are returned to stock. The maximum number of cities in play for any player is 9."
+          },
+          {
+            "text": "Note: The map-board contains white and black city sites. For the purpose of city construction they are treated in the same way."
+          }
+        ]
+      },
+      {
+        "title": "5b. Surplus Population Removal",
+        "items": [
+          {
+            "text": "After the player has built his cities, he must immediately remove all of his tokens exceeding the population limits. This includes any tokens in areas containing a city. Note: ‘Agriculture’ and ‘Public Works’ may create exceptions to this rule."
+          }
+        ]
+      },
+      {
+        "title": "5c. City support and reduction",
+        "items": [
+          {
+            "text": "After the player has removed all of his surplus population he must check for city support. By default a player’s city support rate is 2. This means that a player should have at least 2 tokens on the board for each of his cities on the board. For each city that he cannot support he should remove one city of his choice and replace it with tokens equal to the population limit of that area until he has sufficient city support. This is referred to as ‘Reducing a city’. If a player has built any cities this turn he must reduce these cities first. Any tokens newly gained through city reduction immediately count for city support for other cities."
+          }
+        ]
+      },
+      {
+        "title": "6. Trade Cards Acquisition",
+        "items": [
+          {
+            "text": "IMPORTANT: Before drawing or dealing any cards for the first time, make sure the stacks are set up in the right way as defined in chapter 4. Setting up the game (page 11-13). For any other turn do not forget to check carefully to be sure all cards discarded in the previous turn are shuffled the right way and placed under the appropriate stacks, as mentioned in phase 13b."
+          },
+          {
+            "text": "Tip: Before drawing cards, write down a list containing the number of cities for each player and have a single player deal all the cards."
+          },
+          {
+            "text": "Players are not allowed to conceal their total hand size of trade cards."
+          }
+        ]
+      },
+      {
+        "title": "6a. Drawing trade cards",
+        "items": [
+          {
+            "text": "All players draw trade cards equal to the number of cities on the board. First the player having the lowest number of cities on the board draws trade cards. Then the player with the next lowest number of cities on the board draws trade cards. A.S.T.-order break ties. Players with no cities draw no trade cards. Each player draws one trade card per stack, starting with stack #1 and in ascending order, until they reach the stack number that equals their number cities on the board"
+          },
+          {
+            "text": "Players may look at the cards they draw but are not allowed to inform other players what they drew (it may be a commodity or a calamity). If at any point a stack is empty, a player does not draw a substitute card from another stack. Instead he draws a ‘water’card, which can be used as a trade card worth ‘0’"
+          },
+          {
+            "text": "TODO: Add images"
+          },
+          {
+            "text": "Example: Ronald (Minoa) has 3 cities, so he draws first. He draws from stack 1, 2 and 3. Judith (Hellas) and Tony (Egypt) both have 5 cities, but Hellas is higher on the A.ST. than Egypt, so for their mutual order Hellas draws first. Judith draws from stack 1, 2, 3, 4 and 5 (card 4 turns out to be a calamity). Tony would draw from stack 1, 2, 3, 4 and 5, but stack 2 is empty, so he draws from stack 1, receives a ‘water’ card and draws from stack 3, 4 and 5"
+          }
+        ]
+      },
+      {
+        "title": "6b. Additional purchases",
+        "items": [
+          {
+            "text": "After all players have drawn their regular trade cards, in the exact same order as step 6a, each player may choose to purchase any number of additional trade cards and/ or pass. A player may look at the card he just purchased before deciding to purchase another card or pass. By default players can only purchase a trade card from stack 9 for 15 treasury tokens. Players are not allowed to count the number of cards left on a particular stack (unless the stack is empty). A player must pay treasury before receiving the card. If at any moment a stack is empty,  players may still choose that stack but receive a ‘water’ card instead and pay the same amount of treasury as the initial trade card. After a player receives cards or passes,  he cannot revert his choice. A player is not allowed to inform other players what he drew and the player cannot return a card if he does not like the result, for instance if it turns out to be a calamity. "
+          },
+          {
+            "text": "Separate trade card blocks If the separate trade card blocks East and West are used (12-18 players), the western civilizations draw or purchase cards strictly from the ‘West’-block and the same applies to East-cards for eastern civilizations. Even when a stack is empty at one block, a player does not draw a substitute card from the other block, but draws a ‘water’ card instead."
+          }
+        ]
+      },
+      {
+        "title": "7. Trade",
+        "items": [
+          {
+            "text": "Time limit It is recommended to set a time limit of 10 minutes for this phase, using a timer that is visible to all players. Some groups prefer longer or shorter trading times – use what works best for your group."
+          },
+          {
+            "text": "The value of commodity cards A single card of a specific commodity is worth its face value, which is equal to the number printed in the first box at the bottom of the card. Two equal cards of a specific commodity are worth the amount equal to the number printed in the second box at the bottom of the card, 3 equal cards of a specific commodity are worth the third box, and so on. In other words: set value = (number of identical commodity cards)2 x (face value of the commodity)."
+          },
+          {
+            "text": "Commodities of the same face value but with different names are worth only their individual face values combined."
+          },
+          {
+            "text": "TODO: Add images"
+          },
+          {
+            "text": "Calamities Except for Non Tradeable Calamities, which may never be traded, all other calamities may be included in a trade transaction but cannot be mentioned in a trade offer."
+          },
+          {
+            "text": "During the Trade-phase, calamities do not have any effect, other than acting as trade cards,  though during the Calamity Resolution-phase, any calamities held by a player at that point will resolve eventually."
+          },
+          {
+            "text": "Trade The objective is to try and complete sets of equal trade cards to increase their total set value as described above. For each commodity type there are exactly enough cards to complete 1 set of trading cards, which is equal to the number of boxes shown on the commodity. It may turn out that a set cannot be completed during a single turn."
+          },
+          {
+            "text": "Simultaneously, all players may make trade negotiations with any other player"
+          },
+          {
+            "text": "Trades cannot involve more than 2 players at a time and each trade must include at least 3 trade cards per player."
+          },
+          {
+            "text": "For each trade offer (per player) both players must truthfully inform each other on the identity of 2 commodities,  as well as the total number of cards involved in their offer. Both players may choose to mention the names of the excess commodities involved in the deal this way, though this information does not need to be true. If more than 2 commodities are mentioned, the first 2 mentioned must be true. Players are not allowed to speak about calamities held or involved in a trade,  though players may promise a calamity-free trade offer,  which does not need to be true either. Treasury or Civilization Advances cannot be involved, though any other (non-binding) promises such as peace-treaties are allowed."
+          },
+          {
+            "text": "Once both players agree on a trade, the trade transaction is resolved and all trade cards involved are transferred simultaneously. Other players are not allowed to see which cards are traded. A trade transaction cannot be reverted except when a player receives a Non Tradeable Calamity, a different number of cards than specified, or not at least the first 2 commodities specified. In this case all cards involved are reverted and the players may make new negotiations. Players are not allowed to conduct trade deals in bad faith simply to gain information and revert a deal."
+          },
+          {
+            "text": "End of trade Once all players have finished trading or if the time limit is reached the trade session ends."
+          },
+          {
+            "text": "Separate trade card blocks If the separate trade card blocks East and West are used (12-18 players), players may trade with players from either side. In fact, in this case, most of the time it is the only way to complete a set. "
+          }
+        ]
+      },
+      {
+        "title": "8. Calamity Selection",
+        "items": [
+          {
+            "text": "Calamity limit per player After this phase players are not allowed to hold more than 3 calamities, 2 of which may be Major Calamities (either Non Tradeable or Tradeable), 3 of which may be Minor Calamities and none of which may be duplicates."
+          },
+          {
+            "text": "In a game of 5-8 and 12-14 players, no Minor Calamities are used. In this case the rule should be read as ‘no more than 2 calamities’. In a game using a single block (up to 11 players),  there are no duplicate calamities in the game"
+          },
+          {
+            "text": "All players must truthfully reveal the number (but not the identity) of the calamities they hold by placing the calamities face down in front of them, so that every player can see who holds what number of calamities. These cards are regarded as if they were still held by the player. If at this point nobody holds a calamity, this phase can be skipped."
+          },
+          {
+            "text": "Regardless of the number of calamities held by a player, if a single player holds any calamities of the same name,  he must discard 1 of these at random. If the number of calamities held by a player still exceeds the limit described above, he must discard the excess cards at random until the limit is no longer exceeded. All discarded calamities must be placed on their appropriate discard piles, 1 stack for each number"
+          },
+          {
+            "title": "Example 1:",
+            "text": "David holds 3 calamities in an 8-player game: ‘Famine’, ‘Treachery’ and ‘Barbarian Hordes’. In this phase he has to discard 1 of the cards. He shuffles them face down and his neighbor draws one. He reveals ‘Treachery’. This calamity is discarded. David will be the victim of ‘Famine’ and ‘Barbarian Hordes’ in the next phase."
+          },
+          {
+            "title": "Example 2:",
+            "text": "Jacob holds 5 calamities in a 16-player game: ‘Superstition’, another ‘Superstition’, ‘Tyranny’, ‘Squandered Wealth’ and ‘Coastal Migration’. That is 3 Major Calamities and 2 Minor Calamities. He first has to discard 1 of the 2 ‘Superstitions’ at random. Next, since he still exceeds the limit, 1 of his 4 calamities left is discarded randomly. This could possibly be ‘Tyranny’, the one he wishes to get rid of most, but also the considerably less harmful ‘Squandered Wealth’."
+          }
+        ]
       }
     ]
+  },
+  {
+    "title": "TODO",
+    "paragraphs": []
   }
 ]

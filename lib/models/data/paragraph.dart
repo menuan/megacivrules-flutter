@@ -14,6 +14,7 @@ class Paragraph extends Object with _$ParagraphSerializerMixin {
 @JsonSerializable()
 class ParagraphItem extends Object with _$ParagraphItemSerializerMixin {
   String text;
+  String title;
   List<PunctuatedList> punctuatedTextList;
   List<String> images;
   ParagraphItem(this.text, this.images, this.punctuatedTextList);
