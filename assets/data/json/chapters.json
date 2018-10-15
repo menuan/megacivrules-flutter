@@ -1742,11 +1742,11 @@
         "items": [
           {
             "text": "A full game of Mega Civilization takes 10-12 hours to complete. The setup for ‘The Short Game’ provides a set of rules and pre-constructed decks of Civilization Advances that allow a game of 5 to 6 turns, which means 6-8 hours accordingly. This scenario is recommended for experienced players. If this is the first time you play the game, it is recommended to play the scenario ‘The First Game’ before starting a full game or this scenario. "
+          },
+          {
+            "text": "TODO: Add image of theme-set cards"
           }
         ]
-      },
-      {
-        "text": "TODO: Add image of theme-set cards"
       },
       {
         "title": "How to set up The Short Game?",
