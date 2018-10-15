@@ -18,7 +18,8 @@ class ProgressViewModel {
 
   bool filterByAcquiered = true;
   bool filterByNotAcquiered = true;
-  double _costFilter = 290.0;
+  bool filterCostAscending = true;
+  double _costFilter = 50.0;
 
   bool isAcquiered(CivilizationAdvance a) {
     return this.acquired.contains(a.id);
@@ -55,6 +56,15 @@ class ProgressViewModel {
     _sort();
   }
 
+  void setFilterCostAscneding(bool val) {
+    filterCostAscending = val;
+    filterAdvances();
+  }
+
+  bool getFilterCostAscending() {
+    return filterCostAscending;
+  }
+
   void setGroupFilter(CivilizationAdvanceGroup group, bool value) {
     filter[group] = value;
     filterAdvances();
@@ -67,7 +77,6 @@ class ProgressViewModel {
 
   bool getFilterByAcquiered() {
     return this.filterByAcquiered;
-    filterAdvances();
   }
 
   bool getFilterByNotAquiered() {
@@ -97,6 +106,7 @@ class ProgressViewModel {
 
   void setCostFilter(double value) {
     _costFilter = value;
+    filterAdvances();
   }
 
   double getCostFilterValue() {
@@ -145,10 +155,14 @@ class ProgressViewModel {
     var filterByNotAquieredFunction = (id) {
       return !this.acquired.contains(id);
     };
+
     this.filteredAdvances = this.advances.where((a) {
       // Filter by group
       var byGroup = filterByGroup(a.groups);
-      if (byGroup) {
+      if (byGroup &&
+          (filterCostAscending
+              ? a.cost >= _costFilter
+              : a.cost <= _costFilter)) {
         bool shouldFilter = true;
         if (this.filterByAcquiered) {
           shouldFilter = filterByAcquiered(a.id);
