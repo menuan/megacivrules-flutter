@@ -18,6 +18,7 @@ class ProgressViewModel {
 
   bool filterByAcquiered = true;
   bool filterByNotAcquiered = true;
+  double _costFilter = 290.0;
 
   bool isAcquiered(CivilizationAdvance a) {
     return this.acquired.contains(a.id);
@@ -94,12 +95,24 @@ class ProgressViewModel {
     return this.acquired;
   }
 
+  void setCostFilter(double value) {
+    _costFilter = value;
+  }
+
+  double getCostFilterValue() {
+    return _costFilter;
+  }
+
   String getVictoryPoints() {
     if (acquired.length > 0 && advances.length > 0) {
       return this
           .acquired
-          .map(
-              (a) => this.advances.firstWhere((ad) => ad.id == a).victoryPoints)
+          .map((a) {
+            var found = this
+                .advances
+                .firstWhere((ad) => ad.id == a, orElse: () => null);
+            return found != null ? found.victoryPoints : 0;
+          })
           .reduce((value, element) => value + element)
           .toString();
     }

@@ -116,6 +116,13 @@ class _ProgressState extends State<Progress>
     );
   }
 
+  void _onChangeCostSlider(double value) {
+    print(value);
+    setState(() {
+      viewModel.setCostFilter(value);
+    });
+  }
+
   Widget getSliverBar() {
     return SliverAppBar(
         floating: true,
@@ -133,12 +140,19 @@ class _ProgressState extends State<Progress>
         ]),
         automaticallyImplyLeading: false,
         actions: <Widget>[
+          Slider(
+            value: viewModel.getCostFilterValue(),
+            label: "Cost",
+            max: 290.0,
+            min: 50.0,
+            onChanged: _onChangeCostSlider,
+          ),
           PopupMenuButton<String>(
             child: Padding(
                 padding: EdgeInsets.only(right: 20.0),
                 child: Icon(Icons.filter_list)),
             itemBuilder: (BuildContext context) {
-              List<PopupMenuItem<String>> children = [];
+              List<Widget> children = [];
               viewModel.getGroupFilter().forEach((group, val) {
                 children.add(PopupMenuItem(
                     child: CheckboxView(
