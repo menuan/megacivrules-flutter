@@ -1741,7 +1741,185 @@
         "title": "The Short Game",
         "items": [
           {
-            "text": "TODO: Add text"
+            "text": "A full game of Mega Civilization takes 10-12 hours to complete. The setup for ‘The Short Game’ provides a set of rules and pre-constructed decks of Civilization Advances that allow a game of 5 to 6 turns, which means 6-8 hours accordingly. This scenario is recommended for experienced players. If this is the first time you play the game, it is recommended to play the scenario ‘The First Game’ before starting a full game or this scenario. "
+          }
+        ]
+      },
+      {
+        "text": "TODO: Add image of theme-set cards"
+      },
+      {
+        "title": "How to set up The Short Game?",
+        "items": [
+          {
+            "text": "The game provides a set of 9 different cards showing pre-constructed sets of Civilization Advances. For each different number of players, it is important to select the right theme-set cards, as described. We strongly recommend not to vary these selections."
+          },
+          {
+            "title": "5 players",
+            "text": "Conquering the Seas, Sacred Constructors, Coin and Commerce, Exploring the Deserts, Mystical Palaces."
+          },
+          {
+            "title": "6 players",
+            "text": "Conquering the Seas, Sacred Constructors, Coin and Commerce, Exploring the Deserts, Early Merchants,  Mystical Palaces"
+          },
+          {
+            "title": "7 players",
+            "text": ""
+          },
+          {
+            "title": "6 players",
+            "text": "Conquering the Seas, Sacred Constructors, Coin and Commerce, Exploring the Deserts, Early Merchants,  Spreading Knowledge, Mystical Palaces."
+          },
+          {
+            "title": "8 players",
+            "text": "Conquering the Seas, Sacred Constructors, Exploring the Deserts, Early Merchants, Spreading Knowledge,  Emerging Empire, Mystical Palaces, Cultural Heights."
+          },
+          {
+            "title": "9 players",
+            "text": "Conquering the Seas, Sacred Constructors, Coin and Commerce, Exploring the Deserts, Early Merchants,  Spreading Knowledge, Cultural Heights, Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "10 players",
+            "text": "Conquering the Seas, 2x Sacred Constructors, Coin and Commerce, Exploring the Deserts, Early Merchants,  Spreading Knowledge, Cultural Heights, Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "11 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, Coin and Commerce, Exploring the Deserts, Early Merchants,  Spreading Knowledge, Cultural Heights, Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "12 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, 2x Coin and Commerce, Exploring the Deserts, Early Merchants,  Spreading Knowledge, Cultural Heights, Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "13 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, 2x Coin and Commerce, 2x Exploring the Deserts, Early Merchants, Spreading Knowledge, Cultural Heights,  Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "14 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, 2x Coin and Commerce, 2x Exploring the Deserts, 2x Early Merchants, Spreading Knowledge, Cultural Heights,  Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "15 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, 2x Coin and Commerce, 2x Exploring the Deserts, 2x Early Merchants, 2x Cultural Heights, Spreading Knowledge,  Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "16 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, 2x Coin and Commerce, 2x Exploring the Deserts, 2x Early Merchants, 2x Cultural Heights, 2x Spreading Knowledge,  Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "17 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, 2x Coin and Commerce, 2x Exploring the Deserts, 2x Early Merchants, 2x Cultural Heights, 2x Spreading Knowledge,  2x Emerging Empire, Mystical Palaces."
+          },
+          {
+            "title": "18 players",
+            "text": "2x Conquering the Seas, 2x Sacred Constructors, 2x Coin and Commerce, 2x Exploring the Deserts, 2x Early Merchants, 2x Spreading Knowledge, 2x Cultural Heights,  2x Emerging Empire, 2x Mystical Palaces."
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Setup",
+                "text": "Now, set up the game as normal, as described in chapter 4 ‘Setting up the game’ (page 10) using the basic A.S.T. and adjust the following:",
+                "items": [
+                  {
+                    "text": "Shuffle the selection of theme-set cards as described and place them face down in a stack.",
+                    "title": "Shuffle",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "All players draw a pre-constructed set-card and take a look at it, without revealing it (players may look up the Advances in silence).",
+                    "title": "Draw cards",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "All players choose a civilization using the numbered startup cards.",
+                    "title": "Choose civilization",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "In A.S.T.-ranking order, each player may build 5 cities within their own region, as described in the regions setup (chapter 5, page 18/19), 4 of which must be on a city site. Remember no cities can be built in areas with population limit ‘0’.",
+                    "title": "A.S.T",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Once all players are done, simultaneously all players reveal their theme-set card and collect the Civilization Advances mentioned on this card and collect the corresponding credit tokens. It is recommended to have a round of each player calling the Advances they have received to all players, so that every player knows what everybody holds",
+                    "title": "Reveal and collect",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Some theme-sets order the destruction of 1 city when revealed. This is done at this point.",
+                    "title": "City deconstruction",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "As if it was Trade Cards Acquisition-phase all players draw trade cards (4-5 cards per player). First all players with 4 cities draw their cards, next all players with 5 cities draw their cards, A.S.T.- ranking breaks ties. If players draw a calamity,  they don’t reveal this. Players cannot purchase additional trade cards at this point.",
+                    "title": "Draw cards",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "In A.S.T.-ranking order, all players may divide up to 14 tokens over their associated region (player’s choice). No population limits may be exceeded,  but players may regard ‘Agriculture’",
+                    "title": "A.S.T",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "All players must transfer 10 tokens from stock to treasury",
+                    "title": "Tansfer tokens",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "Advance all succession markers to column 11 on the A.S.T. (just before the Late Bronze Age).",
+                    "title": "Advance",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "At this point, all players should have a set of 4 Civilization Advances, 4-5 trade cards, 4-5 cities and 14 tokens on the board and 10 tokens in treasury",
+                    "title": "Confirm",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "text": "For games with 5, 6 and 12 players using ‘The Short Game’ scenario’, players do not get an additional 5 or 10 credit tokens of each color at the start of the game as described in chapter 4. These additional credits are only used when playing a full game."
+          }
+        ]
+      },
+      {
+        "title": "Start",
+        "items": [
+          {
+            "text": "The game starts as if it was a regular turn, by collecting taxes. Players may regard ‘Coinage’ and ‘Monarchy’ at this point."
+          },
+          {
+            "text": "Any calamities drawn at the start of the game may be traded during the Trade-phase. During the Calamity Resolution-phase these calamities as well as additional calamities drawn or traded are resolved as usual."
+          },
+          {
+            "text": "The game ends once a player advances to the final space on the A.S.T. This is the moment for victory determination."
+          },
+          {
+            "punctuatedTextList": [
+              {
+                "title": "Tips and tricks:",
+                "text": "",
+                "items": [
+                  {
+                    "text": "In ‘The Short Game’ some calamities have a less devastating effect than in the regular game.",
+                    "title": "Calamities",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "This type of game develops quicker than expected. It is more important to score Victory Points by purchasing Civilization Advances than planning for the long range and stay in place on the A.S.T. for a turn",
+                    "title": "Game development",
+                    "leading": "-"
+                  },
+                  {
+                    "text": "It is most important to advance on the A.S.T. every turn. There are fewer possibilities to catch up than in the full game.",
+                    "title": "Advance!!!",
+                    "leading": "-"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
