@@ -14,9 +14,9 @@ class ChapterRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var paragraphIndex = 1;
-
+    String indexString = index != null ? "$index: " : "";
     return ExpansionTile(
-      title: new Text("$index: ${chapter.title}",
+      title: new Text("$indexString${chapter.title}",
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           textAlign: TextAlign.start),
       children: chapter.paragraphs

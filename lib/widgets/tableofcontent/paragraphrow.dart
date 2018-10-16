@@ -126,11 +126,12 @@ class ParagraphRow extends StatelessWidget {
         children.addAll(punctuated);
       }
     }
-
+    var indexString =
+        parentIndex != null ? "$parentIndex:$paragraphIndex " : "";
     return new ExpansionTile(
       title: new Padding(
         padding: new EdgeInsets.only(left: 5.0),
-        child: new Text("$parentIndex:$paragraphIndex ${paragraph.title}",
+        child: new Text("$indexString${paragraph.title}",
             textAlign: TextAlign.start, style: TextStyle(fontSize: 15.0)),
       ),
       children: children,

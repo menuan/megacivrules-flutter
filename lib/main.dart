@@ -1,5 +1,4 @@
 import 'dart:async' show Timer;
-import 'dart:typed_data';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/rendering.dart';
@@ -9,9 +8,9 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 // Ours
 import 'package:mega_civ_rules/models/data/chapter.dart';
 import 'package:mega_civ_rules/widgets/tableofcontent/tableofcontent.dart';
-import 'package:mega_civ_rules/widgets/wikipedia/wikipedia.dart';
 import 'package:mega_civ_rules/widgets/progress/progress.dart';
 import 'package:mega_civ_rules/services/chapterservice.dart';
+import 'package:mega_civ_rules/services/wikipediaService.dart';
 import 'package:mega_civ_rules/services/themeservice.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 
@@ -41,6 +40,7 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   MaterialColor themeColor = Colors.lightGreen;
 
   List<Chapter> chapters = [];
+  List<Chapter> wikipediaChapters = [];
   SearchBar searchBar;
   String searchString = "";
   int _page = 0;
@@ -77,6 +77,11 @@ class _MegaCivRulesState extends State<MegaCivRules> {
     ChapterService.get().then((chapters) {
       this.setState(() {
         this.chapters = chapters;
+      });
+    });
+    WikipediaService.get().then((chapters) {
+      this.setState(() {
+        this.wikipediaChapters = chapters;
       });
     });
   }
@@ -132,8 +137,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.insert_chart),
                   title: const Text('Progress')),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.border_all), title: const Text('Cards'))
             ]));
   }
 
@@ -207,12 +210,16 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   List<Widget> getBody() {
     return [
       TableOfContents(
+        includeIndex: true,
         chapters: this.chapters,
         searchString: this.searchString,
       ),
-      Wikipedia(),
-      Progress(),
-      Text("cards")
+      TableOfContents(
+        includeIndex: false,
+        chapters: this.wikipediaChapters,
+        searchString: this.searchString,
+      ),
+      Progress()
     ];
   }
 
