@@ -13,6 +13,8 @@ import 'package:mega_civ_rules/services/chapterservice.dart';
 import 'package:mega_civ_rules/services/wikipediaService.dart';
 import 'package:mega_civ_rules/services/themeservice.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
+import 'package:mega_civ_rules/services/imageMemoization.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -47,11 +49,12 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   PageController _c;
 
   void loadSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      darkThemeEnabled = prefs.getBool('theme_dark') ?? false;
-      sliderColor = prefs.getInt('theme_color') ?? 0;
-      themeColor = ThemeService.getColor(sliderColor);
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        darkThemeEnabled = prefs.getBool('theme_dark') ?? false;
+        sliderColor = prefs.getInt('theme_color') ?? 0;
+        themeColor = ThemeService.getColor(sliderColor);
+      });
     });
   }
 

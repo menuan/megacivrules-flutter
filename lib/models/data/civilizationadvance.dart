@@ -24,7 +24,9 @@ class CivilizationAdvance extends Object
       this.attributes,
       this.name,
       this.id,
-      this.image});
+      this.image,
+      this.colorCredits,
+      this.reduceCosts});
 
   factory CivilizationAdvance.fromJson(Map<String, dynamic> json) =>
       _$CivilizationAdvanceFromJson(json);
@@ -68,7 +70,7 @@ class CivilizationAdvanceReducedCost extends Object
 
 @JsonSerializable()
 class ColorCredit extends Object with _$ColorCreditSerializerMixin {
-  ColorCredit();
+  ColorCredit({this.group, this.value});
 
   CivilizationAdvanceGroup group;
   int value;

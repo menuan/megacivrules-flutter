@@ -1,32 +1,45 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async' show Future;
+import 'dart:async' show Future, Completer;
 
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/utils.dart';
 import 'package:mega_civ_rules/services/imageMemoization.dart';
 
+typedef OnComplete(List<String> acquiered);
+
 class CivilizationAdvanceService {
   static String acquiredKey = "acquired";
+  static List<CivilizationAdvance> advances = [];
 
   static Future<List<CivilizationAdvance>> get() {
+    var completer = new Completer<List<CivilizationAdvance>>();
     ImageMemoization imgCache = ImageMemoization.instance;
-    return Utils.loadJSONAsset("civilizationadvances.json").then((val) {
-      var advances = List<CivilizationAdvance>();
-      List<dynamic> advanceJson = json.decode(val);
-      advanceJson.forEach((a) {
-        var decoded = CivilizationAdvance.fromJson(a);
-        advances.add(decoded);
-        imgCache.setImage(decoded.name, decoded.image);
+    if (advances.length == 0) {
+      Utils.loadJSONAsset("civilizationadvances.json").then((val) {
+        var advances = List<CivilizationAdvance>();
+        List<dynamic> advanceJson = json.decode(val);
+        advanceJson.forEach((a) {
+          var decoded = CivilizationAdvance.fromJson(a);
+          advances.add(decoded);
+          imgCache.setImage(decoded.name, decoded.image);
+        });
+        CivilizationAdvanceService.advances = advances;
+        completer.complete(advances);
       });
-      return advances;
-    });
+    } else {
+      completer.complete(advances);
+    }
+    return completer.future;
   }
 
   static Future<List<String>> getAcquired() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> acquired = prefs.getStringList(acquiredKey);
-    return Future(() => acquired ?? []);
+    var completer = new Completer<List<String>>();
+    SharedPreferences.getInstance().then((prefs) {
+      List<String> acquired = prefs.getStringList(acquiredKey);
+      completer.complete(acquired);
+    });
+    return completer.future;
   }
 
   static void setAcquired(List<String> acquired) async {
