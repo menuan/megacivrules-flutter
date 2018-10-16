@@ -50,6 +50,7 @@ flutter:
     - assets/img/advancegroups/
     - assets/data/json/chapters.json
     - assets/data/json/civilizationadvances.json
+    - assets/data/json/wikipedia.json
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
