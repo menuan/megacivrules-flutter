@@ -11,20 +11,22 @@ typedef OnComplete(List<String> acquiered);
 class CivilizationAdvanceService {
   static String acquiredKey = "acquired";
   static List<CivilizationAdvance> advances = [];
+  static bool loaded = false;
 
-  static Future<List<CivilizationAdvance>> get() {
+  static Future<List<CivilizationAdvance>> get() async {
     var completer = new Completer<List<CivilizationAdvance>>();
     ImageMemoization imgCache = ImageMemoization.instance;
-    if (advances.length == 0) {
+    if (!loaded) {
       Utils.loadJSONAsset("civilizationadvances.json").then((val) {
         var advances = List<CivilizationAdvance>();
         List<dynamic> advanceJson = json.decode(val);
         advanceJson.forEach((a) {
           var decoded = CivilizationAdvance.fromJson(a);
           advances.add(decoded);
-          imgCache.setImage(decoded.name, decoded.image);
+          imgCache.setImage(decoded.id, decoded.image);
         });
         CivilizationAdvanceService.advances = advances;
+        loaded = true;
         completer.complete(advances);
       });
     } else {

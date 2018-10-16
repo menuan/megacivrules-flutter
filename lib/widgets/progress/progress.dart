@@ -51,7 +51,7 @@ class _ProgressState extends State<Progress>
   }
 
   void _showModal(CivilizationAdvance a) {
-    var data = ImageMemoization.instance.getImage(a.name);
+    var data = ImageMemoization.instance.getImage(a.id);
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext modalContext) {
@@ -91,7 +91,7 @@ class _ProgressState extends State<Progress>
                       child: FadeInImage(
                           placeholder: MemoryImage(kTransparentImage),
                           image: MemoryImage(ImageMemoization.instance
-                              .getImage(advancesToRender[pos].name)))),
+                              .getImage(advancesToRender[pos].id)))),
                   onTap: () => _showModal(advancesToRender[pos]),
                 ),
                 Positioned(

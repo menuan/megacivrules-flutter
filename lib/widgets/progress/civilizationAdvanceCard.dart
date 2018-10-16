@@ -37,7 +37,7 @@ class CivilizationAdvanceCard extends StatelessWidget {
     }
     children.add(
         ListTile(trailing: reduced, title: Text(viewModel.getAdvanceName())));
-    var data = ImageMemoization.instance.getImage(viewModel.getAdvance().name);
+    var data = ImageMemoization.instance.getImage(viewModel.getAdvance().id);
     children.add(Padding(
         padding:
             EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0, bottom: 25.0),
