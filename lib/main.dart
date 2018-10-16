@@ -144,21 +144,23 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   }
 
   void _onSwitchValueChange(bool newValue) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      darkThemeEnabled = newValue;
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        darkThemeEnabled = newValue;
+      });
+      prefs.setBool('theme_dark', newValue);
     });
-    prefs.setBool('theme_dark', newValue);
   }
 
   void _onColorSliderValueChange(double newValue) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int rounded = newValue.round();
-    setState(() {
-      sliderColor = rounded;
-      themeColor = ThemeService.getColor(sliderColor);
+    SharedPreferences.getInstance().then((prefs) {
+      int rounded = newValue.round();
+      setState(() {
+        sliderColor = rounded;
+        themeColor = ThemeService.getColor(sliderColor);
+      });
+      prefs.setInt('theme_color', rounded);
     });
-    prefs.setInt('theme_color', rounded);
   }
 
   Widget getHome() {
