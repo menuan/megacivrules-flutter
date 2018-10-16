@@ -46,6 +46,7 @@ class _ProgressState extends State<Progress>
     this.setState(() {
       CivilizationAdvanceService.setAcquired(
           viewModel.addRemoveAcquiered(advance.id, add));
+      advancesToRender = viewModel.getAdvancesToRender();
     });
   }
 
@@ -84,13 +85,34 @@ class _ProgressState extends State<Progress>
               color: viewModel.isAcquiered(advancesToRender[pos])
                   ? Theme.of(context).primaryColor
                   : Theme.of(context).cardColor,
-              child: GestureDetector(
-                child: FadeInImage(
-                    placeholder: MemoryImage(kTransparentImage),
-                    image: MemoryImage(ImageMemoization.instance
-                        .getImage(advancesToRender[pos].name))),
-                onTap: () => _showModal(advancesToRender[pos]),
-              )),
+              child: Stack(fit: StackFit.expand, children: [
+                GestureDetector(
+                  child: Container(
+                      child: FadeInImage(
+                          placeholder: MemoryImage(kTransparentImage),
+                          image: MemoryImage(ImageMemoization.instance
+                              .getImage(advancesToRender[pos].name)))),
+                  onTap: () => _showModal(advancesToRender[pos]),
+                ),
+                Positioned(
+                  right: 0.0,
+                  bottom: 0.0,
+                  child: new FloatingActionButton(
+                    mini: true,
+                    child: Icon(viewModel.isAcquiered(advancesToRender[pos])
+                        ? Icons.remove_circle
+                        : Icons.add_circle),
+                    backgroundColor:
+                        viewModel.isAcquiered(advancesToRender[pos])
+                            ? Theme.of(context).buttonColor
+                            : Theme.of(context).errorColor,
+                    onPressed: () {
+                      _onTapAddRemoveAdvance(advancesToRender[pos],
+                          !viewModel.isAcquiered(advancesToRender[pos]));
+                    },
+                  ),
+                ),
+              ])),
           childCount: advancesToRender.length),
     );
   }
