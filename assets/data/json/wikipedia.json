@@ -1,20 +1,46 @@
 [
   {
+    "title": "Population",
+    "paragraphs": [
+      {
+        "title": "What are they?",
+        "items": [
+          {
+            "text": "Your population are your units. A populationtoken counts as 1 unit. A player can have a maximum of 55 population. Population are either on the playingboard (the map), in the stock or in the treasury (on the player mats). "
+          },
+          {
+            "text": "Each area on the map specifies the maximum number of units it can carry. Although an area says 0, you can still move your units there, but during the surplus population-phase, these are removed and put in the stock. "
+          },
+          {
+            "text": "You can use population-units to build cities. On an area on the map that does not have the city markes, it costs 12 units to build a city, if it has the marker it costs 6 units."
+          },
+          {
+            "text": "The units in the stock on the player mats are used during the expansion-phase. The rule is: 1 token in each area containing 1 of his tokens and 2 tokens in each area containing 2 or more of his tokens (so an area containing 3 or 4 tokens only gets an additional 2; not 3 or 4). These tokens are taken from the stock pile on the player mat."
+          },
+          "text": "The treasury are obtained from tax-collection. For each city, the player pays the tax for that city (default is 2) by moving one unit from the stock to the treasury. You you can not pay your tax, se the rule is: For each city that this player could not collect tax from, ‘the beneficiary’ may choose and annex 1 of his cities,  referred to as ‘tax revolt’. This beneficiary does not collect taxes for any newly gained cities this way in the same turn. In this phase no check for city support is made. If the beneficiary of a tax revolt has insufficient cities to replace a city, for the remaining city or cities a new beneficiary is selected. If all players have 9 cities on the board, any remaining cities affected by tax revolt are destroyed instead."
+        ]
+      }
+    ]
+  },
+  {
     "title": "Cities",
     "paragraphs": [
       {
         "title": "What are they?",
         "items": [
           {
-            "text": "blablablalbla"
+            "text": "Cities are essentially units with a count of 5. They can be built on area of the map. They either cost 6 or 12, depending on if there is a city marker on the area on the map where is should be built. "
+          },
+          {
+            "text": "To attack and raise a city, an attacking player needs at least 6 tokens. When an attack is made and a battle is initiated, the city is exchanged for 5 population units, and the combat may continue as it would normally."
           }
         ]
       },
       {
-        "title": "How do i build them?",
+        "title": "What are they good for?",
         "items": [
           {
-            "text": "blablalbdla"
+            "text": "Cities are used to gain trading cards, which in turns are used to buy civilization advances. In other words, you need cities to win the game. Keep in mind that to many cities may cause a tax-revolt."
           }
         ]
       }
@@ -27,7 +53,26 @@
         "title": "What are they?",
         "items": [
           {
-            "text": "blablablalbla"
+            "text": "Ships are used to travel over water with your units. A ship does not count as a unit. "
+          },
+          {
+            "text": "At any time during the movement-phase, a player can choose to abtain a ship. The rule goes as follow: Can only be done in coastal areas containing 1 or more of his tokens. It can be used the same turn it is built. A player can built no more than 4 ships per turn. There are 3 ways to build a ship: 1. Pay 2 treasury tokens, 2. Pay 1 treasury token and destroy 1 population token from the ship area, 3. Destroy 2 tokens from the board, at least 1 of which is from the ship area. "
+          }
+        ]
+      },
+      {
+        "title": "Maintenance",
+        "items": [
+          {
+            "text": "Is a player has a ship that was build during the previous turn, the player needs to either pay a treasury token or remove a unit from the board. This is done during the movement-phase. If the maintenance is not done, the ship is destroyed."
+          }
+        ]
+      },
+      {
+        "title": "movement",
+        "items": [
+          {
+            "text": "Players may move a ship a maximum of 4 areas by water. By default, they can not be moved through open sea water. The ship can carry a maximum of 5 units. It can embark and disembark any number of tokens. After the ship’s last step any tokens on it are automatically disembarked in the area. Tokens cannot stay on ships after momevent. Tokens may move either by ship or by land (not both). Ships may move through an area containing an ‘out of play’ token, but cannot end movement or disembark tokens there"
           }
         ]
       }
@@ -40,7 +85,18 @@
         "title": "What are they?",
         "items": [
           {
-            "text": "blablablalbla"
+            "text": "They are used to obtain civilization-advances. They have a value from 0-9 or may be a calamity. For each of the same resource a player have, the value of the trade-card is increased, specified on the bottom of the card (not calamities). "
+          }
+        ]
+      },
+      {
+        "title": "How do i get them?",
+        "items": [
+          {
+            "text": "By having cities during the trading-card acquisition phase."
+          },
+          {
+            "text": "You also get cards by trading with other players, during the trading phase."
           }
         ]
       }
@@ -53,20 +109,7 @@
         "title": "What are they?",
         "items": [
           {
-            "text": "blablablalbla"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "A.S.T",
-    "paragraphs": [
-      {
-        "title": "What are they?",
-        "items": [
-          {
-            "text": "blablablalbla"
+            "text": ""
           }
         ]
       }
@@ -126,19 +169,6 @@
   },
   {
     "title": "Tax",
-    "paragraphs": [
-      {
-        "title": "What are they?",
-        "items": [
-          {
-            "text": "blablablalbla"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Population",
     "paragraphs": [
       {
         "title": "What are they?",
