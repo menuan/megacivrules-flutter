@@ -17,7 +17,9 @@
           {
             "text": "The units in the stock on the player mats are used during the expansion-phase. The rule is: 1 token in each area containing 1 of his tokens and 2 tokens in each area containing 2 or more of his tokens (so an area containing 3 or 4 tokens only gets an additional 2; not 3 or 4). These tokens are taken from the stock pile on the player mat."
           },
-          "text": "The treasury are obtained from tax-collection. For each city, the player pays the tax for that city (default is 2) by moving one unit from the stock to the treasury. You you can not pay your tax, se the rule is: For each city that this player could not collect tax from, ‘the beneficiary’ may choose and annex 1 of his cities,  referred to as ‘tax revolt’. This beneficiary does not collect taxes for any newly gained cities this way in the same turn. In this phase no check for city support is made. If the beneficiary of a tax revolt has insufficient cities to replace a city, for the remaining city or cities a new beneficiary is selected. If all players have 9 cities on the board, any remaining cities affected by tax revolt are destroyed instead."
+          {
+            "text": "The treasury are obtained from tax-collection. For each city, the player pays the tax for that city (default is 2) by moving one unit from the stock to the treasury. You you can not pay your tax, se the rule is: For each city that this player could not collect tax from, ‘the beneficiary’ may choose and annex 1 of his cities,  referred to as ‘tax revolt’. This beneficiary does not collect taxes for any newly gained cities this way in the same turn. In this phase no check for city support is made. If the beneficiary of a tax revolt has insufficient cities to replace a city, for the remaining city or cities a new beneficiary is selected. If all players have 9 cities on the board, any remaining cities affected by tax revolt are destroyed instead."
+          }
         ]
       }
     ]
