@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+/*import 'package:flutter_test/flutter_test.dart';
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 
@@ -58,3 +58,4 @@ void main() {
     expect(viewModel.calculateReducedCost(), 100);
   });
 }
+*/

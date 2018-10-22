@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
-import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 import 'package:mega_civ_rules/services/imageMemoization.dart';
 
 typedef void OnTapCivilizationAdvanceCardAddRemove(
@@ -10,14 +9,20 @@ typedef void OnTapCivilizationAdvanceCardShowCard(CivilizationAdvance advance);
 
 class CivilizationAdvanceCard extends StatelessWidget {
   CivilizationAdvanceCard(
-      {this.onTapAddRemove, this.viewModel, this.onTapShowCard});
+      {this.onTapAddRemove,
+      this.advance,
+      this.onTapShowCard,
+      this.isAcquired,
+      this.cost});
 
   final OnTapCivilizationAdvanceCardAddRemove onTapAddRemove;
-  final CivilizationAdvanceViewModel viewModel;
+  final CivilizationAdvance advance;
   final OnTapCivilizationAdvanceCardShowCard onTapShowCard;
+  final bool isAcquired;
+  final int cost;
 
   String getButtonText() {
-    if (viewModel.isAcquired()) {
+    if (this.isAcquired) {
       return "Remove";
     } else {
       return "Add";
@@ -27,29 +32,25 @@ class CivilizationAdvanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
-    int reducedCost = viewModel.calculateReducedCost();
     Widget reduced;
-    if (!viewModel.isAcquired() && reducedCost != viewModel.getAdvanceCost()) {
+    if (!this.isAcquired && cost != advance.cost) {
       reduced = Text(
-        "Reduced cost: $reducedCost",
+        "Reduced cost: $cost",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
       );
     }
-    children.add(
-        ListTile(trailing: reduced, title: Text(viewModel.getAdvanceName())));
-    var data = ImageMemoization.instance.getImage(viewModel.getAdvance().id);
+    children.add(ListTile(trailing: reduced, title: Text(advance.name)));
+    var data = ImageMemoization.instance.getImage(advance.id);
     children.add(Padding(
         padding:
             EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0, bottom: 25.0),
         child: GestureDetector(
-            onTap: () => onTapShowCard(viewModel.getAdvance()),
-            child: Image.memory(data))));
+            onTap: () => onTapShowCard(advance), child: Image.memory(data))));
     children.add(RaisedButton(
         child: Text(getButtonText()),
-        onPressed: () => this.onTapAddRemove(
-            viewModel.getAdvance(), !this.viewModel.isAcquired())));
+        onPressed: () => this.onTapAddRemove(advance, !this.isAcquired)));
     Card card = Card(
-        color: viewModel.isAcquired()
+        color: this.isAcquired
             ? Theme.of(context).primaryColor
             : Theme.of(context).cardColor,
         child: new Column(

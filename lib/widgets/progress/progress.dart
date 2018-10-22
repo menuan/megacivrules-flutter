@@ -5,7 +5,6 @@ import 'package:mega_civ_rules/models/data/civilizationadvance.dart';
 import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 import 'package:mega_civ_rules/services/imageMemoization.dart';
 import 'package:mega_civ_rules/widgets/progress/civilizationAdvanceCard.dart';
-import 'package:mega_civ_rules/models/viewmodels/civilizationAdvanceViewModel.dart';
 import 'package:mega_civ_rules/widgets/CheckboxView/checkboxView.dart';
 import 'package:mega_civ_rules/models/viewmodels/ProgressViewModel.dart';
 
@@ -50,6 +49,14 @@ class _ProgressState extends State<Progress>
     });
   }
 
+  void reset() {
+    setState(() {
+      CivilizationAdvanceService.setAcquired(List());
+      viewModel.setAcquired(List());
+      advancesToRender = viewModel.getAdvancesToRender();
+    });
+  }
+
   void _showModal(CivilizationAdvance a) {
     var data = ImageMemoization.instance.getImage(a.id);
     showModalBottomSheet<void>(
@@ -79,41 +86,51 @@ class _ProgressState extends State<Progress>
         mainAxisSpacing: 5.0,
         crossAxisSpacing: 5.0,
       ),
-      delegate: SliverChildBuilderDelegate(
-          (context, pos) => Container(
-              padding: EdgeInsets.all(5.0),
-              color: viewModel.isAcquiered(advancesToRender[pos])
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).cardColor,
-              child: Stack(fit: StackFit.expand, children: [
-                GestureDetector(
-                  child: Container(
-                      child: FadeInImage(
-                          placeholder: MemoryImage(kTransparentImage),
-                          image: MemoryImage(ImageMemoization.instance
-                              .getImage(advancesToRender[pos].id)))),
-                  onTap: () => _showModal(advancesToRender[pos]),
+      delegate: SliverChildBuilderDelegate((context, pos) {
+        bool isAcquiered = viewModel.isAcquiered(advancesToRender[pos]);
+        CivilizationAdvance advance = advancesToRender[pos];
+        int reducedCost = viewModel.getReducedCost(advance);
+        return Container(
+            padding: EdgeInsets.all(5.0),
+            color: isAcquiered
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).cardColor,
+            child: Stack(fit: StackFit.expand, children: [
+              GestureDetector(
+                child: Container(
+                    child: FadeInImage(
+                        placeholder: MemoryImage(kTransparentImage),
+                        image: MemoryImage(
+                            ImageMemoization.instance.getImage(advance.id)))),
+                onTap: () => _showModal(advance),
+              ),
+              Positioned(
+                left: 0.0,
+                bottom: 0.0,
+                child: Chip(
+                  backgroundColor: reducedCost == advance.cost
+                      ? Theme.of(context).disabledColor
+                      : Theme.of(context).textSelectionColor,
+                  label: Text("$reducedCost"),
                 ),
-                Positioned(
-                  right: 0.0,
-                  bottom: 0.0,
-                  child: new FloatingActionButton(
-                    mini: true,
-                    child: Icon(viewModel.isAcquiered(advancesToRender[pos])
-                        ? Icons.remove_circle
-                        : Icons.add_circle),
-                    backgroundColor:
-                        viewModel.isAcquiered(advancesToRender[pos])
-                            ? Theme.of(context).buttonColor
-                            : Theme.of(context).errorColor,
-                    onPressed: () {
-                      _onTapAddRemoveAdvance(advancesToRender[pos],
-                          !viewModel.isAcquiered(advancesToRender[pos]));
-                    },
-                  ),
+              ),
+              Positioned(
+                right: 0.0,
+                bottom: 0.0,
+                child: new FloatingActionButton(
+                  mini: true,
+                  child: Icon(
+                      isAcquiered ? Icons.remove_circle : Icons.add_circle),
+                  backgroundColor: isAcquiered
+                      ? Theme.of(context).buttonColor
+                      : Theme.of(context).errorColor,
+                  onPressed: () {
+                    _onTapAddRemoveAdvance(advance, !isAcquiered);
+                  },
                 ),
-              ])),
-          childCount: advancesToRender.length),
+              ),
+            ]));
+      }, childCount: advancesToRender.length),
     );
   }
 
@@ -129,10 +146,9 @@ class _ProgressState extends State<Progress>
   Widget _buildDetailedCardRow(
       BuildContext context, CivilizationAdvance advance) {
     return new CivilizationAdvanceCard(
-      viewModel: new CivilizationAdvanceViewModel(
-          allAdvances: viewModel.getAllAdvancesMap(),
-          advance: advance,
-          acquired: viewModel.getAcquired()),
+      isAcquired: viewModel.isAcquiered(advance),
+      advance: advance,
+      cost: viewModel.getReducedCost(advance),
       onTapAddRemove: _onTapAddRemoveAdvance,
       onTapShowCard: _showModal,
     );
@@ -234,6 +250,16 @@ class _ProgressState extends State<Progress>
                     title: "Not acquired",
                     value: viewModel.getFilterByNotAquiered()),
               )));
+              children.add(PopupMenuItem(
+                enabled: false,
+                child: Divider(height: 0.0),
+              ));
+              children.add(PopupMenuItem(
+                  child: Center(
+                      child: RaisedButton(
+                onPressed: () => _neverSatisfied(),
+                child: const Text("Reset"),
+              ))));
               return children;
             },
           ),
@@ -248,6 +274,39 @@ class _ProgressState extends State<Progress>
         ],
         backgroundColor: Theme.of(context).cardColor,
         flexibleSpace: null);
+  }
+
+  void _neverSatisfied() {
+    showDialog<Null>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Reset all acquired?'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to reset all acquired advances?'),
+                Text('This action can not be reverted.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Yes'),
+              onPressed: () {
+                reset();
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text('No'),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override

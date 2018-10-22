@@ -21,6 +21,31 @@ class ProgressViewModel {
   bool filterCostAscending = true;
   double _costFilter = 50.0;
 
+  int getReducedCost(CivilizationAdvance advance) {
+    if (acquired.length > 0) {
+      int reducedSum = 0;
+      acquired.forEach((id) {
+        var acquiredAdvance = allAdvancesMap[id];
+        if (acquiredAdvance != null) {
+          var reduced = acquiredAdvance.reduceCosts.firstWhere((r) {
+            return r.id == advance.id;
+          }, orElse: () => null);
+          if (reduced != null) {
+            reducedSum += reduced.reduced;
+          }
+          acquiredAdvance.colorCredits.forEach((colorCredit) {
+            if (advance.groups.contains(colorCredit.group)) {
+              reducedSum += colorCredit.value;
+            }
+          });
+        }
+      });
+      int ret = (advance.cost - reducedSum);
+      return ret < 0 ? 0 : ret;
+    }
+    return advance.cost;
+  }
+
   bool isAcquiered(CivilizationAdvance a) {
     return this.acquired.contains(a.id);
   }
