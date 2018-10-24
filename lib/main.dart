@@ -64,7 +64,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
     );
     super.initState();
     loadSharedPreferences();
-    CivilizationAdvanceService.get();
     ChapterService.get().then((chapters) {
       this.setState(() {
         this.chapters = chapters;
