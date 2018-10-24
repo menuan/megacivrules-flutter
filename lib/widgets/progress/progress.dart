@@ -312,6 +312,18 @@ class _ProgressState extends State<Progress>
   @override
   Widget build(BuildContext context) {
     Widget body;
+    if (!CivilizationAdvanceService.loaded) {
+      return new Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          new CircularProgressIndicator(),
+          new Padding(
+              padding: EdgeInsets.only(left: 20.0),
+              child: new Text("Loading advances")),
+        ],
+      );
+    }
     switch (mode) {
       case ProgressDisplayMode.Card:
         body = _getCardGrid(context);
