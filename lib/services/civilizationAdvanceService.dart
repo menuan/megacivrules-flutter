@@ -30,7 +30,7 @@ class CivilizationAdvanceService {
         completer.complete(advances);
       });
     } else {
-      completer.complete(advances);
+      completer.complete(advances != null ? advances : List());
     }
     return completer.future;
   }
@@ -39,7 +39,7 @@ class CivilizationAdvanceService {
     var completer = new Completer<List<String>>();
     SharedPreferences.getInstance().then((prefs) {
       List<String> acquired = prefs.getStringList(acquiredKey);
-      completer.complete(acquired);
+      completer.complete(acquired != null ? acquired : List());
     });
     return completer.future;
   }
