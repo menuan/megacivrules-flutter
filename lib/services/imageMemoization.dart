@@ -7,8 +7,8 @@ class ImageMemoization {
 
   Map<String, Uint8List> _images = Map();
 
-  void setImage(String key, String base64String) {
-    _images[key] = Base64Decoder().convert(base64String);
+  void setImage(String key, Uint8List image) {
+    _images[key] = image;
   }
 
   Uint8List getImage(String key) {
