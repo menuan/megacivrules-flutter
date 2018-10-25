@@ -242,7 +242,8 @@ class _MegaCivRulesState extends State<MegaCivRules> {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.fill, image: AssetImage('assets/img/splash.png'))),
+              fit: BoxFit.fitWidth,
+              image: AssetImage('assets/img/splash.png'))),
     );
   }
 
@@ -255,8 +256,9 @@ class _MegaCivRulesState extends State<MegaCivRules> {
       children: <Widget>[
         Container(decoration: BoxDecoration(color: themeColor)),
         Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[Expanded(flex: 2, child: getSplashImage())],
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[Expanded(child: getSplashImage())],
         )
       ],
     ));
