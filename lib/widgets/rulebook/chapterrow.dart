@@ -16,16 +16,25 @@ class ChapterRow extends StatelessWidget {
   Widget build(BuildContext context) {
     var paragraphIndex = 1;
     String indexString = index != null ? "$index: " : "";
+    var anyHasMatches = false;
     List<ParagraphRow> paragraphs = chapter.paragraphs
         .map((val) => ParagraphRow(
               context: context,
-              paragraph: val,
-              parentIndex: index,
-              paragraphIndex: paragraphIndex++,
-              searchString: this.searchString,
+              viewModel: ParagraphRowViewModel(
+                  paragraph: val,
+                  parentIndex: index,
+                  paragraphIndex: paragraphIndex++,
+                  searchString: this.searchString),
             ))
-        .toList();
+        .where((ParagraphRow row) {
+      anyHasMatches |= row.viewModel.hasMatches();
+      return row.viewModel.hasMatches();
+    }).toList();
+    var shouldExpand = searchString == null ? false : anyHasMatches;
+    print("Should I expand? ${shouldExpand ? "YES" : "NO"}");
     return ExpansionTile(
+      key: Key("$indexString$shouldExpand"),
+      initiallyExpanded: shouldExpand,
       title: Text("$indexString${chapter.title}",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           textAlign: TextAlign.start),

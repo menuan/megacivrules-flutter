@@ -6,24 +6,45 @@ import 'package:mega_civ_rules/services/utils.dart';
 
 typedef void OnTapTocRow(int index);
 
-class ParagraphRow extends StatelessWidget {
-  ParagraphRow(
+class ParagraphRowViewModel {
+  ParagraphRowViewModel(
       {Key key,
-      @required this.context,
-      this.paragraph,
-      this.parentIndex,
-      this.paragraphIndex,
-      this.searchString})
-      : super(key: key);
+      @required this.paragraph,
+      @required this.parentIndex,
+      @required this.paragraphIndex,
+      @required this.searchString}) {
+    itemMatches = searchString != null
+        ? paragraph.items.map((ParagraphItem item) {
+            final textContentList =
+                item.text != null ? item.text.split(searchString) : ["kek"];
+            final matches = textContentList.length - 1;
+            return matches > 0;
+          }).toList()
+        : List<bool>(paragraph.items.length);
+  }
 
-  final BuildContext context;
+  int matches = 0;
+  List<bool> itemMatches;
   final Paragraph paragraph;
   final int parentIndex;
   final int paragraphIndex;
   final String searchString;
 
-  int matches = 0;
-  bool hasMatches = false;
+  bool hasMatches() {
+    return searchString == null ? true : itemMatches.any((element) => element);
+  }
+
+  bool doesItemHasMatches(int index) {
+    return searchString == null ? true : itemMatches[index];
+  }
+}
+
+class ParagraphRow extends StatelessWidget {
+  ParagraphRow({Key key, @required this.context, @required this.viewModel})
+      : super(key: key);
+
+  final BuildContext context;
+  final ParagraphRowViewModel viewModel;
 
   Widget getTitleWidget(String text) {
     var textWidget = Container(
@@ -44,7 +65,7 @@ class ParagraphRow extends StatelessWidget {
       child: RichText(
         text: TextSpan(
             style: DefaultTextStyle.of(context).style,
-            children: Utils.getMassagedTexts(text, searchString)),
+            children: Utils.getMassagedTexts(text, viewModel.searchString)),
       ),
       padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
     );
@@ -107,7 +128,7 @@ class ParagraphRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
-    for (var item in paragraph.items) {
+    for (var item in viewModel.paragraph.items) {
       // Add title/text
       if (item.title != null && item.title.length > 0) {
         var textWidget = getTitleWidget(item.title);
@@ -132,12 +153,16 @@ class ParagraphRow extends StatelessWidget {
         children.addAll(punctuated);
       }
     }
-    var indexString =
-        parentIndex != null ? "$parentIndex:$paragraphIndex " : "";
+    var indexString = viewModel.parentIndex != null
+        ? "${viewModel.parentIndex}:${viewModel.paragraphIndex} "
+        : "";
+    var hasMatches = viewModel.hasMatches();
     return new ExpansionTile(
+      key: Key("$indexString$hasMatches"),
+      initiallyExpanded: hasMatches,
       title: new Padding(
         padding: new EdgeInsets.only(left: 5.0),
-        child: new Text("$indexString${paragraph.title}",
+        child: new Text("$indexString${viewModel.paragraph.title}",
             textAlign: TextAlign.start, style: TextStyle(fontSize: 15.0)),
       ),
       children: children,
