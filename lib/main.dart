@@ -2,6 +2,7 @@ import 'dart:async' show Timer;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 // Ours
 import 'package:mega_civ_rules/models/data/chapter.dart';
@@ -10,7 +11,6 @@ import 'package:mega_civ_rules/widgets/progress/progress.dart';
 import 'package:mega_civ_rules/services/chapterservice.dart';
 import 'package:mega_civ_rules/services/wikipediaService.dart';
 import 'package:mega_civ_rules/services/themeservice.dart';
-import 'package:mega_civ_rules/services/civilizationAdvanceService.dart';
 import 'package:flutter/services.dart';
 import 'package:mega_civ_rules/widgets/searchbar/search_controller.dart';
 
@@ -32,7 +32,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
 
 //  final PublishSubject<String> searchStringSubject = PublishSubject<String>();
   Timer splashTimer;
-  bool hasShownSplash = false;
   bool darkThemeEnabled = false;
   int sliderColor = 0;
 
@@ -45,7 +44,10 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   PageController _pageController;
 
   SearchController searchController;
+  TextEditingController controller = TextEditingController();
   String searchString;
+  bool isSearching = false;
+  PublishSubject<String> subject = PublishSubject<String>();
 
   void loadSharedPreferences() async {
     SharedPreferences.getInstance().then((prefs) {
@@ -98,6 +100,13 @@ class _MegaCivRulesState extends State<MegaCivRules> {
         title: new Text('Mega Civilization Rules'),
         centerTitle: false,
         actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                setState(() {
+                  isSearching = true;
+                });
+              }),
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
@@ -155,20 +164,29 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   }
 
   Widget getHome(BuildContext context) {
-    var appBar = buildAppBar(context);
     searchController = SearchController(
       appBarBuilder: buildAppBar,
+      subject: subject,
+      controller: controller,
+      isSearching: isSearching,
+      onClosed: () {
+        setState(() {
+          isSearching = false;
+          searchString = null;
+        });
+      },
+      closeOnSubmit: true,
     );
-    searchController.subject.stream
-        .debounce(searchDebounceTimeout)
-        .listen((String event) {
+
+    subject.stream.debounce(searchDebounceTimeout).listen((String event) {
+      print("New search event $event");
       setState(() {
-        print("New search event $event");
         searchString = event;
       });
     });
+
     return Scaffold(
-      appBar: appBar,
+      appBar: searchController.build(context),
       body: PageView(
         controller: _pageController,
         onPageChanged: (newPage) {
@@ -202,15 +220,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
               value: sliderColor + .0,
               onChanged: _onColorSliderValueChange),
         ),
-        ListTile(
-            title: const Text('See splash again, pliz'),
-            trailing: RaisedButton(
-                child: const Text('Go!'),
-                onPressed: () {
-                  setState(() {
-                    hasShownSplash = false;
-                  });
-                }))
       ],
     ));
   }
@@ -233,7 +242,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
 
   void handleSplashTimeout(BuildContext context) {
     setState(() {
-      hasShownSplash = true;
       Navigator.popAndPushNamed(context, '/app');
     });
   }
@@ -276,7 +284,6 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: getThemeData(),
-//      home: hasShownSplash ? getHome() : getSplashScreen(),
       initialRoute: '/',
       routes: {
         '/': (context) => getSplashScreen(context),

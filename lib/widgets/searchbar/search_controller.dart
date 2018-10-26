@@ -5,29 +5,73 @@ import 'package:rxdart/rxdart.dart';
 typedef Widget AppBarCallback(BuildContext context);
 
 class SearchController extends StatelessWidget {
-  SearchController({Key key, @required this.appBarBuilder}) : super(key: key) {
-    subject = PublishSubject<String>();
-  }
+  SearchController(
+      {Key key,
+      @required this.appBarBuilder,
+      @required this.subject,
+      @required this.controller,
+      @required this.isSearching,
+      this.onClosed,
+      this.closeOnSubmit = false})
+      : super(key: key) {}
 
   final AppBarCallback appBarBuilder;
-  final ValueNotifier<bool> isSearching = ValueNotifier(false);
-  PublishSubject<String> subject;
+  final bool isSearching;
+  final VoidCallback onClosed;
+  final bool closeOnSubmit;
+  final PublishSubject<String> subject;
+  final TextEditingController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return isSearching.value ? appBarBuilder(context) : appBarBuilder(context);
+  AppBar build(BuildContext context) {
+    return isSearching ? searchAppBarBuilder(context) : appBarBuilder(context);
   }
 
-  IconButton getSearchButton() {
-    return IconButton(
-        icon: Icon(Icons.search),
+  AppBar searchAppBarBuilder(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
+    Directionality title = Directionality(
+        textDirection: Directionality.of(context),
+        child: TextField(
+          key: Key('SearchBarTextField'),
+          keyboardType: TextInputType.text,
+          style: TextStyle(color: themeData.textSelectionColor, fontSize: 16.0),
+          decoration: InputDecoration(
+              hintText: 'Keckler',
+              hintStyle: TextStyle(color: themeData.hintColor, fontSize: 16.0),
+              border: null),
+          onChanged: (String value) {
+            subject.add(value);
+          },
+          onSubmitted: (String value) {
+            subject.add(value);
+            if (closeOnSubmit) {
+              clear();
+            }
+          },
+          autofocus: true,
+          controller: controller,
+        ));
+    return AppBar(
+      leading: IconButton(
+        icon: const BackButtonIcon(),
+        tooltip: MaterialLocalizations.of(context).backButtonTooltip,
         onPressed: () {
-          beginSearch();
-        });
+          if (onClosed != null) {
+            onClosed();
+          }
+          clear();
+        },
+      ),
+      backgroundColor: themeData.backgroundColor,
+      title: title,
+    );
   }
 
-  void beginSearch({Theme theme}) {
-    print("And so the search began..!");
-//    appbar.title = SearchBar(theme: theme, controller: null, hintText: null);
+  void clear() {
+    print("Clearing and resetting");
+    controller.clear();
+    if (onClosed != null) {
+      onClosed();
+    }
   }
 }

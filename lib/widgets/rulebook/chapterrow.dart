@@ -16,19 +16,20 @@ class ChapterRow extends StatelessWidget {
   Widget build(BuildContext context) {
     var paragraphIndex = 1;
     String indexString = index != null ? "$index: " : "";
+    List<ParagraphRow> paragraphs = chapter.paragraphs
+        .map((val) => ParagraphRow(
+              context: context,
+              paragraph: val,
+              parentIndex: index,
+              paragraphIndex: paragraphIndex++,
+              searchString: this.searchString,
+            ))
+        .toList();
     return ExpansionTile(
       title: Text("$indexString${chapter.title}",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           textAlign: TextAlign.start),
-      children: chapter.paragraphs
-          .map((val) => ParagraphRow(
-                context: context,
-                paragraph: val,
-                parentIndex: index,
-                paragraphIndex: paragraphIndex++,
-                searchString: this.searchString,
-              ))
-          .toList(),
+      children: paragraphs,
     );
   }
 }
