@@ -13,7 +13,8 @@ class Utils {
     final defaultStyle =
         TextStyle(fontWeight: FontWeight.normal, color: Colors.white);
     if (searchPattern != null && searchPattern.length > 2) {
-      final contentList = content.split(searchPattern);
+      final contentList =
+          content.toLowerCase().split(searchPattern.toLowerCase());
       final contentListLength = contentList.length;
       final matches = contentList.length > 1 ? contentList.length - 1 : 0;
       final searchMatchStyle =

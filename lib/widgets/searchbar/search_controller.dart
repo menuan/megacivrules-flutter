@@ -13,7 +13,7 @@ class SearchController extends StatelessWidget {
       @required this.isSearching,
       this.onClosed,
       this.closeOnSubmit = false})
-      : super(key: key) {}
+      : super(key: key);
 
   final AppBarCallback appBarBuilder;
   final bool isSearching;

@@ -20,7 +20,7 @@ class ParagraphRowViewModel {
             final matches = textContentList.length - 1;
             return matches > 0;
           }).toList()
-        : List<bool>(paragraph.items.length);
+        : List<bool>.generate(paragraph.items.length, (index) => false);
   }
 
   int matches = 0;
@@ -32,6 +32,10 @@ class ParagraphRowViewModel {
 
   bool hasMatches() {
     return searchString == null ? true : itemMatches.any((element) => element);
+  }
+
+  bool hasMatchAtIndex(int index) {
+    return itemMatches[index];
   }
 
   bool doesItemHasMatches(int index) {
@@ -139,7 +143,8 @@ class ParagraphRow extends StatelessWidget {
         children.add(textWidget);
       }
 
-      // Add images
+      // Add images, dont render images if we have matches right now. Att meta data to the images
+      // for search compatability
       if (item.images != null) {
         for (var src in item.images) {
           var image = getImageWidget(src);
@@ -156,10 +161,11 @@ class ParagraphRow extends StatelessWidget {
     var indexString = viewModel.parentIndex != null
         ? "${viewModel.parentIndex}:${viewModel.paragraphIndex} "
         : "";
-    var hasMatches = viewModel.hasMatches();
+    var initiallyExpanded =
+        viewModel.searchString == null ? false : viewModel.hasMatches();
     return new ExpansionTile(
-      key: Key("$indexString$hasMatches"),
-      initiallyExpanded: hasMatches,
+      key: Key("$indexString$initiallyExpanded"),
+      initiallyExpanded: initiallyExpanded,
       title: new Padding(
         padding: new EdgeInsets.only(left: 5.0),
         child: new Text("$indexString${viewModel.paragraph.title}",
