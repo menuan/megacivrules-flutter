@@ -11,13 +11,14 @@ import 'package:mega_civ_rules/models/viewmodels/ProgressViewModel.dart';
 enum ProgressDisplayMode { DetailedCard, Card }
 
 class Progress extends StatefulWidget {
-  Progress({Key key}) : super(key: key);
+  Progress({Key key, @required this.searchString}) : super(key: key);
+  final String searchString;
 
   @override
-  _ProgressState createState() => new _ProgressState();
+  ProgressState createState() => new ProgressState();
 }
 
-class _ProgressState extends State<Progress>
+class ProgressState extends State<Progress>
     with AutomaticKeepAliveClientMixin<Progress> {
   bool get wantKeepAlive => true;
   ProgressDisplayMode mode = ProgressDisplayMode.Card;
@@ -30,13 +31,13 @@ class _ProgressState extends State<Progress>
     CivilizationAdvanceService.getAcquired().then((acquired) {
       this.setState(() {
         viewModel.setAcquired(acquired);
-        advancesToRender = viewModel.getAdvancesToRender();
+        advancesToRender = viewModel.getAdvancesToRender(widget.searchString);
       });
     });
     CivilizationAdvanceService.get().then((advances) {
       this.setState(() {
         viewModel.setAdvances(advances);
-        advancesToRender = viewModel.getAdvancesToRender();
+        advancesToRender = viewModel.getAdvancesToRender(widget.searchString);
       });
     });
   }
@@ -45,7 +46,7 @@ class _ProgressState extends State<Progress>
     this.setState(() {
       CivilizationAdvanceService.setAcquired(
           viewModel.addRemoveAcquiered(advance.id, add));
-      advancesToRender = viewModel.getAdvancesToRender();
+      advancesToRender = viewModel.getAdvancesToRender(widget.searchString);
     });
   }
 
@@ -53,7 +54,7 @@ class _ProgressState extends State<Progress>
     setState(() {
       CivilizationAdvanceService.setAcquired(List());
       viewModel.setAcquired(List());
-      advancesToRender = viewModel.getAdvancesToRender();
+      advancesToRender = viewModel.getAdvancesToRender(widget.searchString);
     });
   }
 
@@ -87,12 +88,12 @@ class _ProgressState extends State<Progress>
         crossAxisSpacing: 5.0,
       ),
       delegate: SliverChildBuilderDelegate((context, pos) {
-        bool isAcquiered = viewModel.isAcquiered(advancesToRender[pos]);
+        bool isAcquired = viewModel.isAcquired(advancesToRender[pos]);
         CivilizationAdvance advance = advancesToRender[pos];
         int reducedCost = viewModel.getReducedCost(advance);
         return Container(
             padding: EdgeInsets.all(5.0),
-            color: isAcquiered
+            color: isAcquired
                 ? Theme.of(context).primaryColor
                 : Theme.of(context).cardColor,
             child: Stack(fit: StackFit.expand, children: [
@@ -119,13 +120,13 @@ class _ProgressState extends State<Progress>
                 bottom: 0.0,
                 child: new FloatingActionButton(
                   mini: true,
-                  child: Icon(
-                      isAcquiered ? Icons.remove_circle : Icons.add_circle),
-                  backgroundColor: isAcquiered
+                  child:
+                      Icon(isAcquired ? Icons.remove_circle : Icons.add_circle),
+                  backgroundColor: isAcquired
                       ? Theme.of(context).buttonColor
                       : Theme.of(context).errorColor,
                   onPressed: () {
-                    _onTapAddRemoveAdvance(advance, !isAcquiered);
+                    _onTapAddRemoveAdvance(advance, !isAcquired);
                   },
                 ),
               ),
@@ -146,7 +147,7 @@ class _ProgressState extends State<Progress>
   Widget _buildDetailedCardRow(
       BuildContext context, CivilizationAdvance advance) {
     return new CivilizationAdvanceCard(
-      isAcquired: viewModel.isAcquiered(advance),
+      isAcquired: viewModel.isAcquired(advance),
       advance: advance,
       cost: viewModel.getReducedCost(advance),
       onTapAddRemove: _onTapAddRemoveAdvance,
@@ -157,123 +158,130 @@ class _ProgressState extends State<Progress>
   void _onChangeCostSlider(double value) {
     setState(() {
       viewModel.setCostFilter(value);
-      advancesToRender = viewModel.getAdvancesToRender();
+      advancesToRender = viewModel.getAdvancesToRender(widget.searchString);
     });
   }
 
-  Widget getSliverBar() {
-    return SliverAppBar(
-        floating: true,
-        expandedHeight: 40.0,
-        leading: Row(children: [
-          Padding(
-            child: Icon(Icons.stars),
-            padding: EdgeInsets.only(left: 5.0),
-          ),
-          Padding(
-            child: Text("${viewModel.getVictoryPoints()}",
-                style: TextStyle(fontSize: 15.0)),
-            padding: EdgeInsets.only(left: 5.0),
-          )
-        ]),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          Row(children: [
-            RaisedButton.icon(
-                onPressed: () {
-                  setState(() {
-                    viewModel.setFilterCostAscneding(
-                        !viewModel.getFilterCostAscending());
-                    advancesToRender = viewModel.getAdvancesToRender();
-                  });
-                },
-                icon: Icon(viewModel.getFilterCostAscending()
-                    ? Icons.arrow_downward
-                    : Icons.arrow_upward),
-                label: Text("${viewModel.getCostFilterValue().toInt()}")),
-            Slider(
-              value: viewModel.getCostFilterValue(),
-              max: 290.0,
-              min: 50.0,
-              onChanged: _onChangeCostSlider,
+  Widget getSliverBar(BuildContext context) {
+    Theme theme = Theme(
+      data: Theme.of(context),
+      child: SliverAppBar(
+          floating: true,
+          expandedHeight: 40.0,
+          leading: Row(children: [
+            Padding(
+              child: Icon(Icons.stars),
+              padding: EdgeInsets.only(left: 5.0),
+            ),
+            Padding(
+              child: Text("${viewModel.getVictoryPoints()}",
+                  style: TextStyle(fontSize: 15.0)),
+              padding: EdgeInsets.only(left: 5.0),
             )
           ]),
-          PopupMenuButton<String>(
-            child: Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: Icon(Icons.filter_list)),
-            itemBuilder: (BuildContext context) {
-              List<PopupMenuEntry<String>> children = [];
-              viewModel.getGroupFilter().forEach((group, val) {
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            Row(children: [
+              RaisedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      viewModel.setFilterCostAscneding(
+                          !viewModel.getFilterCostAscending());
+                      advancesToRender =
+                          viewModel.getAdvancesToRender(widget.searchString);
+                    });
+                  },
+                  icon: Icon(viewModel.getFilterCostAscending()
+                      ? Icons.arrow_downward
+                      : Icons.arrow_upward),
+                  label: Text("${viewModel.getCostFilterValue().toInt()}")),
+              Slider(
+                value: viewModel.getCostFilterValue(),
+                max: 290.0,
+                min: 50.0,
+                onChanged: _onChangeCostSlider,
+              )
+            ]),
+            PopupMenuButton<String>(
+              child: Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(Icons.filter_list)),
+              itemBuilder: (BuildContext context) {
+                List<PopupMenuEntry<String>> children = [];
+                viewModel.getGroupFilter().forEach((group, val) {
+                  children.add(PopupMenuItem(
+                      child: CheckboxView(
+                          item: CheckBoxItem<CivilizationAdvanceGroup>(
+                              onChange: (dynamic key, value) {
+                                setState(() {
+                                  viewModel.setGroupFilter(key, value);
+                                  viewModel.filterAdvances();
+                                  advancesToRender = viewModel
+                                      .getAdvancesToRender(widget.searchString);
+                                });
+                              },
+                              key: group,
+                              title: viewModel.groupToString(group),
+                              value: viewModel.getGroupFilterValue(group)))));
+                });
+                children.add(PopupMenuItem(
+                  enabled: false,
+                  child: Divider(),
+                ));
                 children.add(PopupMenuItem(
                     child: CheckboxView(
-                        item: CheckBoxItem<CivilizationAdvanceGroup>(
-                            onChange: (dynamic key, value) {
-                              setState(() {
-                                viewModel.setGroupFilter(key, value);
-                                viewModel.filterAdvances();
-                                advancesToRender =
-                                    viewModel.getAdvancesToRender();
-                              });
-                            },
-                            key: group,
-                            title: viewModel.groupToString(group),
-                            value: viewModel.getGroupFilterValue(group)))));
-              });
-              children.add(PopupMenuItem(
-                enabled: false,
-                child: Divider(),
-              ));
-              children.add(PopupMenuItem(
-                  child: CheckboxView(
-                item: CheckBoxItem<String>(
-                    onChange: (dynamic key, value) {
-                      setState(() {
-                        viewModel.setFilterByAcquiered(value);
-                        advancesToRender = viewModel.getAdvancesToRender();
-                      });
-                    },
-                    key: "acquired",
-                    title: "Acquired",
-                    value: viewModel.getFilterByAcquiered()),
-              )));
-              children.add(PopupMenuItem(
-                  child: CheckboxView(
-                item: CheckBoxItem<String>(
-                    onChange: (dynamic key, value) {
-                      setState(() {
-                        viewModel.setFilterByNotAcquiered(value);
-                        advancesToRender = viewModel.getAdvancesToRender();
-                      });
-                    },
-                    key: "not_acquired",
-                    title: "Not acquired",
-                    value: viewModel.getFilterByNotAquiered()),
-              )));
-              children.add(PopupMenuItem(
-                enabled: false,
-                child: Divider(height: 0.0),
-              ));
-              children.add(PopupMenuItem(
-                  child: Center(
-                      child: RaisedButton(
-                onPressed: () => _neverSatisfied(),
-                child: const Text("Reset"),
-              ))));
-              return children;
-            },
-          ),
-          GestureDetector(
-            child: Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: Icon(mode == ProgressDisplayMode.DetailedCard
-                    ? Icons.grid_on
-                    : Icons.list)),
-            onTap: _onChangeMode,
-          ),
-        ],
-        backgroundColor: Theme.of(context).cardColor,
-        flexibleSpace: null);
+                  item: CheckBoxItem<String>(
+                      onChange: (dynamic key, value) {
+                        setState(() {
+                          viewModel.setFilterByAcquiered(value);
+                          advancesToRender = viewModel
+                              .getAdvancesToRender(widget.searchString);
+                        });
+                      },
+                      key: "acquired",
+                      title: "Acquired",
+                      value: viewModel.getFilterByAcquiered()),
+                )));
+                children.add(PopupMenuItem(
+                    child: CheckboxView(
+                  item: CheckBoxItem<String>(
+                      onChange: (dynamic key, value) {
+                        setState(() {
+                          viewModel.setFilterByNotAcquiered(value);
+                          advancesToRender = viewModel
+                              .getAdvancesToRender(widget.searchString);
+                        });
+                      },
+                      key: "not_acquired",
+                      title: "Not acquired",
+                      value: viewModel.getFilterByNotAquiered()),
+                )));
+                children.add(PopupMenuItem(
+                  enabled: false,
+                  child: Divider(height: 0.0),
+                ));
+                children.add(PopupMenuItem(
+                    child: Center(
+                        child: RaisedButton(
+                  onPressed: () => _neverSatisfied(),
+                  child: const Text("Reset"),
+                ))));
+                return children;
+              },
+            ),
+            GestureDetector(
+              child: Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(mode == ProgressDisplayMode.DetailedCard
+                      ? Icons.grid_on
+                      : Icons.list)),
+              onTap: _onChangeMode,
+            ),
+          ],
+          // backgroundColor: Theme.of(context).cardColor,
+          flexibleSpace: null),
+    );
+    return theme;
   }
 
   void _neverSatisfied() {
@@ -332,6 +340,6 @@ class _ProgressState extends State<Progress>
         body = _getDetailedCardList();
         break;
     }
-    return CustomScrollView(slivers: [getSliverBar(), body]);
+    return CustomScrollView(slivers: [getSliverBar(context), body]);
   }
 }

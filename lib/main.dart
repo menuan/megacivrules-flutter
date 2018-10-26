@@ -227,16 +227,15 @@ class _MegaCivRulesState extends State<MegaCivRules> {
   List<Widget> getBody() {
     return [
       Rulebook(
-        chapters: this.chapters,
-        searchString: this.searchString,
-        includeIndex: true,
-      ),
+          includeIndex: true, chapters: chapters, searchString: searchString),
       Rulebook(
-        includeIndex: false,
-        chapters: this.wikipediaChapters,
-        searchString: this.searchString,
-      ),
-      Progress()
+          includeIndex: false,
+          chapters: wikipediaChapters,
+          searchString: searchString),
+      Progress(
+        // key: progressKey,
+        searchString: searchString,
+      )
     ];
   }
 

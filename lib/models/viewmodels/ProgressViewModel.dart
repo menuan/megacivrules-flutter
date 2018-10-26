@@ -46,11 +46,29 @@ class ProgressViewModel {
     return advance.cost;
   }
 
-  bool isAcquiered(CivilizationAdvance a) {
+  bool isAcquired(CivilizationAdvance a) {
     return this.acquired.contains(a.id);
   }
 
-  List<CivilizationAdvance> getAdvancesToRender() {
+  List<CivilizationAdvance> getAdvancesToRender(String searchString) {
+    if (searchString != null) {
+      print("got searchString : $searchString ");
+      return filteredAdvances.where((advance) {
+        String searchLower = searchString.toLowerCase();
+        bool didNameMatch =
+            advance.name.toLowerCase().split(searchLower).length > 1;
+        bool didReducesMatch = advance.reduceCosts
+                .map((r) => r.id)
+                .join("")
+                .replaceAll("_", " ")
+                .split(searchLower)
+                .length >
+            1;
+        print(didReducesMatch || didNameMatch);
+        return didReducesMatch || didNameMatch;
+      }).toList();
+    }
+    print("searchstring is null");
     return filteredAdvances;
   }
 
