@@ -16,7 +16,7 @@ class ParagraphRowViewModel {
     itemMatches = searchString != null
         ? paragraph.items.map((ParagraphItem item) {
             final textContentList =
-                item.text != null ? item.text.split(searchString) : ["kek"];
+                item.text != null ? item.text.split(searchString) : [];
             final matches = textContentList.length - 1;
             return matches > 0;
           }).toList()
