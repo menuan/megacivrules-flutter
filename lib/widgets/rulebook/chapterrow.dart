@@ -27,11 +27,13 @@ class ChapterRow extends StatelessWidget {
                   searchString: this.searchString),
             ))
         .where((ParagraphRow row) {
-      anyHasMatches |= row.viewModel.hasMatches();
-      return row.viewModel.hasMatches();
+      anyHasMatches |= row.viewModel.shouldShow();
+      return row.viewModel.shouldShow();
     }).toList();
     var shouldExpand = searchString == null ? false : anyHasMatches;
 
+    print(
+        "Rebuilding chapter $indexString with new searchString ${searchString != null ? searchString : "NULL"}. Do we have matches? ${anyHasMatches ? "YES" : "NO"}");
     return ExpansionTile(
       key: Key("$indexString$shouldExpand"),
       initiallyExpanded: shouldExpand,

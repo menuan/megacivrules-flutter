@@ -15,8 +15,9 @@ class ParagraphRowViewModel {
       @required this.searchString}) {
     itemMatches = searchString != null
         ? paragraph.items.map((ParagraphItem item) {
-            final textContentList =
-                item.text != null ? item.text.split(searchString) : [];
+            final textContentList = item.text != null
+                ? item.text.toLowerCase().split(searchString.toLowerCase())
+                : [];
             final matches = textContentList.length - 1;
             return matches > 0;
           }).toList()
@@ -30,8 +31,9 @@ class ParagraphRowViewModel {
   final int paragraphIndex;
   final String searchString;
 
-  bool hasMatches() {
-    return searchString == null ? true : itemMatches.any((element) => element);
+  bool shouldShow() {
+    bool kek = itemMatches.any((element) => element);
+    return searchString == null ? true : kek;
   }
 
   bool hasMatchAtIndex(int index) {
@@ -132,7 +134,14 @@ class ParagraphRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
-    for (var item in viewModel.paragraph.items) {
+    for (var i = 0; i < viewModel.paragraph.items.length; i++) {
+      if (viewModel.searchString != null && !viewModel.hasMatchAtIndex(i)) {
+        print("We have no dfucking match for index $i");
+        continue;
+      } else {
+        print("We have a match!!!!!");
+      }
+      var item = viewModel.paragraph.items[i];
       // Add title/text
       if (item.title != null && item.title.length > 0) {
         var textWidget = getTitleWidget(item.title);
@@ -145,7 +154,7 @@ class ParagraphRow extends StatelessWidget {
 
       // Add images, dont render images if we have matches right now. Att meta data to the images
       // for search compatability
-      if (item.images != null) {
+      if (item.images != null && viewModel.searchString == null) {
         for (var src in item.images) {
           var image = getImageWidget(src);
           children.add(image);
@@ -162,7 +171,7 @@ class ParagraphRow extends StatelessWidget {
         ? "${viewModel.parentIndex}:${viewModel.paragraphIndex} "
         : "";
     var initiallyExpanded =
-        viewModel.searchString == null ? false : viewModel.hasMatches();
+        viewModel.searchString == null ? false : viewModel.shouldShow();
     return new ExpansionTile(
       key: Key("$indexString$initiallyExpanded"),
       initiallyExpanded: initiallyExpanded,
