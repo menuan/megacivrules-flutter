@@ -27,7 +27,7 @@ class ChapterRow extends StatelessWidget {
                   searchString: this.searchString),
             ))
         .where((ParagraphRow row) {
-      anyHasMatches |= row.viewModel.shouldShow();
+      anyHasMatches = anyHasMatches || row.viewModel.shouldShow();
       return row.viewModel.shouldShow();
     }).toList();
     var shouldExpand = searchString == null ? false : anyHasMatches;
