@@ -16,8 +16,8 @@ class ProgressViewModel {
     CivilizationAdvanceGroup.religion: true
   };
 
-  bool filterByAcquiered = true;
-  bool filterByNotAcquiered = true;
+  bool filterByAcquired = true;
+  bool filterByNotAcquired = true;
   bool filterCostAscending = true;
   double _costFilter = 50.0;
 
@@ -52,7 +52,6 @@ class ProgressViewModel {
 
   List<CivilizationAdvance> getAdvancesToRender(String searchString) {
     if (searchString != null) {
-      print("got searchString : $searchString ");
       return filteredAdvances.where((advance) {
         String searchLower = searchString.toLowerCase();
         bool didNameMatch =
@@ -68,7 +67,6 @@ class ProgressViewModel {
         return didReducesMatch || didNameMatch;
       }).toList();
     }
-    print("searchstring is null");
     return filteredAdvances;
   }
 
@@ -119,11 +117,11 @@ class ProgressViewModel {
   }
 
   bool getFilterByAcquiered() {
-    return this.filterByAcquiered;
+    return this.filterByAcquired;
   }
 
   bool getFilterByNotAquiered() {
-    return this.filterByNotAcquiered;
+    return this.filterByNotAcquired;
   }
 
   Map<CivilizationAdvanceGroup, bool> getGroupFilter() {
@@ -172,13 +170,13 @@ class ProgressViewModel {
     return "0";
   }
 
-  void setFilterByAcquiered(bool val) {
-    this.filterByAcquiered = val;
+  void setFilterByAcquired(bool val) {
+    this.filterByAcquired = val;
     filterAdvances();
   }
 
-  void setFilterByNotAcquiered(bool val) {
-    this.filterByNotAcquiered = val;
+  void setFilterByNotAcquired(bool val) {
+    this.filterByNotAcquired = val;
     filterAdvances();
   }
 
@@ -192,10 +190,10 @@ class ProgressViewModel {
       }
       return false;
     };
-    var filterByAcquiered = (id) {
+    var filterByAcquired = (id) {
       return this.acquired.contains(id);
     };
-    var filterByNotAquieredFunction = (id) {
+    var filterByNotAcquiredFunction = (id) {
       return !this.acquired.contains(id);
     };
 
@@ -207,13 +205,13 @@ class ProgressViewModel {
               ? a.cost >= _costFilter
               : a.cost <= _costFilter)) {
         bool shouldFilter = true;
-        if (this.filterByAcquiered) {
-          shouldFilter = filterByAcquiered(a.id);
+        if (this.filterByAcquired) {
+          shouldFilter = filterByAcquired(a.id);
         } else {
           shouldFilter = false;
         }
-        if (this.filterByNotAcquiered) {
-          shouldFilter = shouldFilter || filterByNotAquieredFunction(a.id);
+        if (this.filterByNotAcquired) {
+          shouldFilter = shouldFilter || filterByNotAcquiredFunction(a.id);
         }
         return shouldFilter;
       }

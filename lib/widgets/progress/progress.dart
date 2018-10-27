@@ -163,8 +163,9 @@ class ProgressState extends State<Progress>
   }
 
   Widget getSliverBar(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
     Theme theme = Theme(
-      data: Theme.of(context),
+      data: themeData,
       child: SliverAppBar(
           floating: true,
           expandedHeight: 40.0,
@@ -196,6 +197,8 @@ class ProgressState extends State<Progress>
                       : Icons.arrow_upward),
                   label: Text("${viewModel.getCostFilterValue().toInt()}")),
               Slider(
+                label: "Price",
+                activeColor: themeData.accentColor,
                 value: viewModel.getCostFilterValue(),
                 max: 290.0,
                 min: 50.0,
@@ -233,7 +236,7 @@ class ProgressState extends State<Progress>
                   item: CheckBoxItem<String>(
                       onChange: (dynamic key, value) {
                         setState(() {
-                          viewModel.setFilterByAcquiered(value);
+                          viewModel.setFilterByAcquired(value);
                           advancesToRender = viewModel
                               .getAdvancesToRender(widget.searchString);
                         });
@@ -247,7 +250,7 @@ class ProgressState extends State<Progress>
                   item: CheckBoxItem<String>(
                       onChange: (dynamic key, value) {
                         setState(() {
-                          viewModel.setFilterByNotAcquiered(value);
+                          viewModel.setFilterByNotAcquired(value);
                           advancesToRender = viewModel
                               .getAdvancesToRender(widget.searchString);
                         });

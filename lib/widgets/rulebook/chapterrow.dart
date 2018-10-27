@@ -31,9 +31,6 @@ class ChapterRow extends StatelessWidget {
       return row.viewModel.shouldShow();
     }).toList();
     var shouldExpand = searchString == null ? false : anyHasMatches;
-
-    print(
-        "Rebuilding chapter $indexString with new searchString ${searchString != null ? searchString : "NULL"}. Do we have matches? ${anyHasMatches ? "YES" : "NO"}");
     return ExpansionTile(
       key: Key("$indexString$shouldExpand"),
       initiallyExpanded: shouldExpand,
